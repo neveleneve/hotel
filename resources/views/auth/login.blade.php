@@ -37,12 +37,15 @@
                                     <label for="remember" class="text-[--on-primary]">Ingat saya</label>
                                 </div>
                             </div>
-                            <a href="#" class="text-sm font-medium text-[--on-primary] hover:underline">Lupa Kata
-                                Sandi?</a>
+                        </div>
+                        <div class="text-center">
+                            <a href="#" class="text-sm font-medium text-[--on-primary] hover:underline">
+                                Lupa Kata Sandi?
+                            </a>
                         </div>
                         <button type="submit"
                             class="w-full text-[--on-primary] bg-primary-600 border-2 border-[--on-primary] font-medium rounded-lg text-sm px-5 py-2 text-center font-bold">Masuk</button>
-                        <p class="text-sm font-light text-[--on-primary]">
+                        <p class="text-sm text-center font-light text-[--on-primary]">
                             Belum punya akun? <a href="{{ route('register') }}"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Daftar</a>
                         </p>

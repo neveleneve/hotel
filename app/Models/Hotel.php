@@ -11,6 +11,7 @@ class Hotel extends Model {
     protected $fillable = [
         'name',
         'country_id',
+        'price',
         'description',
     ];
 }
