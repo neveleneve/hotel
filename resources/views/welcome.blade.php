@@ -26,7 +26,7 @@
                 @foreach ($country as $items)
                     <div class="flex flex-col items-center lg:mb-8">
                         <i
-                            class="w-full h-12 border border-[--primary] rounded-full fi fi-{{ $items->flag_code }} fis text-5xl"></i>
+                            class="w-full h-12 border-2 border-[--on-secondary] rounded-full fi fi-{{ $items->flag_code }} fis text-5xl"></i>
                         <span class="text-xs mt-2 text-center font-bold">{{ $items->name }}</span>
                     </div>
                 @endforeach
@@ -39,12 +39,15 @@
             </div>
             <hr class="mb-2">
             <div class="flex space-x-4 mb-4">
-                <button
-                    class="px-2 py-1 bg-[--on-primary] text-[--on-primary-container] rounded-lg font-bold text-xs">Semua</button>
-                <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">Top
-                    Deal</button>
-                <button
-                    class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">Populer</button>
+                <button class="px-2 py-1 bg-[--on-primary] text-[--on-primary-container] rounded-lg font-bold text-xs">
+                    Semua
+                </button>
+                <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">
+                    Top Deal
+                </button>
+                <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">
+                    Populer
+                </button>
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
                 @foreach ($hotel as $item)
