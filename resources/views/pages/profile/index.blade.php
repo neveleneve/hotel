@@ -22,41 +22,42 @@
             </div>
         </div>
         <hr>
-        <div class="py-4">
-            <ul>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <a href="#" class="flex items-center space-x-4">
-                        <i class="material-icons">lock</i>
-                        <span class="text-[--on-primary] text-sm font-bold">Akun dan Keamanan</span>
-                    </a>
-                    <i class="material-icons">chevron_right</i>
-                </li>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <a href="#" class="flex items-center space-x-4">
-                        <i class="material-icons">person</i>
-                        <span class="text-[--on-primary] text-sm font-bold">Edit Profil</span>
-                    </a>
-                    <i class="material-icons">chevron_right</i>
-                </li>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <a href="#" class="flex items-center space-x-4">
-                        <i class="material-icons">info</i>
-                        <span class="text-[--on-primary] text-sm font-bold">Pusat Bantuan</span>
-                    </a>
-                    <i class="material-icons">chevron_right</i>
-                </li>
-                <hr>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button class="flex items-center space-x-4 text-[--error-container]">
-                            <i class="material-icons">logout</i>
-                            <span class="text-[--error-container] text-sm font-bold">Keluar</span>
-                        </button>
-                    </form>
-                </li>
-                <hr>
-            </ul>
+        <div class="pb-4">
+            <a href="#" class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
+                <span class="flex items-center space-x-4">
+                    <i class="material-icons">lock</i>
+                    <span class="text-[--on-primary] text-sm font-bold">Akun dan Keamanan</span>
+                </span>
+                <i class="material-icons">chevron_right</i>
+            </a>
+            <hr>
+            <a href="#" class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
+                <span class="flex items-center space-x-4">
+                    <i class="material-icons">person</i>
+                    <span class="text-[--on-primary] text-sm font-bold">Akun dan Keamanan</span>
+                </span>
+                <i class="material-icons">chevron_right</i>
+            </a>
+            <hr>
+            <a href="#" class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
+                <span class="flex items-center space-x-4">
+                    <i class="material-icons">info</i>
+                    <span class="text-[--on-primary] text-sm font-bold">Pusat Bantuan</span>
+                </span>
+                <i class="material-icons">chevron_right</i>
+            </a>
+            <hr>
+            <a onclick="document.getElementById('logout').submit();"
+                class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer text-[--error-container] ">
+                <span class="flex items-center space-x-4">
+                    <i class="material-icons">logout</i>
+                    <span class="text-[--error-container] text-sm font-bold">Keluar</span>
+                </span>
+            </a>
+            <hr>
+            <form action="{{ route('logout') }}" method="post" class="hidden" id="logout">
+                @csrf
+            </form>
         </div>
 
     </div>
