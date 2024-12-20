@@ -3,18 +3,30 @@
 @section('content')
     <div class="my-16">
         <div class="px-4 py-2">
-            <input type="text" placeholder="Pencarian"
-                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+            <div class="relative w-full max-w-md">
+                <input type="text" placeholder="Cari..."
+                    class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+                    id="search-input" oninput="toggleIcons()" />
+                <span class="material-icons absolute left-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">
+                    search
+                </span>
+                <button id="icon-times"
+                    class="hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]"
+                    onclick="clearInput()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
         </div>
         <section class="px-4 py-2">
             <h2 class="text-lg font-bold mb-1">Event Belanja</h2>
             <hr class="mb-2">
             <div class="bg-gray-200 h-32 flex items-center justify-center mb-4">Slide 1</div>
             <hr class="mb-2">
-            <div class="grid grid-cols-4 gap-4">
+            <div class="grid grid-cols-4 gap-4 lg:grid-cols-8 lg:gap-2">
                 @foreach ($country as $items)
-                    <div class="flex flex-col items-center">
-                        <i class="w-full h-12 fi fi-{{ $items->flag_code }}"></i>
+                    <div class="flex flex-col items-center lg:mb-8">
+                        <i
+                            class="w-full h-12 border border-[--primary] rounded-full fi fi-{{ $items->flag_code }} fis text-5xl"></i>
                         <span class="text-xs mt-2 text-center font-bold">{{ $items->name }}</span>
                     </div>
                 @endforeach
@@ -36,20 +48,32 @@
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
                 @foreach ($hotel as $item)
-                    <a class="max-w-xs bg-white border border-gray-200 rounded-lg shadow lg:mb-3" href="#">
-                        <img class="w-full h-100 rounded-t-lg" src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}">
-                        <div class="p-4">
-                            <h5 class="text-sm font-medium text-[--on-primary]">{{ $item->name }}</h5>
-                            <div class="items-center mt-2 z-0">
-                                <i class="h-4 w-4 fi fi-{{ $item->country->flag_code }}"></i>
-                                <span class="text-xs text-[--on-primary] font-bold">{{ $item->country->name }}</span>
-                                <br>
-                                <i class="material-icons text-yellow-500 text-sm">star_half</i>
-                                <span class="ml-1 text-sm font-semibold text-gray-700">3.5</span>
-                                <br>
+                    <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
+                        href="#">
+                        <div class="relative w-full">
+                            <img class="w-full aspect-square object-cover rounded-t-lg"
+                                src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}"
+                                alt="Gambar Hotel {{ $item->name }}">
+                        </div>
+                        <div class="flex flex-col justify-between flex-1 p-4">
+                            <div>
+                                <h5 class="text-sm font-medium text-[--on-primary] min-h-[48px]">
+                                    {{ $item->name }}
+                                </h5>
+                                <div class="flex items-center mt-2">
+                                    <i class="h-4 w-4 fi fi-{{ $item->country->flag_code ?? 'default-flag' }}"></i>
+                                    <span class="text-xs text-[--on-primary] font-bold ml-3">
+                                        {{ $item->country->name ?? 'Unknown Country' }}
+                                    </span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <i class="material-icons text-yellow-500 text-sm">star_half</i>
+                                    <span class="ml-1 text-sm font-semibold text-gray-700">3.5</span>
+                                </div>
                             </div>
-                            <div class="mt-3 text-xs font-bold text-gray-900">
-                                Rp {{ number_format($item->price, 0, ',', '.') }} / Malam
+                            <hr class="border-t border-gray-200 my-3">
+                            <div class="text-xs font-bold text-[--on-primary]">
+                                {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
                             </div>
                         </div>
                     </a>
@@ -68,7 +92,7 @@
         <div class="flex items-center">
             <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
                 src="{{ asset('assets/img/user-default.jpg') }}">
-            <span class="ml-4 font-bold">Belanja.com</span>
+            <span class="ml-4 font-bold">{{ env('APP_NAME') }}</span>
         </div>
         <div class="flex items-center space-x-4">
             <a href="#">
@@ -79,4 +103,25 @@
             </a>
         </div>
     </header>
+@endpush
+
+@push('customjs')
+    <script>
+        function toggleIcons() {
+            const input = document.getElementById('search-input');
+            const iconTimes = document.getElementById('icon-times');
+
+            if (input.value.trim() !== "") {
+                iconTimes.classList.remove('hidden');
+            } else {
+                iconTimes.classList.add('hidden');
+            }
+        }
+
+        function clearInput() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            toggleIcons();
+        }
+    </script>
 @endpush

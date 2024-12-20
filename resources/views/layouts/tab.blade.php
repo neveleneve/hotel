@@ -13,6 +13,6 @@
     </a>
     <a href="{{ route('profile.index') }}"
         class="column-3 items-center p-3 {{ Request::is('profile*') ? 'bg-[--primary] rounded' : null }}">
-        <i class="material-icons {{ Request::is('profile*') ? 'fill' : null }}">person</i>
+        <i class="material-icons {{ Request::is('profile*') ? 'fill' : 'material-icons-outlined' }}">person</i>
     </a>
 </nav>
