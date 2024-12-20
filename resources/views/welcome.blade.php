@@ -14,7 +14,7 @@
             <div class="grid grid-cols-4 gap-4">
                 @foreach ($country as $items)
                     <div class="flex flex-col items-center">
-                        <i class="w-full h-12 border border-[--primary] fi fi-{{ $items->flag_code }}"></i>
+                        <i class="w-full h-12 fi fi-{{ $items->flag_code }}"></i>
                         <span class="text-xs mt-2 text-center font-bold">{{ $items->name }}</span>
                     </div>
                 @endforeach
@@ -34,9 +34,9 @@
                 <button
                     class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">Populer</button>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
                 @foreach ($hotel as $item)
-                    <a class="max-w-xs bg-white border border-gray-200 rounded-lg shadow" href="#">
+                    <a class="max-w-xs bg-white border border-gray-200 rounded-lg shadow lg:mb-3" href="#">
                         <img class="w-full h-100 rounded-t-lg" src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}">
                         <div class="p-4">
                             <h5 class="text-sm font-medium text-[--on-primary]">{{ $item->name }}</h5>
