@@ -13,18 +13,19 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-[--on-primary] text-center">
                         Masuk
                     </h1>
-                    <form class="space-y-4" action="#">
+                    <form method="POST" class="space-y-4" action="{{ route('login') }}">
+                        @csrf
                         <div>
                             <label for="email" class="block mb-2 text-sm font-bold text-[--on-primary]">Email</label>
                             <input type="email" name="email" id="email" placeholder="Email"
-                                class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary-container] rounded-xl block w-full p-2"
+                                class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary] rounded-xl block w-full p-2"
                                 required>
                         </div>
                         <div>
                             <label for="password" class="block mb-2 text-sm font-bold text-[--on-primary]">Kata
                                 Sandi</label>
                             <input type="password" name="password" id="password" placeholder="Password"
-                                class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary-container] rounded-xl block w-full p-2"
+                                class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary] rounded-xl block w-full p-2"
                                 required>
                         </div>
                         <div class="flex items-center justify-between">

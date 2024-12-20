@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder {
      * Seed the application's database.
      */
     public function run(): void {
+        $this->call(UserSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(HotelSeeder::class);
     }

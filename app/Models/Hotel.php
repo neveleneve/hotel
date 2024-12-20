@@ -14,4 +14,8 @@ class Hotel extends Model {
         'price',
         'description',
     ];
+
+    public function country() {
+        return $this->belongsTo(country::class);
+    }
 }

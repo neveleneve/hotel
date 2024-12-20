@@ -22,9 +22,6 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 // general route
 
 // admin route
