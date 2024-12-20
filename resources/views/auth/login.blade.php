@@ -24,9 +24,15 @@
                         <div>
                             <label for="password" class="block mb-2 text-sm font-bold text-[--on-primary]">Kata
                                 Sandi</label>
-                            <input type="password" name="password" id="password" placeholder="Password"
-                                class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary] rounded-xl block w-full p-2"
-                                required>
+                            <div class="relative">
+                                <input type="password" name="password" id="password" placeholder="Password"
+                                    class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary] rounded-xl block w-full p-2 pr-10"
+                                    required>
+                                <button type="button" id="togglePassword"
+                                    class="absolute inset-y-0 right-2 flex items-center">
+                                    <span class="material-icons text-[--on-primary]">visibility</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-start">
@@ -56,3 +62,16 @@
         </div>
     </section>
 @endsection
+
+
+@push('customjs')
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = this.querySelector('.material-icons');
+            icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+    </script>
+@endpush
