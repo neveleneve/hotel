@@ -14,5 +14,7 @@ class country extends Model {
         'flag_code',
     ];
 
-    
+    public function hotel() {
+        return $this->hasMany(Hotel::class);
+    }
 }

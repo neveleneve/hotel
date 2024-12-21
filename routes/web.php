@@ -2,21 +2,12 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\MemberCountryController;
+use App\Http\Controllers\MemberHotelController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 
@@ -35,3 +26,11 @@ Route::prefix('profile')->group(function () {
 
 Route::resource('cart', CartController::class);
 Route::resource('order', OrderController::class);
+
+Route::prefix('country')->group(function () {
+    Route::get('/{flag_code}', [MemberCountryController::class, 'index'])->name('member.country.index');
+});
+
+Route::prefix('hotel')->group(function () {
+    Route::get('/{flag_code}/{id}', [MemberHotelController::class, 'index'])->name('member.hotel.index');
+});

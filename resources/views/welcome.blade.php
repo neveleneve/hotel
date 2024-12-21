@@ -3,18 +3,15 @@
 @section('content')
     <div class="my-16">
         <div class="px-4 py-2">
-            <div class="relative w-full max-w-md">
+            <div class="relative w-full">
                 <input type="text" placeholder="Cari..."
-                    class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+                    class="w-full pl-10 pr-10 py-2 border-2 border-[--on-primary] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
                     id="search-input" oninput="toggleIcons()" />
                 <span class="material-icons absolute left-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">
                     search
                 </span>
-                <button id="icon-times"
-                    class="hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]"
-                    onclick="clearInput()">
-                    <span class="material-icons">close</span>
-                </button>
+                <span onclick="clearInput()" id="icon-times"
+                    class="material-icons hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">close</span>
             </div>
         </div>
         <section class="px-4 py-2">
@@ -24,11 +21,12 @@
             <hr class="mb-2">
             <div class="grid grid-cols-4 gap-4 lg:grid-cols-8 lg:gap-2">
                 @foreach ($country as $items)
-                    <div class="flex flex-col items-center lg:mb-8">
+                    <a class="flex flex-col items-center lg:mb-8"
+                        href="{{ route('member.country.index', $items->flag_code) }}">
                         <i
                             class="w-full h-12 border-2 border-[--on-secondary] rounded-full fi fi-{{ $items->flag_code }} fis text-5xl"></i>
                         <span class="text-xs mt-2 text-center font-bold">{{ $items->name }}</span>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         </section>
@@ -52,7 +50,7 @@
             <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
                 @foreach ($hotel as $item)
                     <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
-                        href="#">
+                        href="{{ route('member.hotel.index', ['flag_code' => $item->country->flag_code, 'id' => $item->id]) }}">
                         <div class="relative w-full">
                             <img class="w-full aspect-square object-cover rounded-t-lg"
                                 src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}"
@@ -91,11 +89,13 @@
 @endpush
 
 @push('nav')
-    <header class="fixed top-0 left-0 w-full bg-[#003060] text-white p-4 flex justify-between items-center z-50">
+    <header class="fixed top-0 left-0 w-full bg-[--on-primary] text-white p-4 flex justify-between items-center z-20">
         <div class="flex items-center">
-            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                src="{{ asset('assets/img/user-default.jpg') }}">
-            <span class="ml-4 font-bold">{{ env('APP_NAME') }}</span>
+            <a href="{{ route('profile.index') }}">
+                <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                    src="{{ asset('assets/img/user-default.jpg') }}">
+            </a>
+            <a href="{{ route('landing') }}" class="ml-4 font-bold">{{ env('APP_NAME') }}</a>
         </div>
         <div class="flex items-center space-x-4">
             <a href="#">

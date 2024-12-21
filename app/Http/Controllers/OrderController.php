@@ -13,7 +13,7 @@ class OrderController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        return view('pages.order.index');
+        return view('pages.member.order.index');
     }
 
     /**

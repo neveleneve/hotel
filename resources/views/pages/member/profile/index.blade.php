@@ -3,7 +3,7 @@
 @section('content')
     <div class="mt-[75px]">
         <div class="p-6 text-center bg-[--primary] text-[--on-primary]">
-            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border border-gray-300">
+            <div class="w-24 h-24 mx-auto rounded-full border-4 border-[--on-primary] overflow-hidden">
                 <img src="{{ asset('assets/img/user-default.jpg') }}" alt="Profile Picture" class="w-full h-full object-cover">
             </div>
             <h2 class="mt-4 text-xl font-bold">{{ Auth::user()->name }}</h2>

@@ -2,9 +2,15 @@
 
 @section('content')
     <section class="bg-[--on-primary] h-screen flex justify-center p-0">
+        <div
+            class="absolute top-0 left-0 mx-3 mt-3 md:hidden text-[--primary-container] bg-[--on-primary-container] hover:text-[--on-primary-container] hover:bg-[--primary-container] hover:border hover:border-[--on-primary-container] rounded-full">
+            <a href="{{ route('landing') }}" class="flex items-center p-2">
+                <i class="material-icons font-bold">chevron_left</i>
+            </a>
+        </div>
         <div class="flex flex-col items-center justify-center w-full lg:w-96 mx-4">
             <a href="{{ route('landing') }}"
-                class="fixed top-12 flex items-center mb-6 text-2xl font-semibold text-[--on-primary-container]">
+                class="fixed top-12 flex items-center mb-6 text-2xl font-bold text-[--on-primary-container]">
                 <img class="w-8 h-8 mr-2 rounded-full" src="https://placehold.co/200?text=Belanja.com" alt="logo">
                 {{ env('APP_NAME') }}
             </a>
@@ -38,7 +44,7 @@
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">
                                     <input id="remember" type="checkbox"
-                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800">
+                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-[--on-primary] dark:ring-offset-gray-800">
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label for="remember" class="text-[--on-primary]">Ingat saya</label>
@@ -51,7 +57,7 @@
                             </a>
                         </div>
                         <button type="submit"
-                            class="w-full text-[--on-primary] bg-primary-600 border-2 border-[--on-primary] font-medium rounded-lg text-sm px-5 py-2 text-center font-bold">Masuk</button>
+                            class="w-full text-[--on-primary] bg-primary-600 border-2 border-[--on-primary] hover:bg-[--on-primary] hover:text-[--primary] font-medium rounded-lg text-sm px-5 py-2 text-center font-bold">Masuk</button>
                         <p class="text-sm text-center font-light text-[--on-primary]">
                             Belum punya akun? <a href="{{ route('register') }}"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Daftar</a>
