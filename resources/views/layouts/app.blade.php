@@ -17,7 +17,6 @@
     @yield('content')
     @stack('footer')
     @stack('tab')
-    <script type="module" src="{{ asset('assets/js/beer.js') }}"></script>
     @stack('customjs')
 </body>
 
