@@ -28,8 +28,9 @@
                             {{ $hotel->name }}
                         </h5>
                         <div class="flex items-center mt-2">
-                            <i class="h-4 w-4 fi fi-{{ $hotel->country->flag_code ?? 'xx' }}"></i>
-                            <span class="text-md text-[--on-primary] font-semibold ml-2">
+                            {{-- <i class="h-4 w-4 fi fi-{{ $hotel->country->flag_code ?? 'xx' }}"></i> --}}
+                            <i class="material-icons text-md text-[--on-primary]">location_on</i>
+                            <span class="text-md text-[--on-primary] font-semibold ml-1">
                                 {{ $hotel->country->name ?? 'xx' }}
                             </span>
                         </div>
@@ -81,7 +82,7 @@
                 </a>
             </div>
             <div class="grid grid-cols-1 gap-4">
-                <a href="{{ route('landing') }}"
+                <a href="{{ url()->previous() ? url()->previous() : route('landing') }}"
                     class="bg-[--error] text-[--on-error] px-10 py-3 w-full rounded-full font-bold hover:bg-[--on-error] hover:text-[--error] hover:border hover:border-transparent border border-transparent text-center">
                     Kembali
                 </a>

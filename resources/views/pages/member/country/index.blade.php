@@ -2,13 +2,49 @@
 
 @section('content')
     <div class="my-[56px]">
-        <div class="p-6 text-center bg-[--primary] text-[--on-primary]">
-            <div class="w-24 h-24 mx-auto rounded-full border-4 border-[--on-primary] overflow-hidden">
-                <img src="{{ asset('assets/img/user-default.jpg') }}" alt="Profile Picture" class="w-full h-full object-cover">
+        <section class="p-4">
+            <h3 class="text-center font-bold text-2xl">{{ $country->name }}</h3>
+            <hr class="mt-3">
+        </section>
+        <section class="p-4 pt-2">
+            <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
+                @forelse ($hotel as $item)
+                    <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
+                        href="{{ route('member.hotel.index', ['flag_code' => $item->country->flag_code, 'id' => $item->id]) }}">
+                        <div class="relative w-full">
+                            <img class="w-full aspect-square object-cover rounded-t-lg"
+                                src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}"
+                                alt="Gambar Hotel {{ $item->name }}">
+                        </div>
+                        <div class="flex flex-col justify-between flex-1 p-4">
+                            <div>
+                                <h5 class="text-sm font-medium text-[--on-primary] min-h-[48px]">
+                                    {{ $item->name }}
+                                </h5>
+                                <div class="flex items-center mt-2">
+                                    <i class="h-4 w-4 fi fi-{{ $item->country->flag_code ?? 'default-flag' }}"></i>
+                                    <span class="text-xs text-[--on-primary] font-bold ml-3">
+                                        {{ $item->country->name ?? 'xx' }}
+                                    </span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <i class="material-icons text-yellow-500 text-sm">star_half</i>
+                                    <span class="ml-1 text-sm font-semibold text-gray-700">3.5</span>
+                                </div>
+                            </div>
+                            <hr class="border-t border-gray-200 my-3">
+                            <div class="text-xs font-bold text-[--on-primary]">
+                                {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
+                            </div>
+                        </div>
+                    </a>
+                @empty
+                    <h3 class="text-center col-span-2 text-lg font-bold">
+                        Data Kosong
+                    </h3>
+                @endforelse
             </div>
-            <h2 class="mt-4 text-xl font-bold">{{ Auth::user()->name }}</h2>
-            <p class="text-sm text-[--on-primary] font-semibold">{{ Auth::user()->email }}</p>
-        </div>
+        </section>
     </div>
 @endsection
 
