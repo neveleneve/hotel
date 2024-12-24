@@ -57,6 +57,11 @@ class MemberOrderController extends Controller {
             if ($request->action == 'pesan') {
                 $hotel = Hotel::find($request->hotel_id);
                 $total_day = (strtotime($request->check_out_hidden) - strtotime($request->check_in_hidden)) / (60 * 60 * 24);
+                if ($hotel->promo) {
+                    $total = ($hotel->price * $request->room_hidden * $total_day) - ($hotel->price * $request->room_hidden * $total_day * $hotel->discount / 100);
+                } else {
+                    $total = $hotel->price * $request->room_hidden * $total_day;
+                }
                 $order = Order::create([
                     'order_code' => strtoupper($hotel->country->flag_code) . '/' . date('ymdHi') . '/' . str_pad($request->user_id, 4, "0", STR_PAD_LEFT) . '/' . strtoupper(uniqid()),
                     'user_id' => $request->user_id,
@@ -64,7 +69,7 @@ class MemberOrderController extends Controller {
                     'check_in' => $request->check_in_hidden,
                     'check_out' => $request->check_out_hidden,
                     'total_room' => $request->room_hidden,
-                    'total' => $hotel->price * $request->room_hidden * $total_day,
+                    'total' => $total,
                 ]);
                 if ($order) {
                     return redirect(route('order.index'))->with([
@@ -82,13 +87,18 @@ class MemberOrderController extends Controller {
             } elseif ($request->action == 'keranjang') {
                 $hotel = Hotel::find($request->hotel_id);
                 $total_day = (strtotime($request->check_out_hidden) - strtotime($request->check_in_hidden)) / (60 * 60 * 24);
+                if ($hotel->promo) {
+                    $total = ($hotel->price * $request->room_hidden * $total_day) - ($hotel->price * $request->room_hidden * $total_day * $hotel->discount / 100);
+                } else {
+                    $total = $hotel->price * $request->room_hidden * $total_day;
+                }
                 $cart = Cart::create([
                     'user_id' => $request->user_id,
                     'hotel_id' => $request->hotel_id,
                     'check_in' => $request->check_in_hidden,
                     'check_out' => $request->check_out_hidden,
                     'total_room' => $request->room_hidden,
-                    'total' => $hotel->price * $request->room_hidden * $total_day,
+                    'total' => $total,
                 ]);
                 if ($cart) {
                     return redirect(route('cart.index'))->with([

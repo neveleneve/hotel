@@ -49,8 +49,13 @@
                     <hr class="border-t my-2">
                     <div class="text-sm">
                         @if ($item->promo)
-                            <div class="text-[--on-error] text-xs line-through font-bold">
-                                {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
+                            <div class="flex items-center gap-2">
+                                <div class="text-[--on-error] text-xs line-through font-bold">
+                                    {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
+                                </div>
+                                <span class="bg-[--error] text-[--on-error] text-xs px-2 py-0.5 rounded-full font-bold">
+                                    -{{ $item->discount }}%
+                                </span>
                             </div>
                             <div class="font-extrabold text-[--on-primary]">
                                 {{ 'Rp ' . number_format($item->price - ($item->price * $item->discount) / 100, 0, ',', '.') }}

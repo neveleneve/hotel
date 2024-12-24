@@ -37,16 +37,20 @@
                                         <span>{{ $order->total_room }} Kamar</span>
                                     </div>
                                 </div>
-                                <div class="flex items-center">
+                                <div class="flex items-center gap-2">
                                     <span title="{{ $order->status_bayar ? 'Sudah bayar' : 'Belum bayar' }}"
                                         class="text-xs px-2 py-1 rounded-full font-bold {{ $order->status_bayar ? 'bg-[--primary] text-[--on-primary]' : 'bg-[--error] text-[--on-error]' }}">
                                         {{ $order->status_bayar ? 'Sudah bayar' : 'Belum bayar' }}
                                     </span>
+                                    @if (!$order->status_bayar)
+                                        <button onclick="showPaymentInfo()"
+                                            class="w-5 h-5 rounded-full bg-[--on-primary-container] text-[--on-primary] flex items-center justify-center hover:bg-[--primary]">
+                                            <i class="material-icons text-sm">info</i>
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Bottom Payment Info -->
                         <div class="mt-auto p-4 border-t">
                             <div class="flex justify-between items-center">
                                 <span class="text-sm text-[--on-primary] font-bold">Total Pembayaran</span>
@@ -96,4 +100,27 @@
             })
         </script>
     @endsession
+    <script>
+        function showPaymentInfo() {
+            Swal.fire({
+                title: 'Informasi Pembayaran',
+                html: `
+                    <p class="mb-4">Silahkan hubungi admin untuk melakukan pembayaran:</p>
+                    <div class="text-center space-y-2">
+                        <p><i class="material-icons align-middle">phone</i> +62 812-3456-7890</p>
+                        <p><i class="material-icons align-middle">mail</i> admin@example.com</p>
+                        <p><i class="material-icons align-middle">call</i> +62 812-3456-7890</p>
+                    </div>
+                `,
+                icon: 'info',
+                confirmButtonText: 'Tutup',
+                customClass: {
+                    popup: 'bg-white rounded-lg shadow-lg',
+                    title: 'text-lg font-bold text-[--on-primary]',
+                    htmlContainer: 'text-semibold text-[--on-primary]',
+                    confirmButton: 'bg-[--primary] text-[--on-primary] px-4 py-2 rounded-lg hover:bg-[-primary-container] focus:ring focus:ring-blue-300 font-bold',
+                }
+            });
+        }
+    </script>
 @endpush

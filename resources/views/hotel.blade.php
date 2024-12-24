@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="my-16">
+    <div class="my-16 mb-3">
         <div class="px-4">
             @livewire('hotel-landing')
         </div>

@@ -19,7 +19,7 @@ class HotelSeeder extends Seeder {
                 'rating' => 3.5,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'promo' => rand(0, 1),
-                'discount' => 10,
+                'discount' => rand(10, 20),
             ],
             [
                 'name' => 'Hotel Komune Living & Wellness Kuala Lumpur',
@@ -28,7 +28,7 @@ class HotelSeeder extends Seeder {
                 'rating' => 4.4,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'promo' => rand(0, 1),
-                'discount' => 10,
+                'discount' => rand(10, 20),
             ],
             [
                 'name' => 'KL Season Apartment At Times Square',
@@ -37,7 +37,7 @@ class HotelSeeder extends Seeder {
                 'rating' => 4.2,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'promo' => rand(0, 1),
-                'discount' => 10,
+                'discount' => rand(10, 20),
             ],
             [
                 'name' => 'Santa Grand Signature Kuala Lumpur',
@@ -46,7 +46,7 @@ class HotelSeeder extends Seeder {
                 'rating' => 4.1,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'promo' => rand(0, 1),
-                'discount' => 10,
+                'discount' => rand(10, 20),
             ],
             [
                 'name' => 'Star Residence Suite KLCC',
@@ -55,7 +55,7 @@ class HotelSeeder extends Seeder {
                 'rating' => 3.7,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'promo' => rand(0, 1),
-                'discount' => 10,
+                'discount' => rand(10, 20),
             ],
             [
                 'name' => 'Wyndham Grand Bangsar Kuala Lumpur',
@@ -64,7 +64,7 @@ class HotelSeeder extends Seeder {
                 'rating' => 4.6,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'promo' => rand(0, 1),
-                'discount' => 10,
+                'discount' => rand(10, 20),
             ],
         ];
 

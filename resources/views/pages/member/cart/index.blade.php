@@ -12,23 +12,17 @@
                         </div>
                         <div class="flex-1 p-4 pb-2">
                             <div class="flex items-center justify-between mb-2">
-                                <h5 class="text-lg font-bold text-[--on-primary]">
+                                <h5 class="text-lg font-extrabold text-[--on-primary]">
                                     {{ $order->hotel->name }}
                                 </h5>
                             </div>
-                            <div class="pb-2">
-                                <h5 class="text-xs font-bold text-[--on-primary]">
-                                    {{ $order->order_code }}
-                                </h5>
-                            </div>
-
-                            <div class="space-y-2 text-sm text-gray-600">
+                            <div class="space-y-2 text-sm text-[--on-primary] font-semibold mb-3">
                                 <div class="flex items-center">
-                                    <i class="material-icons text-sm mr-1">calendar_today</i>
+                                    <i class="material-icons text-sm mr-1">event_available</i>
                                     <span>Check in: {{ date('d M Y', strtotime($order->check_in)) }}</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <i class="material-icons text-sm mr-1">calendar_today</i>
+                                    <i class="material-icons text-sm mr-1">event_busy</i>
                                     <span>Check out: {{ date('d M Y', strtotime($order->check_out)) }}</span>
                                 </div>
                                 <div class="flex items-center">
@@ -38,7 +32,10 @@
                             </div>
                             <div class="mt-1 pt-1 border-t">
                                 <div class="flex justify-between items-center">
-                                    <form action="" method="POST" class=" mt-1 w-full mr-2">
+                                    <form action="{{ route('cart.update', ['cart' => $order->id]) }}" method="POST"
+                                        class=" mt-1 w-full mr-2">
+                                        @method('PUT')
+                                        @csrf
                                         <button
                                             class="bg-[--primary] text-[--on-primary] rounded-full py-2.5 font-bold w-full">
                                             Pesan
