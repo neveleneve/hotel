@@ -41,11 +41,11 @@
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
                 <h2 class="text-lg font-bold">Belanja Mall</h2>
-                <a href="#" class="text-[--primary] text-xs font-bold">Lihat Semua</a>
+                <a href="{{ route('hotels') }}" class="text-[--primary] text-xs font-bold">Lihat Semua</a>
             </div>
             <hr class="mb-2">
             <div class="flex space-x-4 mb-4">
-                <button class="px-2 py-1 bg-[--on-primary] text-[--on-primary-container] rounded-lg font-bold text-xs">
+                <button class="px-2 py-2 bg-[--on-primary] text-[--on-primary-container] rounded-lg font-bold text-xs">
                     Semua
                 </button>
                 {{-- <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">
@@ -77,7 +77,8 @@
                                 </div>
                                 <div class="flex items-center mt-1">
                                     <i class="material-icons text-yellow-500 text-sm">star_half</i>
-                                    <span class="ml-1 text-sm font-semibold text-gray-700">{{ $item->rating ?? '-' }}</span>
+                                    <span
+                                        class="ml-1 text-sm font-semibold text-gray-700">{{ $item->rating ?? '-' }}</span>
                                 </div>
                             </div>
                             <hr class="border-t border-gray-200 my-3">

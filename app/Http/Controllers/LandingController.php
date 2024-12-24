@@ -15,6 +15,6 @@ class LandingController extends Controller {
 
     public function hotels() {
         $hotel = Hotel::orderBy('rating', 'desc')->get();
-        return view('pages.hotel', compact('hotel'));
+        return view('hotel', compact('hotel'));
     }
 }

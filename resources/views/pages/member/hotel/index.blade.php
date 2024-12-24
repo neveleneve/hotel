@@ -3,8 +3,7 @@
 @section('content')
     <div class="mt-[66px] mb-[108px]">
         <div class="grid grid-cols-1 px-3 text-[--on-primary]">
-            <div
-                class="w-full h-full flex flex-col bg-white border border-[--primary-container] rounded-lg shadow-lg lg:mb-3">
+            <div class="w-full h-full flex flex-col bg-white border rounded-lg shadow-lg lg:mb-3">
                 <div class="relative w-full rounded-t-lg">
                     <div class="swiper z-10 rounded-t-lg">
                         <div class="swiper-wrapper aspect-[3/2] md:aspect-[16/6]">
@@ -46,8 +45,7 @@
             </div>
         </div>
         <div class="grid grid-cols-1 px-3 text-[--on-primary]">
-            <div
-                class="w-full h-full flex flex-col bg-white border border-[--primary-container] rounded-lg shadow-lg lg:mb-3 p-3 mt-3">
+            <div class="w-full h-full flex flex-col bg-white border rounded-lg shadow-lg lg:mb-3 p-3 mt-3">
                 <h3 class="font-bold text-xl">Detail Pesan</h3>
                 <hr class="my-2">
                 <div class="grid grid-cols-1 mb-3">
@@ -116,7 +114,6 @@
                 Beranda
             </a>
         </div>
-
     </header>
 @endpush
 
