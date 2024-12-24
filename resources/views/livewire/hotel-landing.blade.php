@@ -8,10 +8,10 @@
             class="px-2 py-1 bg-[--primary{{ $select == 'top' ? '-container' : null }}] text-[--on-primary{{ $select == 'top' ? '-container' : null }}] rounded-lg font-bold text-xs">
             Top Deal
         </button>
-        <button wire:click="changeData('popular')"
+        {{-- <button wire:click="changeData('popular')"
             class="px-2 py-1 bg-[--primary{{ $select == 'popular' ? '-container' : null }}] text-[--on-primary{{ $select == 'popular' ? '-container' : null }}] rounded-lg font-bold text-xs">
             Populer
-        </button>
+        </button> --}}
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2" wire:loading.class="opacity-40">
         @foreach ($hotel as $item)

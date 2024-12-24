@@ -18,7 +18,7 @@ class HotelLanding extends Component {
 
     public function changeData($value) {
         if ($value == 'all') {
-            $this->hotel = Hotel::orderBy('rating', 'desc')->get();
+            $this->hotel = Hotel::get();
             $this->select = 'all';
         } elseif ($value == 'top') {
             $this->hotel = Hotel::orderBy('rating', 'desc')->get();
