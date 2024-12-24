@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="my-[56px]">
+    <div class="mt-[56px]">
         <section class="p-4">
             <h3 class="text-center font-bold text-2xl">{{ $country->name }}</h3>
             <hr class="mt-3">
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="flex items-center mt-1">
                                     <i class="material-icons text-yellow-500 text-sm">star_half</i>
-                                    <span class="ml-1 text-sm font-semibold text-gray-700">3.5</span>
+                                    <span class="ml-1 text-sm font-semibold text-gray-700">{{ $item->rating ?? '-' }}</span>
                                 </div>
                             </div>
                             <hr class="border-t border-gray-200 my-3">
@@ -51,8 +51,9 @@
 @push('nav')
     <header class="fixed top-0 left-0 w-full bg-[--on-primary] text-white p-2 flex justify-between items-center z-20">
         <div class="flex items-center">
-            <a href="{{ route('landing') }}" class="flex items-center p-2 bg-[--error] rounded-full">
-                <i class="material-icons font-bold">chevron_left</i>
+            <a href="{{ route('landing') }}" class="font-bold flex items-center p-2 rounded-full">
+                <i class="material-icons">chevron_left</i>
+                Beranda
             </a>
         </div>
 

@@ -30,6 +30,14 @@
                 @endforeach
             </div>
         </section>
+        @auth
+            <section class="p-4">
+                <div class="flex justify-between items-center mb-1">
+                    <h2 class="text-lg font-bold">Project Kamu</h2>
+                </div>
+                <hr class="mb-2">
+            </section>
+        @endauth
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
                 <h2 class="text-lg font-bold">Belanja Mall</h2>
@@ -64,12 +72,12 @@
                                 <div class="flex items-center mt-2">
                                     <i class="h-4 w-4 fi fi-{{ $item->country->flag_code ?? 'default-flag' }}"></i>
                                     <span class="text-xs text-[--on-primary] font-bold ml-3">
-                                        {{ $item->country->name ?? 'Unknown Country' }}
+                                        {{ $item->country->name ?? '-' }}
                                     </span>
                                 </div>
                                 <div class="flex items-center mt-1">
                                     <i class="material-icons text-yellow-500 text-sm">star_half</i>
-                                    <span class="ml-1 text-sm font-semibold text-gray-700">3.5</span>
+                                    <span class="ml-1 text-sm font-semibold text-gray-700">{{ $item->rating ?? '-' }}</span>
                                 </div>
                             </div>
                             <hr class="border-t border-gray-200 my-3">

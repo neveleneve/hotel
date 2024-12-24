@@ -12,10 +12,15 @@ class Hotel extends Model {
         'name',
         'country_id',
         'price',
+        'rating',
         'description',
     ];
 
     public function country() {
         return $this->belongsTo(country::class);
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class);
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('name');
             $table->integer('country_id');
             $table->integer('price');
+            $table->float('rating')->max(5);
             $table->string('description');
             $table->timestamps();
         });

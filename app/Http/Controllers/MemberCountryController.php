@@ -12,7 +12,7 @@ class MemberCountryController extends Controller {
 
     public function index($flag_code) {
         $country = country::where('flag_code', $flag_code)->first();
-        $hotel = $country->hotel()->get();
+        $hotel = $country->hotel()->orderBy('rating', 'desc')->get();
         return view('pages.member.country.index', compact('hotel',  'country'));
     }
 }
