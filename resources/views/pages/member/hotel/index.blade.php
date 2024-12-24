@@ -5,6 +5,14 @@
         <div class="grid grid-cols-1 px-3 text-[--on-primary]">
             <div class="w-full h-full flex flex-col bg-white border rounded-lg shadow-lg lg:mb-3">
                 <div class="relative w-full rounded-t-lg">
+                    @if ($hotel->promo)
+                        <div class="absolute top-2 right-2 animate-pulse z-50">
+                            <span class="bg-[--error] text-[--on-error] text-xs font-bold px-2 py-1 rounded-full">
+                                <i class="material-icons text-sm align-middle">local_offer</i>
+                                Promo
+                            </span>
+                        </div>
+                    @endif
                     <div class="swiper z-10 rounded-t-lg">
                         <div class="swiper-wrapper aspect-[3/2] md:aspect-[16/6]">
                             <div class="swiper-slide flex justify-center">
@@ -13,8 +21,6 @@
                             <div class="swiper-slide flex justify-center">
                                 <img src="{{ asset('assets/img/hotel/' . $hotel->id . '.jpg') }}">
                             </div>
-                        </div>
-                        <div class="text-xs">
                         </div>
                         <div class="swiper-button-prev text-[--on-primary]"></div>
                         <div class="swiper-button-next text-[--on-primary]"></div>

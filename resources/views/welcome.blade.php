@@ -15,7 +15,7 @@
             </div>
         </div>
         <section class="px-4 py-2">
-            <h2 class="text-lg font-bold mb-1">Event Belanja</h2>
+            <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Event Belanja</h2>
             <hr class="mb-2">
             <div class="bg-gray-200 h-32 flex items-center justify-center mb-4">Slide 1</div>
             <hr class="mb-2">
@@ -33,15 +33,15 @@
         @auth
             <section class="p-4">
                 <div class="flex justify-between items-center mb-1">
-                    <h2 class="text-lg font-bold">Project Kamu</h2>
+                    <h2 class="text-lg font-bold text-[--on-primary]">Project Kamu</h2>
                 </div>
                 <hr class="mb-2">
             </section>
         @endauth
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
-                <h2 class="text-lg font-bold">Belanja Mall</h2>
-                <a href="{{ route('hotels') }}" class="text-[--primary] text-xs font-bold">Lihat Semua</a>
+                <h2 class="text-lg font-bold text-[--on-primary]">Belanja Mall</h2>
+                <a href="{{ route('hotels') }}" class="text-[--on-primary] text-xs font-bold">Lihat Semua</a>
             </div>
             <hr class="mb-2">
             @livewire('hotel-landing')

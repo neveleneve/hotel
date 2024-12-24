@@ -8,13 +8,11 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller {
     public function index() {
-        $hotel = Hotel::orderBy('rating', 'desc')->get();
         $country = country::orderBy('name')->get();
-        return view('welcome', compact('hotel', 'country'));
+        return view('welcome', compact('country'));
     }
 
     public function hotels() {
-        $hotel = Hotel::orderBy('rating', 'desc')->get();
-        return view('hotel', compact('hotel'));
+        return view('hotel');
     }
 }

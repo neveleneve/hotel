@@ -23,6 +23,14 @@
                     <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
                         href="{{ route('member.hotel.index', ['flag_code' => $item->country->flag_code, 'id' => $item->id]) }}">
                         <div class="relative w-full">
+                            @if ($item->promo)
+                                <div class="absolute top-2 right-2 animate-pulse">
+                                    <span class="bg-[--error] text-[--on-error] text-xs font-bold px-2 py-1 rounded-full">
+                                        <i class="material-icons text-sm align-middle">local_offer</i>
+                                        Promo
+                                    </span>
+                                </div>
+                            @endif
                             <img class="w-full aspect-square object-cover rounded-t-lg"
                                 src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}"
                                 alt="Gambar Hotel {{ $item->name }}">

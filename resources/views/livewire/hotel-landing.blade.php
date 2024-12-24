@@ -1,15 +1,15 @@
 <div>
-    <div class="flex space-x-4 mb-4">
+    <div class="flex space-x-1 mb-4">
         <button wire:click="changeData('all')"
-            class="px-2 py-2 bg-[--primary{{ $select == 'all' ? '-container' : null }}] text-[--on-primary{{ $select == 'all' ? '-container' : null }}] rounded-lg font-bold text-xs">
+            class="px-2 py-2 bg-[--primary{{ $select == 'all' ? '-container' : null }}] text-[--on-primary{{ $select == 'all' ? '-container' : null }}] rounded-lg font-extrabold text-xs">
             Semua
         </button>
         <button wire:click="changeData('top')"
-            class="px-2 py-1 bg-[--primary{{ $select == 'top' ? '-container' : null }}] text-[--on-primary{{ $select == 'top' ? '-container' : null }}] rounded-lg font-bold text-xs">
+            class="px-2 py-1 bg-[--primary{{ $select == 'top' ? '-container' : null }}] text-[--on-primary{{ $select == 'top' ? '-container' : null }}] rounded-lg font-extrabold text-xs">
             Top Deal
         </button>
         <button wire:click="changeData('popular')"
-            class="px-2 py-1 bg-[--primary{{ $select == 'popular' ? '-container' : null }}] text-[--on-primary{{ $select == 'popular' ? '-container' : null }}] rounded-lg font-bold text-xs">
+            class="px-2 py-1 bg-[--primary{{ $select == 'popular' ? '-container' : null }}] text-[--on-primary{{ $select == 'popular' ? '-container' : null }}] rounded-lg font-extrabold text-xs">
             Populer
         </button>
     </div>
