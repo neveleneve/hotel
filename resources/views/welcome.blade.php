@@ -48,12 +48,12 @@
                 <button class="px-2 py-1 bg-[--on-primary] text-[--on-primary-container] rounded-lg font-bold text-xs">
                     Semua
                 </button>
-                <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">
+                {{-- <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">
                     Top Deal
                 </button>
                 <button class="px-2 py-1 bg-[--primary] text-[--primary-container] rounded-lg font-bold text-xs">
                     Populer
-                </button>
+                </button> --}}
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
                 @foreach ($hotel as $item)

@@ -2,10 +2,21 @@
 
 @section('content')
     <div class="mt-[56px]">
-        <section class="p-4">
-            <h3 class="text-center font-bold text-2xl">{{ $country->name }}</h3>
-            <hr class="mt-3">
+        <section class="p-4 mb-3 bg-[--primary]">
+            <h3 class="text-center font-bold text-2xl text-[--primary-container]">{{ $country->name }}</h3>
         </section>
+        <div class="px-4 pb-2">
+            <div class="relative w-full">
+                <input type="text" placeholder="Cari..."
+                    class="w-full pl-10 pr-10 py-2 border-2 border-[--on-primary] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+                    id="search-input" oninput="toggleIcons()" />
+                <span class="material-icons absolute left-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">
+                    search
+                </span>
+                <span onclick="clearInput()" id="icon-times"
+                    class="material-icons hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">close</span>
+            </div>
+        </div>
         <section class="p-4 pt-2">
             <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2">
                 @forelse ($hotel as $item)
@@ -39,9 +50,12 @@
                         </div>
                     </a>
                 @empty
-                    <h3 class="text-center col-span-2 text-lg font-bold">
-                        Data Kosong
-                    </h3>
+                    <div class="flex flex-col col-span-2 lg:col-span-6 items-center justify-center py-12">
+                        <span class="material-icons text-6xl text-[--primary-container] mb-3">hotel</span>
+                        <h3 class="text-xl font-bold text-[--primary-container]">Tidak ada hotel</h3>
+                        <p class="text-[--primary-container] font-semibold text-center mt-2">Hotel belum tersedia untuk
+                            negara ini</p>
+                    </div>
                 @endforelse
             </div>
         </section>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Hotel;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -47,13 +48,17 @@ class MemberOrderController extends Controller {
         ]);
 
         if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate->errors())->withInput();
+            return redirect()->back()->withErrors($validate->errors())->withInput()->with([
+                'title' => 'Gagal',
+                'text' => 'Gagal menambah pesanan!',
+                'icon' => 'error',
+            ]);
         } else {
             if ($request->action == 'pesan') {
                 $hotel = Hotel::find($request->hotel_id);
                 $total_day = (strtotime($request->check_out_hidden) - strtotime($request->check_in_hidden)) / (60 * 60 * 24);
-                Order::create([
-                    'order_code' => date('ymdHi') . '/' . strtoupper(uniqid()) . '/' . str_pad($request->user_id, 4, "0", STR_PAD_LEFT),
+                $order = Order::create([
+                    'order_code' => strtoupper($hotel->country->flag_code) . '/' . date('ymdHi') . '/' . str_pad($request->user_id, 4, "0", STR_PAD_LEFT) . '/' . strtoupper(uniqid()),
                     'user_id' => $request->user_id,
                     'hotel_id' => $request->hotel_id,
                     'check_in' => $request->check_in_hidden,
@@ -61,13 +66,43 @@ class MemberOrderController extends Controller {
                     'total_room' => $request->room_hidden,
                     'total' => $hotel->price * $request->room_hidden * $total_day,
                 ]);
-                return redirect(route('order.index'))->with([
-                    'title' => 'Berhasil',
-                    'text' => 'Berhasil menambah pesanan!',
-                    'icon' => 'success',
-                ]);
+                if ($order) {
+                    return redirect(route('order.index'))->with([
+                        'title' => 'Berhasil',
+                        'text' => 'Berhasil menambah pesanan!',
+                        'icon' => 'success',
+                    ]);
+                } else {
+                    return redirect()->back()->with([
+                        'title' => 'Gagal',
+                        'text' => 'Gagal menambah ke keranjang!',
+                        'icon' => 'error',
+                    ]);
+                }
             } elseif ($request->action == 'keranjang') {
-                dd('Keranjang');
+                $hotel = Hotel::find($request->hotel_id);
+                $total_day = (strtotime($request->check_out_hidden) - strtotime($request->check_in_hidden)) / (60 * 60 * 24);
+                $cart = Cart::create([
+                    'user_id' => $request->user_id,
+                    'hotel_id' => $request->hotel_id,
+                    'check_in' => $request->check_in_hidden,
+                    'check_out' => $request->check_out_hidden,
+                    'total_room' => $request->room_hidden,
+                    'total' => $hotel->price * $request->room_hidden * $total_day,
+                ]);
+                if ($cart) {
+                    return redirect(route('cart.index'))->with([
+                        'title' => 'Berhasil',
+                        'text' => 'Berhasil menambah ke keranjang!',
+                        'icon' => 'success',
+                    ]);
+                } else {
+                    return redirect()->back()->with([
+                        'title' => 'Gagal',
+                        'text' => 'Gagal menambah ke keranjang!',
+                        'icon' => 'error',
+                    ]);
+                }
             }
         }
     }

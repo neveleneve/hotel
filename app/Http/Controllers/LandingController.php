@@ -12,4 +12,9 @@ class LandingController extends Controller {
         $country = country::orderBy('name')->get();
         return view('welcome', compact('hotel', 'country'));
     }
+
+    public function hotels() {
+        $hotel = Hotel::orderBy('rating', 'desc')->get();
+        return view('pages.hotel', compact('hotel'));
+    }
 }

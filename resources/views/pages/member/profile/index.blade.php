@@ -10,13 +10,11 @@
             <p class="text-sm text-[--on-primary] font-semibold">{{ Auth::user()->email }}</p>
         </div>
         <div class="grid grid-cols-2 my-2">
-            <div
-                class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--on-primary] text-[--on-primary-container] m-4 p-4">
+            <div class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--primary] text-[--on-primary] m-4 p-4">
                 <i class="w-12 h-12 material-icons text-5xl">credit_card</i>
                 <span class="text-xs mt-2 text-center font-bold">Pembayaran</span>
             </div>
-            <div
-                class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--on-primary] text-[--on-primary-container] m-4 p-4">
+            <div class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--primary] text-[--on-primary] m-4 p-4">
                 <i class="w-12 h-12 material-icons text-5xl">history</i>
                 <span class="text-xs mt-2 text-center font-bold">History</span>
             </div>

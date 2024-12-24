@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('hotels', [LandingController::class, 'hotels'])->name('hotels');
 
 Auth::routes();
 

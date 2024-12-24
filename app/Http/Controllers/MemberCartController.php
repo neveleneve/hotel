@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class MemberCartController extends Controller {
@@ -10,7 +11,11 @@ class MemberCartController extends Controller {
     }
 
     public function index() {
-        return view('pages.member.cart.index');
+        $carts = Cart::with('hotel')
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('pages.member.cart.index', compact('carts'));
     }
 
     public function create() {
@@ -21,19 +26,19 @@ class MemberCartController extends Controller {
         //
     }
 
-    public function show(string $id) {
+    public function show(Cart $cart) {
         //
     }
 
-    public function edit(string $id) {
+    public function edit(Cart $cart) {
         //
     }
 
-    public function update(Request $request, string $id) {
+    public function update(Request $request, Cart $cart) {
         //
     }
 
-    public function destroy(string $id) {
-        //
+    public function destroy(Cart $cart) {
+        dd($cart);
     }
 }
