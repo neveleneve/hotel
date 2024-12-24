@@ -8,16 +8,24 @@
             class="px-2 py-1 bg-[--primary{{ $select == 'top' ? '-container' : null }}] text-[--on-primary{{ $select == 'top' ? '-container' : null }}] rounded-lg font-bold text-xs">
             Top Deal
         </button>
-        {{-- <button wire:click="changeData('popular')"
+        <button wire:click="changeData('popular')"
             class="px-2 py-1 bg-[--primary{{ $select == 'popular' ? '-container' : null }}] text-[--on-primary{{ $select == 'popular' ? '-container' : null }}] rounded-lg font-bold text-xs">
             Populer
-        </button> --}}
+        </button>
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2" wire:loading.class="opacity-40">
         @foreach ($hotel as $item)
             <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
                 href="{{ route('member.hotel.index', ['flag_code' => $item->country->flag_code, 'id' => $item->id]) }}">
                 <div class="relative w-full">
+                    @if ($item->promo)
+                        <div class="absolute top-2 right-2 animate-pulse">
+                            <span class="bg-[--error] text-[--on-error] text-xs font-bold px-2 py-1 rounded-full">
+                                <i class="material-icons text-sm align-middle">local_offer</i>
+                                Promo
+                            </span>
+                        </div>
+                    @endif
                     <img class="w-full aspect-square object-cover rounded-t-lg"
                         src="{{ asset('assets/img/hotel/' . $item->id . '.jpg') }}"
                         alt="Gambar Hotel {{ $item->name }}">

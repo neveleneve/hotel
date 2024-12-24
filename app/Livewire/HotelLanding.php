@@ -21,7 +21,9 @@ class HotelLanding extends Component {
             $this->hotel = Hotel::get();
             $this->select = 'all';
         } elseif ($value == 'top') {
-            $this->hotel = Hotel::orderBy('rating', 'desc')->get();
+            $this->hotel = Hotel::where('promo', 1)
+                ->orderBy('rating', 'desc')
+                ->get();
             $this->select = 'top';
         } elseif ($value == 'popular') {
             $this->hotel = Hotel::orderBy('rating', 'desc')->get();

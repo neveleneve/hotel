@@ -18,6 +18,7 @@ class HotelSeeder extends Seeder {
                 'price' => 600000,
                 'rating' => 3.5,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                'promo' => rand(0, 1),
             ],
             [
                 'name' => 'Hotel Komune Living & Wellness Kuala Lumpur',
@@ -25,6 +26,7 @@ class HotelSeeder extends Seeder {
                 'price' => 630000,
                 'rating' => 4.4,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                'promo' => rand(0, 1),
             ],
             [
                 'name' => 'KL Season Apartment At Times Square',
@@ -32,6 +34,7 @@ class HotelSeeder extends Seeder {
                 'price' => 890000,
                 'rating' => 4.2,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                'promo' => rand(0, 1),
             ],
             [
                 'name' => 'Santa Grand Signature Kuala Lumpur',
@@ -39,6 +42,7 @@ class HotelSeeder extends Seeder {
                 'price' => 450000,
                 'rating' => 4.1,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                'promo' => rand(0, 1),
             ],
             [
                 'name' => 'Star Residence Suite KLCC',
@@ -46,6 +50,7 @@ class HotelSeeder extends Seeder {
                 'price' => 300000,
                 'rating' => 3.7,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                'promo' => rand(0, 1),
             ],
             [
                 'name' => 'Wyndham Grand Bangsar Kuala Lumpur',
@@ -53,6 +58,7 @@ class HotelSeeder extends Seeder {
                 'price' => 670000,
                 'rating' => 4.6,
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                'promo' => rand(0, 1),
             ],
         ];
 
