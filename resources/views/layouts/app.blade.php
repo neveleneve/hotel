@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     @stack('customcss')
+    @livewireStyles
 </head>
 
 <body class="light">
@@ -19,6 +20,7 @@
     @stack('tab')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('customjs')
+    @livewireScripts
 </body>
 
 </html>
