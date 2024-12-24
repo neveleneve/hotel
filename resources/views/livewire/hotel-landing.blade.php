@@ -47,8 +47,19 @@
                         </div>
                     </div>
                     <hr class="border-t border-gray-200 my-3">
-                    <div class="text-xs font-bold text-[--on-primary]">
-                        {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
+                    <div class="text-sm">
+                        @if ($item->promo)
+                            <div class="text-[--on-error] line-through font-bold">
+                                {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
+                            </div>
+                            <div class="font-extrabold text-[--on-primary] text-sm">
+                                {{ 'Rp ' . number_format($item->price - ($item->price * $item->discount) / 100, 0, ',', '.') }}
+                            </div>
+                        @else
+                            <div class="font-bold text-[--on-primary]">
+                                {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </a>

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->float('rating')->max(5);
             $table->string('description');
             $table->boolean('promo');
+            $table->integer('discount');
             $table->timestamps();
         });
     }
