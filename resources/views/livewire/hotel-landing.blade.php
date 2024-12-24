@@ -46,7 +46,7 @@
                             <span class="ml-1 text-sm font-semibold text-gray-700">{{ $item->rating ?? '-' }}</span>
                         </div>
                     </div>
-                    <hr class="border-t border-gray-200 my-3">
+                    <hr class="border-t my-2">
                     <div class="text-sm">
                         @if ($item->promo)
                             <div class="text-[--on-error] line-through font-bold">
