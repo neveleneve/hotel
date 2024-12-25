@@ -7,10 +7,6 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 
 class MemberCartController extends Controller {
-    public function __construct() {
-        $this->middleware('auth');
-    }
-
     public function index() {
         $carts = Cart::with('hotel')
             ->where('user_id', auth()->user()->id)

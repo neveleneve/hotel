@@ -9,10 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class MemberOrderController extends Controller {
-    public function __construct() {
-        $this->middleware('auth');
-    }
-
     public function index() {
         $orders = Order::with('hotel')
             ->where('user_id', auth()->user()->id)

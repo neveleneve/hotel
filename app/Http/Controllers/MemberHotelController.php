@@ -7,10 +7,6 @@ use App\Models\Hotel;
 use Illuminate\Http\Request;
 
 class MemberHotelController extends Controller {
-    public function __construct() {
-        $this->middleware('auth');
-    }
-
     public function index($flag_code, $id) {
         $country = country::where('flag_code', $flag_code)->first();
         $data = $country->hotel->find($id);
