@@ -25,8 +25,10 @@ Auth::routes();
 
 // admin route
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['permission:dashboard'])->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    });
     Route::resource('member', AdminMemberController::class);
     Route::resource('hotel', AdminHotelController::class);
     Route::resource('country', AdminCountryController::class);

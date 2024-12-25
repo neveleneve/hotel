@@ -1,8 +1,7 @@
 @extends('layouts.admin')
-@section('title', 'Dashboard')
 
 @section('content')
-    <div class=""   >
+    <div>
         <section class="mb-3">
             <h3 class="font-bold text-2xl text-center md:text-start mb-3 text-[--primary-container]">Dashboard</h3>
             <hr>
@@ -39,7 +38,8 @@
                 <div class="flex justify-between items-start">
                     <div>
                         <h4 class="text-[--primary-container] font-bold text-lg">Profit</h4>
-                        <p class="text-[--primary-container] text-2xl font-bold">{{ $payments }}</p>
+                        <p class="text-[--primary-container] text-2xl font-bold">Rp
+                            {{ number_format($payments, 0, ',', '.') }}</p>
                     </div>
                     <i class="material-icons text-[--primary-container] text-opacity-20 text-6xl">payments</i>
                 </div>

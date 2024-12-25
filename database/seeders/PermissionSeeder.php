@@ -13,30 +13,36 @@ class PermissionSeeder extends Seeder {
     public function run(): void {
         $permissions = [
             'dashboard',
+
             'member index',
             'member view',
             'member edit',
             'member delete',
+
             'hotel index',
             'hotel create',
             'hotel view',
             'hotel edit',
             'hotel delete',
+
             'country index',
             'country create',
             'country view',
             'country edit',
             'country delete',
+
             'order index',
             'order create',
             'order view',
             'order edit',
             'order delete',
+
             'role index',
             'role create',
             'role view',
             'role edit',
             'role delete',
+
             'permission index',
             'permission create',
             'permission view',

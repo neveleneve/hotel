@@ -2,23 +2,28 @@
     <div class="px-6 py-[18px] border-b" :class="{ 'justify-center': !sidebarOpen }">
         <h1 class="text-2xl text-center font-bold text-nowrap" x-show="sidebarOpen">Admin Panel</h1>
         <h1 class="text-sm font-bold text-center bg-[--primary] rounded-lg  p-2" x-show="!sidebarOpen">AP</h1>
+        {{-- <h1>{{ Auth::user()->name }}</h1> --}}
     </div>
     <nav class="flex-1 flex flex-col">
         <div class="px-4 pt-3 space-y-2">
-            <a href="{{ route('admin.dashboard') }}" title="Dashboard"
-                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.dashboard') ? 'bg-[--primary-container]' : '' }}"
-                :class="{ 'justify-center': !sidebarOpen }">
-                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">dashboard</i>
-                <span x-show="sidebarOpen"
-                    class="{{ request()->routeIs('admin.dashboard') ? 'font-bold' : '' }}">Dashboard</span>
-            </a>
-            <a href="{{ route('admin.member.index') }}" title="Member"
-                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.member.*') ? 'bg-[--primary-container]' : '' }}"
-                :class="{ 'justify-center': !sidebarOpen }">
-                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">people</i>
-                <span x-show="sidebarOpen"
-                    class="{{ request()->routeIs('admin.member.*') ? 'font-bold' : '' }}">Member</span>
-            </a>
+            @can('dashboard')
+                <a href="{{ route('admin.dashboard') }}" title="Dashboard"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.dashboard') ? 'bg-[--primary-container]' : '' }}"
+                    :class="{ 'justify-center': !sidebarOpen }">
+                    <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">dashboard</i>
+                    <span x-show="sidebarOpen"
+                        class="{{ request()->routeIs('admin.dashboard') ? 'font-bold' : '' }}">Dashboard</span>
+                </a>
+            @endcan
+            @can('member index')
+                <a href="{{ route('admin.member.index') }}" title="Member"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.member.*') ? 'bg-[--primary-container]' : '' }}"
+                    :class="{ 'justify-center': !sidebarOpen }">
+                    <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">people</i>
+                    <span x-show="sidebarOpen"
+                        class="{{ request()->routeIs('admin.member.*') ? 'font-bold' : '' }}">Member</span>
+                </a>
+            @endcan
             <a href="{{ route('admin.hotel.index') }}" title="Hotel"
                 class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.hotel.*') ? 'bg-[--primary-container]' : '' }}"
                 :class="{ 'justify-center': !sidebarOpen }">
