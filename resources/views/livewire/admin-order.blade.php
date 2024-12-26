@@ -89,7 +89,6 @@
                         <p class="text-sm text-gray-600">{{ $order->order_code }}</p>
                         <p class="text-sm">Check In: {{ $order->check_in }}</p>
                         <p class="text-sm">Check Out: {{ $order->check_out }}</p>
-                        <p class="text-sm font-semibold">Total: Rp {{ number_format($order->total, 0, ',', '.') }}</p>
                         <span
                             class="font-bold inline-block px-2 py-1 rounded-full text-xs
                             @if ($order->status === 'pending') bg-yellow-100 text-yellow-800
@@ -97,6 +96,7 @@
                             @else bg-red-100 text-red-800 @endif">
                             {{ $order->status ? 'Sudah Bayar' : 'Belum Bayar' }}
                         </span>
+                        <p class="text-sm font-semibold">Total: Rp {{ number_format($order->total, 0, ',', '.') }}</p>
                     </div>
                     <div class="flex gap-2">
                         @can('order edit')
