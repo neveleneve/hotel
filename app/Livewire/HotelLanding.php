@@ -8,26 +8,43 @@ use Livewire\Component;
 class HotelLanding extends Component {
     public $hotel;
     public $select = 'all';
-    public function render() {
-        return view('livewire.hotel-landing');
-    }
+    public $page = 1;
+    public $hasMorePages = true;
 
     public function mount() {
-        $this->changeData($this->select);
+        $this->hotel = Hotel::take(8)->get();
     }
 
-    public function changeData($value) {
-        if ($value == 'all') {
-            $this->hotel = Hotel::get();
-            $this->select = 'all';
-        } elseif ($value == 'top') {
-            $this->hotel = Hotel::where('promo', 1)
-                ->orderBy('rating', 'desc')
-                ->get();
-            $this->select = 'top';
-        } elseif ($value == 'popular') {
-            $this->hotel = Hotel::orderBy('rating', 'desc')->get();
-            $this->select = 'popular';
+    public function loadHotels() {
+        $this->hotel = Hotel::take(8)->get();
+    }
+
+    public function loadMore() {
+        $this->page++;
+        $hotels = Hotel::skip(($this->page - 1) * 8)->take(8)->get();
+
+        if ($hotels->isEmpty()) {
+            $this->hasMorePages = false;
+        } else {
+            $this->hotel = $this->hotel->merge($hotels);
         }
+    }
+
+    public function changeData($type) {
+        $this->select = $type;
+        $this->page = 1;
+        $this->hasMorePages = true;
+
+        if ($type == 'all') {
+            $this->hotel = Hotel::take(8)->get();
+        } elseif ($type == 'top') {
+            $this->hotel = Hotel::where('rating', '>=', 4)->take(8)->get();
+        } elseif ($type == 'popular') {
+            $this->hotel = Hotel::orderBy('price', 'desc')->take(8)->get();
+        }
+    }
+
+    public function render() {
+        return view('livewire.hotel-landing');
     }
 }

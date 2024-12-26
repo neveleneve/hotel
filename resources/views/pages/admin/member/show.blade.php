@@ -6,8 +6,8 @@
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-2xl text-[--primary-container]">Detail Member</h3>
                 <a href="{{ route('admin.member.index') }}"
-                    class="flex items-center gap-2 text-[--primary] hover:text-[--primary-container]">
-                    <i class="material-icons">arrow_back</i>
+                    class="flex font-bold items-center gap-1 text-[--primary] hover:text-[--primary-container]">
+                    <i class="material-icons">chevron_left</i>
                     <span>Kembali</span>
                 </a>
             </div>

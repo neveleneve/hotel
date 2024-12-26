@@ -2,18 +2,6 @@
 
 @section('content')
     <div class="my-16">
-        {{-- <div class="px-4 py-2">
-            <div class="relative w-full">
-                <input type="text" placeholder="Cari..."
-                    class="w-full pl-10 pr-10 py-2 border-2 border-[--on-primary] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
-                    id="search-input" oninput="toggleIcons()" />
-                <span class="material-icons absolute left-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">
-                    search
-                </span>
-                <span onclick="clearInput()" id="icon-times"
-                    class="material-icons hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-[--on-primary]">close</span>
-            </div>
-        </div> --}}
         <section class="px-4 py-2">
             <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Event Belanja</h2>
             <hr class="mb-2">
@@ -30,14 +18,6 @@
                 @endforeach
             </div>
         </section>
-        {{-- @auth
-            <section class="p-4">
-                <div class="flex justify-between items-center mb-1">
-                    <h2 class="text-lg font-bold text-[--on-primary]">Project Kamu</h2>
-                </div>
-                <hr class="mb-2">
-            </section>
-        @endauth --}}
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
                 <h2 class="text-lg font-bold text-[--on-primary]">Belanja Mall</h2>

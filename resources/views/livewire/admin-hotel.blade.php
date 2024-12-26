@@ -25,7 +25,9 @@
             <table class="min-w-full text-sm">
                 <thead class="text-xs uppercase bg-[--primary] text-[--on-primary]">
                     <tr>
+                        <th scope="col" class="px-6 py-3 text-center">No</th>
                         <th scope="col" class="px-6 py-3 text-center">Nama Hotel</th>
+                        <th scope="col" class="px-6 py-3 text-center">Negara</th>
                         <th scope="col" class="px-6 py-3 text-center">Deskripsi</th>
                         <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                     </tr>
@@ -33,7 +35,9 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($hotels as $hotel)
                         <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 text-center">{{ $hotel->id }}</td>
                             <td class="px-6 py-4 text-center">{{ $hotel->name }}</td>
+                            <td class="px-6 py-4 text-center">{{ $hotel->country->name }}</td>
                             <td class="px-6 py-4 text-center">{{ Str::limit($hotel->description, 50) }}</td>
                             <td class="px-6 py-4 text-center">
                                 <div class="flex items-center justify-center gap-2">

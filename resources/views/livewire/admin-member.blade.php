@@ -16,7 +16,7 @@
     <div class="hidden lg:block">
         <div class="overflow-x-auto">
             <table class="min-w-[800px] w-full text-sm">
-                <thead class="text-xs uppercase bg-[--primary-container] text-[--on-primary-container]">
+                <thead class="text-xs uppercase bg-[--primary] text-[--on-primary]">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">Nama</th>
                         <th scope="col" class="px-6 py-3 text-center">Email</th>

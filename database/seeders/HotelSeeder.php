@@ -5,71 +5,57 @@ namespace Database\Seeders;
 use App\Models\Hotel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class HotelSeeder extends Seeder {
     /**
      * Run the database seeds.
      */
     public function run(): void {
-        $data = [
-            [
-                'name' => 'Grand Service Apartment @ Times Square',
-                'country_id' => 12,
-                'price' => 600000,
-                'rating' => 3.5,
-                'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'promo' => rand(0, 1),
-                'discount' => rand(10, 20),
-            ],
-            [
-                'name' => 'Hotel Komune Living & Wellness Kuala Lumpur',
-                'country_id' => 12,
-                'price' => 630000,
-                'rating' => 4.4,
-                'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'promo' => rand(0, 1),
-                'discount' => rand(10, 20),
-            ],
-            [
-                'name' => 'KL Season Apartment At Times Square',
-                'country_id' => 12,
-                'price' => 890000,
-                'rating' => 4.2,
-                'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'promo' => rand(0, 1),
-                'discount' => rand(10, 20),
-            ],
-            [
-                'name' => 'Santa Grand Signature Kuala Lumpur',
-                'country_id' => 12,
-                'price' => 450000,
-                'rating' => 4.1,
-                'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'promo' => rand(0, 1),
-                'discount' => rand(10, 20),
-            ],
-            [
-                'name' => 'Star Residence Suite KLCC',
-                'country_id' => 12,
-                'price' => 300000,
-                'rating' => 3.7,
-                'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'promo' => rand(0, 1),
-                'discount' => rand(10, 20),
-            ],
-            [
-                'name' => 'Wyndham Grand Bangsar Kuala Lumpur',
-                'country_id' => 12,
-                'price' => 670000,
-                'rating' => 4.6,
-                'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'promo' => rand(0, 1),
-                'discount' => rand(10, 20),
-            ],
+        $countryMap = [
+            'nz' => 1,
+            'cn' => 2,
+            'ch' => 3,
+            'de' => 4,
+            'gb' => 5,
+            'it' => 6,
+            'tr' => 7,
+            'fr' => 8,
+            'th' => 9,
+            'sg' => 10,
+            'in' => 11,
+            'my' => 12,
+            'vn' => 13,
+            'kr' => 14,
+            'jp' => 15,
+            'au' => 16,
         ];
 
-        for ($i = 0; $i < count($data); $i++) {
-            Hotel::create($data[$i]);
+        $data = [];
+        $hotelImagesPath = public_path('assets/img/hotel');
+        $directories = File::directories($hotelImagesPath);
+
+        foreach ($directories as $directory) {
+            $countryCode = basename($directory);
+            if (isset($countryMap[$countryCode])) {
+                $countryId = $countryMap[$countryCode];
+                $hotelImages = File::files($directory);
+                foreach ($hotelImages as $image) {
+                    $data[] = [
+                        'name' => pathinfo($image, PATHINFO_FILENAME),
+                        'country_id' => $countryId,
+                        'price' => rand(100000, 1000000),
+                        'rating' => rand(1, 5),
+                        'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
+                        'promo' => rand(0, 1),
+                        'discount' => rand(10, 20),
+                    ];
+                }
+            }
+        }
+
+        foreach ($data as $hotel) {
+            Hotel::create($hotel);
         }
     }
 }

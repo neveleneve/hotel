@@ -13,7 +13,7 @@
             Populer
         </button>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-2" wire:loading.class="opacity-40">
+    <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-4" wire:loading.class="opacity-40">
         @foreach ($hotel as $item)
             <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
                 href="{{ route('member.hotel.index', ['flag_code' => $item->country->flag_code, 'id' => $item->id]) }}">
@@ -70,4 +70,21 @@
             </a>
         @endforeach
     </div>
+    @if ($hasMorePages)
+        <div wire:loading.remove class="flex justify-center mt-4">
+            <button wire:click="loadMore" class="px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold">
+                Load More
+            </button>
+        </div>
+    @endif
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener('scroll', function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                @this.loadMore();
+            }
+        });
+    </script>
+@endpush
