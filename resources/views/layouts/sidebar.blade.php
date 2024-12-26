@@ -24,27 +24,33 @@
                         class="{{ request()->routeIs('admin.member.*') ? 'font-bold' : '' }}">Member</span>
                 </a>
             @endcan
-            <a href="{{ route('admin.hotel.index') }}" title="Hotel"
-                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.hotel.*') ? 'bg-[--primary-container]' : '' }}"
-                :class="{ 'justify-center': !sidebarOpen }">
-                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">hotel</i>
-                <span x-show="sidebarOpen"
-                    class="{{ request()->routeIs('admin.hotel.*') ? 'font-bold' : '' }}">Hotel</span>
-            </a>
-            <a href="{{ route('admin.country.index') }}" title="Negara"
-                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.country.*') ? 'bg-[--primary-container]' : '' }}"
-                :class="{ 'justify-center': !sidebarOpen }">
-                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">flag</i>
-                <span x-show="sidebarOpen"
-                    class="{{ request()->routeIs('admin.country.*') ? 'font-bold' : '' }}">Negara</span>
-            </a>
-            <a href="{{ route('admin.order.index') }}" title="Pesanan"
-                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.order.*') ? 'bg-[--primary-container]' : '' }}"
-                :class="{ 'justify-center': !sidebarOpen }">
-                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">shopping_cart</i>
-                <span x-show="sidebarOpen"
-                    class="{{ request()->routeIs('admin.order.*') ? 'font-bold' : '' }}">Pesanan</span>
-            </a>
+            @can('hotel index')
+                <a href="{{ route('admin.hotel.index') }}" title="Hotel"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.hotel.*') ? 'bg-[--primary-container]' : '' }}"
+                    :class="{ 'justify-center': !sidebarOpen }">
+                    <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">hotel</i>
+                    <span x-show="sidebarOpen"
+                        class="{{ request()->routeIs('admin.hotel.*') ? 'font-bold' : '' }}">Hotel</span>
+                </a>
+            @endcan
+            @can('country index')
+                <a href="{{ route('admin.country.index') }}" title="Negara"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.country.*') ? 'bg-[--primary-container]' : '' }}"
+                    :class="{ 'justify-center': !sidebarOpen }">
+                    <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">flag</i>
+                    <span x-show="sidebarOpen"
+                        class="{{ request()->routeIs('admin.country.*') ? 'font-bold' : '' }}">Negara</span>
+                </a>
+            @endcan
+            @can('order index')
+                <a href="{{ route('admin.order.index') }}" title="Pesanan"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.order.*') ? 'bg-[--primary-container]' : '' }}"
+                    :class="{ 'justify-center': !sidebarOpen }">
+                    <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">shopping_cart</i>
+                    <span x-show="sidebarOpen"
+                        class="{{ request()->routeIs('admin.order.*') ? 'font-bold' : '' }}">Pesanan</span>
+                </a>
+            @endcan
         </div>
 
         <form method="POST" action="{{ route('logout') }}" class="mt-auto px-4 border-t">

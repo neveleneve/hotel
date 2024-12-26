@@ -81,11 +81,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="grid grid-cols-2">
+                <div class="grid grid-cols-2 gap-x-0">
                     <div class="block flex-1">
                         <label for="check_in" class="font-bold text-md">Dari</label>
                         <input type="date" name="check_in" id="check_in" value="{{ date('Y-m-d') }}"
-                            class="mt-2 w-full rounded-l-full py-2 px-3 border border-[--on-primary] focus:ring-primary focus:border-primary">
+                            class="mt-2 w-full rounded-l-full py-2 px-3 border border-[--on-primary] focus:ring-primary focus:border-primary appearance-none">
                         @error('check_in_hidden')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -94,7 +94,7 @@
                         <label for="check_out" class="font-bold text-md">Sampai</label>
                         <input type="date" name="check_out" id="check_out"
                             value="{{ date('Y-m-d', strtotime('+1 days')) }}"
-                            class="mt-2 w-full rounded-r-full py-2 px-3 border border-[--on-primary] focus:ring-primary focus:border-primary">
+                            class="mt-2 w-full rounded-r-full py-2 px-3 border border-[--on-primary] focus:ring-primary focus:border-primary appearance-none">
                         @error('check_out_hidden')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
