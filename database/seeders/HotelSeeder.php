@@ -53,7 +53,6 @@ class HotelSeeder extends Seeder {
                 }
             }
         }
-        dd($data);
 
         foreach ($data as $hotel) {
             Hotel::create($hotel);
