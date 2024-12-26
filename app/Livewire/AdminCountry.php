@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Country;
+use App\Models\country;
 use Illuminate\Pagination\Paginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,7 +14,7 @@ class AdminCountry extends Component {
     public $currentPage;
 
     public function render() {
-        $countries = Country::when($this->search, function ($query) {
+        $countries = country::when($this->search, function ($query) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('flag_code', 'like', '%' . $this->search . '%');
