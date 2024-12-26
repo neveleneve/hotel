@@ -26,7 +26,7 @@ class UserSeeder extends Seeder {
         ];
 
         // Add 10 members
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $users[] = [
                 'name' => 'Member ' . $i,
                 'email' => 'member' . $i . '@gmail.com',
