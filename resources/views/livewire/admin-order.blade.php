@@ -15,28 +15,30 @@
     </div>
 
     <!-- Desktop Table -->
-    <div class="hidden lg:block">
+    <div class="hidden xl:block">
         <div class="overflow-x-auto">
             <table class="min-w-full text-sm text-nowrap">
                 <thead class="text-xs uppercase bg-[--primary] text-[--on-primary]">
                     <tr>
+                        <th scope="col" class="py-3 text-center">Kode Pesanan</th>
                         <th scope="col" class="px-6 py-3 text-center">Nama Pemesan</th>
-                        <th scope="col" class="px-6 py-3 text-center">Hotel</th>
+                        <th scope="col" class="py-3 text-center">Hotel</th>
                         <th scope="col" class="px-6 py-3 text-center">Check In</th>
                         <th scope="col" class="px-6 py-3 text-center">Check Out</th>
-                        <th scope="col" class="px-6 py-3 text-center">Status</th>
-                        <th scope="col" class="px-6 py-3 text-center">Total</th>
-                        <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                        <th scope="col" class="py-3 text-center">Status</th>
+                        <th scope="col" class="py-3 text-center">Total</th>
+                        <th scope="col" class="py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($orders as $order)
                         <tr class="hover:bg-gray-50">
+                            <td class="py-4 text-center">{{ $order->order_code }}</td>
                             <td class="px-6 py-4 text-center">{{ $order->user->name }}</td>
-                            <td class="px-6 py-4 text-center">{{ $order->hotel->name }}</td>
-                            <td class="px-6 py-4 text-center">{{ $order->check_in }}</td>
-                            <td class="px-6 py-4 text-center">{{ $order->check_out }}</td>
-                            <td class="px-6 py-4 text-center">
+                            <td class="py-4 text-center">{{ $order->hotel->name }}</td>
+                            <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_in)) }}</td>
+                            <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_out)) }}</td>
+                            <td class="py-4 text-center">
                                 <span
                                     class="font-bold px-2 py-1 rounded-full text-xs
                                     @if ($order->status === 'pending') bg-yellow-100 text-yellow-800
@@ -45,8 +47,8 @@
                                     {{ $order->status ? 'Sudah Bayar' : 'Belum Bayar' }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-center">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4 text-center">
+                            <td class="py-4 text-center">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
+                            <td class="py-4 text-center">
                                 <div class="flex gap-2 items-center justify-center">
                                     @can('order edit')
                                         <button title="Edit"
@@ -79,7 +81,7 @@
     </div>
 
     <!-- Mobile Cards -->
-    <div class="lg:hidden space-y-4">
+    <div class="xl:hidden space-y-4">
         @forelse ($orders as $order)
             <div class="bg-gray-50 p-4 rounded-lg space-y-3">
                 <div class="flex justify-between items-start">

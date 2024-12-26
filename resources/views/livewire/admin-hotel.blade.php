@@ -1,6 +1,6 @@
 <div class="bg-white p-4 rounded-lg shadow-md">
-    <div class="mb-4">
-        <div class="relative">
+    <div class="flex justify-between items-center mb-4">
+        <div class="relative flex-1">
             <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari hotel..."
                 class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-[--primary] focus:border-[--primary]">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -12,9 +12,14 @@
                 </button>
             @endif
         </div>
+        @can('hotel create')
+            <a href="{{ route('admin.hotel.create') }}"
+                class="ml-4 px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg hover:bg-[--primary-container] hover:text-[--on-primary-container] flex items-center gap-2 font-bold">
+                <i class="material-icons text-base">add</i>
+                <span>Tambah Hotel</span>
+            </a>
+        @endcan
     </div>
-
-    <!-- Desktop Table -->
     <div class="hidden md:block">
         <div class="overflow-x-auto">
             <table class="min-w-full text-sm">
@@ -61,8 +66,6 @@
             </div>
         @endif
     </div>
-
-    <!-- Mobile Cards -->
     <div class="md:hidden space-y-4">
         @forelse ($hotels as $hotel)
             <div class="bg-gray-50 p-4 rounded-lg space-y-3">

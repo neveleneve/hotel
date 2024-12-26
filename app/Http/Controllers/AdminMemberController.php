@@ -26,8 +26,8 @@ class AdminMemberController extends Controller {
         //
     }
 
-    public function show(string $id) {
-        //
+    public function show(User $member) {
+        return view('pages.admin.member.show', compact('member'));
     }
 
     public function edit(string $id) {

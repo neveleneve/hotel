@@ -31,7 +31,7 @@
                             <td class="px-6 py-4 text-center">
                                 <div class="flex items-center justify-center gap-2">
                                     @can('member edit')
-                                        <a title="Edit" href="{{ route('admin.member.edit', $member->id) }}"
+                                        <a title="Edit" href="{{ route('admin.member.show', $member->id) }}"
                                             class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
                                             <i class="material-icons text-base">edit</i>
                                         </a>
