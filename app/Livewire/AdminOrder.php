@@ -16,7 +16,7 @@ class AdminOrder extends Component {
     public function render() {
         $orders = Order::when($this->search, function ($query) {
             $query->where(function ($q) {
-                $q->where('order_number', 'like', '%' . $this->search . '%')
+                $q->where('order_code', 'like', '%' . $this->search . '%')
                     ->orWhereHas('user', function ($query) {
                         $query->where('name', 'like', '%' . $this->search . '%');
                     });
