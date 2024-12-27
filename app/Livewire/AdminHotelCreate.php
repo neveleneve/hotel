@@ -38,7 +38,7 @@ class AdminHotelCreate extends Component {
                 return;
             }
 
-            $imagePath = $this->image->store('hotels', 'public');
+            $imagePath = $this->image->store('hotel', 'public');
 
             if (!$imagePath) {
                 session()->flash('error', 'Failed to upload image.');
