@@ -20,7 +20,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '950000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/1.jpg'
+                'image'       => '1.jpg'
             ],
             [
                 'id'          => '2',
@@ -29,7 +29,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '210000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/2.jpg'
+                'image'       => '2.jpg'
             ],
             [
                 'id'          => '3',
@@ -38,7 +38,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '820000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/3.jpg'
+                'image'       => '3.jpg'
             ],
             [
                 'id'          => '4',
@@ -47,7 +47,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '890000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/4.jpg'
+                'image'       => '4.jpg'
             ],
             [
                 'id'          => '5',
@@ -56,7 +56,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '650000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/5.jpg'
+                'image'       => '5.jpg'
             ],
             [
                 'id'          => '6',
@@ -65,7 +65,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '210000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/6.jpg'
+                'image'       => '6.jpg'
             ],
             [
                 'id'          => '7',
@@ -74,7 +74,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '180000',
                 'rating'      => '1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/7.jpg'
+                'image'       => '7.jpg'
             ],
             [
                 'id'          => '8',
@@ -83,7 +83,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '630000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/8.jpg'
+                'image'       => '8.jpg'
             ],
             [
                 'id'          => '9',
@@ -92,7 +92,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '250000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/9.jpg'
+                'image'       => '9.jpg'
             ],
             [
                 'id'          => '10',
@@ -101,7 +101,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '840000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/10.jpg'
+                'image'       => '10.jpg'
             ],
             [
                 'id'          => '11',
@@ -110,7 +110,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '860000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/11.jpg'
+                'image'       => '11.jpg'
             ],
             [
                 'id'          => '12',
@@ -119,7 +119,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '400000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/12.jpg'
+                'image'       => '12.jpg'
             ],
             [
                 'id'          => '13',
@@ -128,7 +128,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '410000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/13.jpg'
+                'image'       => '13.jpg'
             ],
             [
                 'id'          => '14',
@@ -137,7 +137,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '850000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/14.jpg'
+                'image'       => '14.jpg'
             ],
             [
                 'id'          => '15',
@@ -146,7 +146,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '420000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/15.jpg'
+                'image'       => '15.jpg'
             ],
             [
                 'id'          => '16',
@@ -155,7 +155,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '350000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/16.jpg'
+                'image'       => '16.jpg'
             ],
             [
                 'id'          => '17',
@@ -164,7 +164,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '730000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/17.jpg'
+                'image'       => '17.jpg'
             ],
             [
                 'id'          => '18',
@@ -173,7 +173,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '670000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/18.jpg'
+                'image'       => '18.jpg'
             ],
             [
                 'id'          => '19',
@@ -182,7 +182,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '510000',
                 'rating'      => '1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/19.jpg'
+                'image'       => '19.jpg'
             ],
             [
                 'id'          => '20',
@@ -191,7 +191,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '840000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/20.jpg'
+                'image'       => '20.jpg'
             ],
             [
                 'id'          => '21',
@@ -200,7 +200,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '950000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/21.jpg'
+                'image'       => '21.jpg'
             ],
             [
                 'id'          => '22',
@@ -209,7 +209,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '380000',
                 'rating'      => '1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/22.jpg'
+                'image'       => '22.jpg'
             ],
             [
                 'id'          => '23',
@@ -218,7 +218,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '990000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/23.jpg'
+                'image'       => '23.jpg'
             ],
             [
                 'id'          => '24',
@@ -227,7 +227,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '310000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/24.jpg'
+                'image'       => '24.jpg'
             ],
             [
                 'id'          => '25',
@@ -236,7 +236,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '280000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/25.jpg'
+                'image'       => '25.jpg'
             ],
             [
                 'id'          => '26',
@@ -245,7 +245,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '660000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/26.jpg'
+                'image'       => '26.jpg'
             ],
             [
                 'id'          => '27',
@@ -254,7 +254,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '190000',
                 'rating'      => '1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/27.jpg'
+                'image'       => '27.jpg'
             ],
             [
                 'id'          => '28',
@@ -263,7 +263,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '830000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/28.jpg'
+                'image'       => '28.jpg'
             ],
             [
                 'id'          => '29',
@@ -272,7 +272,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '690000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/29.jpg'
+                'image'       => '29.jpg'
             ],
             [
                 'id'          => '30',
@@ -281,7 +281,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '890000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/30.jpg'
+                'image'       => '30.jpg'
             ],
             [
                 'id'          => '31',
@@ -290,7 +290,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '410000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/31.jpg'
+                'image'       => '31.jpg'
             ],
             [
                 'id'          => '32',
@@ -299,7 +299,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '680000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/32.jpg'
+                'image'       => '32.jpg'
             ],
             [
                 'id'          => '33',
@@ -308,7 +308,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '630000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/33.jpg'
+                'image'       => '33.jpg'
             ],
             [
                 'id'          => '34',
@@ -317,7 +317,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '1000000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/34.jpg'
+                'image'       => '34.jpg'
             ],
             [
                 'id'          => '35',
@@ -326,7 +326,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '920000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/35.jpg'
+                'image'       => '35.jpg'
             ],
             [
                 'id'          => '36',
@@ -335,7 +335,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '970000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/36.jpg'
+                'image'       => '36.jpg'
             ],
             [
                 'id'          => '37',
@@ -344,7 +344,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '200000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/37.jpg'
+                'image'       => '37.jpg'
             ],
             [
                 'id'          => '38',
@@ -353,7 +353,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '620000',
                 'rating'      => '4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/38.jpg'
+                'image'       => '38.jpg'
             ],
             [
                 'id'          => '39',
@@ -362,7 +362,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '910000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/39.jpg'
+                'image'       => '39.jpg'
             ],
             [
                 'id'          => '40',
@@ -371,7 +371,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '760000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/40.jpg'
+                'image'       => '40.jpg'
             ],
             [
                 'id'          => '41',
@@ -380,7 +380,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '370000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/41.jpg'
+                'image'       => '41.jpg'
             ],
             [
                 'id'          => '42',
@@ -389,7 +389,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '650000',
                 'rating'      => '5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/42.jpg'
+                'image'       => '42.jpg'
             ],
             [
                 'id'          => '43',
@@ -398,7 +398,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '300000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/43.jpg'
+                'image'       => '43.jpg'
             ],
             [
                 'id'          => '44',
@@ -407,7 +407,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '330000',
                 'rating'      => '2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/44.jpg'
+                'image'       => '44.jpg'
             ],
             [
                 'id'          => '45',
@@ -416,7 +416,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '850000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/45.jpg'
+                'image'       => '45.jpg'
             ],
             [
                 'id'          => '46',
@@ -425,7 +425,7 @@ class HotelSeeder extends Seeder {
                 'price'       => '210000',
                 'rating'      => '3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
-                'image'       => 'hotel/46.jpg'
+                'image'       => '46.jpg'
             ],
         ];
 

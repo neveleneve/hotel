@@ -6,6 +6,7 @@ use App\Models\country;
 use App\Models\Hotel;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Helpers\FileHelper;
 
 class AdminHotelCreate extends Component {
     use WithFileUploads;
@@ -20,45 +21,6 @@ class AdminHotelCreate extends Component {
 
     public function mount() {
         $this->countries = country::all();
-    }
-
-    public function save() {
-        try {
-            $this->validate([
-                'name'          => 'required|string|max:255',
-                'country_id'    => 'required|exists:countries,id',
-                'price'         => 'required|numeric|min:0',
-                'rating'        => 'required|numeric|min:1|max:5',
-                'description'   => 'required|string',
-                'image'         => 'required|image|max:2048',
-            ]);
-
-            if (!$this->image) {
-                session()->flash('error', 'Please select an image.');
-                return;
-            }
-
-            $imagePath = $this->image->store('hotel', 'public');
-
-            if (!$imagePath) {
-                session()->flash('error', 'Failed to upload image.');
-                return;
-            }
-
-            Hotel::create([
-                'name'          => $this->name,
-                'country_id'    => $this->country_id,
-                'price'         => $this->price,
-                'rating'        => $this->rating,
-                'description'   => $this->description,
-                'image'         => $imagePath,
-            ]);
-
-            session()->flash('message', 'Hotel berhasil ditambahkan.');
-            return redirect()->route('admin.hotel.index');
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error: ' . $e->getMessage());
-        }
     }
 
     public function render() {
