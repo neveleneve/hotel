@@ -16,10 +16,10 @@
                     <div class="swiper z-10 rounded-t-lg">
                         <div class="swiper-wrapper aspect-[3/2] md:aspect-[16/6]">
                             <div class="swiper-slide flex justify-center">
-                                <img src="{{ Storage::url($hotel->image) }}" class="object-cover">
+                                <img src="{{ asset('storage/' . $hotel->image) }}" class="object-cover">
                             </div>
                             <div class="swiper-slide flex justify-center">
-                                <img src="{{ Storage::url($hotel->image) }}">
+                                <img src="{{ asset('storage/' . $hotel->image) }}">
                             </div>
                         </div>
                         <div class="swiper-button-prev text-[--on-primary]"></div>
