@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Country;
+use App\Models\country;
 use App\Models\Hotel;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -19,7 +19,7 @@ class AdminHotelCreate extends Component {
     public $countries;
 
     public function mount() {
-        $this->countries = Country::all();
+        $this->countries = country::all();
     }
 
     public function save() {
