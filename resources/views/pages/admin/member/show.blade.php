@@ -6,16 +6,14 @@
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-2xl text-[--primary-container]">Detail Member</h3>
                 <a href="{{ route('admin.member.index') }}"
-                    class="flex font-bold items-center gap-1 text-[--primary] hover:text-[--primary-container]">
+                    class="flex font-bold items-center py-2 px-3 rounded-lg bg-[--on-error-container] text-[--error-container] hover:text-[--on-error-container] hover:bg-[--error-container]">
                     <i class="material-icons">chevron_left</i>
                     <span>Kembali</span>
                 </a>
             </div>
             <hr class="mt-3">
         </section>
-
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <!-- Personal Info Card -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Informasi Pribadi</h4>
                 <div class="space-y-3">
@@ -33,11 +31,8 @@
                     </div>
                 </div>
             </div>
-            {{-- table --}}
             <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Riwayat Pesanan</h4>
-
-                <!-- Desktop Table -->
                 <div class="hidden md:block">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 text-nowrap">
@@ -77,8 +72,6 @@
                         </table>
                     </div>
                 </div>
-
-                <!-- Mobile Cards -->
                 <div class="md:hidden space-y-4">
                     @forelse($member->orders as $order)
                         <div class="bg-gray-50 p-4 rounded-lg space-y-2">

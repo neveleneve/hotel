@@ -27,7 +27,6 @@ class UserSeeder extends Seeder {
             ],
         ];
 
-        // Add 10 members
         for ($i = 1; $i <= 5; $i++) {
             $users[] = [
                 'name' => 'Member ' . $i,
@@ -36,7 +35,6 @@ class UserSeeder extends Seeder {
             ];
         }
 
-        // Create roles array
         $roles = [
             'super admin',
             'admin',

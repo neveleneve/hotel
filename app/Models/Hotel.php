@@ -12,10 +12,9 @@ class Hotel extends Model {
         'name',
         'country_id',
         'price',
+        'image',
         'rating',
         'description',
-        'promo',
-        'discount',
     ];
 
     public function country() {
