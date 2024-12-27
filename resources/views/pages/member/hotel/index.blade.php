@@ -19,7 +19,7 @@
                                 <img src="{{ asset('storage/' . $hotel->image) }}" class="object-cover">
                             </div>
                             <div class="swiper-slide flex justify-center">
-                                <img src="{{ asset('storage/' . $hotel->image) }}">
+                                <img src="{{ Storage::url($hotel->image) }}">
                             </div>
                         </div>
                         <div class="swiper-button-prev text-[--on-primary]"></div>

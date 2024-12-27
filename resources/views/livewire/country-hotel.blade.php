@@ -27,7 +27,7 @@
                             </div>
                         @endif
                         <img class="w-full aspect-square object-cover rounded-t-lg"
-                            src="{{ asset('storage/' . $item->image) }}" alt="Gambar Hotel {{ $item->name }}">
+                            src="{{ Storage::url($item->image) }}" alt="Gambar Hotel {{ $item->name }}">
                     </div>
                     <div class="flex flex-col justify-between flex-1 p-4">
                         <div>
