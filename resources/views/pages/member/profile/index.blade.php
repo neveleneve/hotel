@@ -8,6 +8,10 @@
             </div>
             <h2 class="mt-4 text-xl font-bold">{{ Auth::user()->name }}</h2>
             <p class="text-sm text-[--on-primary] font-semibold">{{ Auth::user()->email }}</p>
+            <div class="mt-4 border-t px-3 pt-3">
+                <p class="text-md font-semibold">Saldo Anda</p>
+                <p class="text-xl font-bold">Rp {{ number_format(Auth::user()->saldo->saldo ?? 0, 0, ',', '.') }}</p>
+            </div>
         </div>
         <div class="grid grid-cols-2 my-2">
             <div class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--primary] text-[--on-primary] m-4 p-4">
@@ -77,98 +81,3 @@
 @push('tab')
     @include('layouts.tab')
 @endpush
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-gray-100 font-sans">
-    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-10">
-        <!-- Profile Section -->
-        <div class="p-6 text-center">
-            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border border-gray-300">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-full h-full object-cover">
-            </div>
-            <h2 class="mt-4 text-xl font-bold">SRwIUB</h2>
-            <p class="text-sm text-gray-600">Email: pandumahdanie@gmail.com</p>
-            <p class="text-sm text-gray-600">User ID: 221186</p>
-        </div>
-
-        <!-- Order Status -->
-        <div class="flex justify-around bg-gray-50 py-4 border-t border-b border-gray-200">
-            <div class="text-center">
-                <div class="w-8 h-8 mx-auto mb-1 bg-gray-200 rounded-full flex items-center justify-center">
-                    <i class="text-gray-600">💳</i>
-                </div>
-                <p class="text-xs text-gray-700">Belum Bayar</p>
-            </div>
-            <div class="text-center">
-                <div class="w-8 h-8 mx-auto mb-1 bg-gray-200 rounded-full flex items-center justify-center">
-                    <i class="text-gray-600">📦</i>
-                </div>
-                <p class="text-xs text-gray-700">Terkirim</p>
-            </div>
-            <div class="text-center">
-                <div class="w-8 h-8 mx-auto mb-1 bg-gray-200 rounded-full flex items-center justify-center">
-                    <i class="text-gray-600">↩️</i>
-                </div>
-                <p class="text-xs text-gray-700">Pengembalian</p>
-            </div>
-            <div class="text-center">
-                <div class="w-8 h-8 mx-auto mb-1 bg-gray-200 rounded-full flex items-center justify-center">
-                    <i class="text-gray-600">✔️</i>
-                </div>
-                <p class="text-xs text-gray-700">Selesai</p>
-            </div>
-        </div>
-
-        <!-- Menu Section -->
-        <div class="py-4">
-            <ul>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex items-center space-x-4">
-                        <i class="text-gray-600">🔒</i>
-                        <span class="text-gray-800 text-sm">Akun dan Keamanan</span>
-                    </div>
-                    <i class="text-gray-400">&gt;</i>
-                </li>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex items-center space-x-4">
-                        <i class="text-gray-600">👤</i>
-                        <span class="text-gray-800 text-sm">Edit Profil</span>
-                    </div>
-                    <i class="text-gray-400">&gt;</i>
-                </li>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex items-center space-x-4">
-                        <i class="text-gray-600">🎟️</i>
-                        <span class="text-gray-800 text-sm">Voucher</span>
-                    </div>
-                    <i class="text-gray-400">&gt;</i>
-                </li>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex items-center space-x-4">
-                        <i class="text-gray-600">📍</i>
-                        <span class="text-gray-800 text-sm">Alamat Saya</span>
-                    </div>
-                    <i class="text-gray-400">&gt;</i>
-                </li>
-                <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex items-center space-x-4">
-                        <i class="text-gray-600">🌐</i>
-                        <span class="text-gray-800 text-sm">Bahasa / Language</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">Indonesia</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</body>
-
-</html> --}}

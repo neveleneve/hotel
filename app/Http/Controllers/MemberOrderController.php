@@ -31,7 +31,7 @@ class MemberOrderController extends Controller {
         ], [
             'hotel_id.required' => 'Hotel tidak boleh kosong',
             'user_id.required' => 'User tidak boleh kosong',
-            'room_hidder.required' => 'Room tidak boleh kosong',
+            'room_hidden.required' => 'Room tidak boleh kosong', // Perbaiki typo 'room_hidder'
             'room_hidden.numeric' => 'Room harus berupa angka',
             'room_hidden.min' => 'Room tidak boleh kurang dari 1',
             'check_in_hidden.required' => 'Tanggal check in tidak boleh kosong',

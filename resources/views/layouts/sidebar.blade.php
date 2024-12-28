@@ -1,8 +1,8 @@
 <aside class="h-screen bg-[--on-primary] text-white overflow-hidden flex flex-col">
-    <div class="px-6 py-[18px] border-b" :class="{ 'justify-center': !sidebarOpen }">
+    <div class="px-6 py-2 border-b" :class="{ 'justify-center': !sidebarOpen, 'py-4': !sidebarOpen }">
         <h1 class="text-2xl text-center font-bold text-nowrap" x-show="sidebarOpen">Admin Panel</h1>
-        <h1 class="text-sm font-bold text-center bg-[--primary] rounded-lg  p-2" x-show="!sidebarOpen">AP</h1>
-        {{-- <h1>{{ Auth::user()->name }}</h1> --}}
+        <h1 class="text-center font-semibold" x-show='sidebarOpen'>{{ Auth::user()->name }}</h1>
+        <h1 class="text-sm font-bold text-center bg-[--primary] rounded-lg p-2" x-show="!sidebarOpen">AP</h1>
     </div>
     <nav class="flex-1 flex flex-col">
         <div class="px-4 pt-3 space-y-2">

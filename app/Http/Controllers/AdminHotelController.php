@@ -7,34 +7,25 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AdminHotelController extends Controller {
-    /**
-     * Display a listing of the resource.
-     */
     public function index() {
         return view('pages.admin.hotel.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create() {
         $countries = Country::all();
         return view('pages.admin.hotel.create', compact('countries'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request) {
-
-        // dd($request->all());
         $request->validate([
-            'name' => 'required|string|max:255',
-            'country_id' => 'required|exists:countries,id',
-            'price' => 'required|numeric|min:0',
-            'rating' => 'required|numeric|min:1|max:5',
-            'description' => 'required|string',
-            'image' => 'required|image|max:2048',
+            'name'          => 'required|string|max:255',
+            'country_id'    => 'required|exists:countries,id',
+            'price'         => 'required|numeric|min:0',
+            'rating'        => 'required|numeric|min:0|max:5',
+            'description'   => 'required|string',
+            'image'         => 'required|image|max:2048',
+            'is_promo'      => 'required|boolean',
+            'discount'      => 'required_if:is_promo,1|nullable|numeric|min:0|max:100',
         ]);
 
         try {
@@ -47,48 +38,47 @@ class AdminHotelController extends Controller {
             $request->image->move($uploadPath, $fileName);
 
             Hotel::create([
-                'name' => $request->name,
-                'country_id' => $request->country_id,
-                'price' => $request->price,
-                'rating' => $request->rating,
-                'description' => $request->description,
-                'image' => $fileName,
+                'name'          => $request->name,
+                'country_id'    => $request->country_id,
+                'price'         => $request->price,
+                'rating'        => $request->rating,
+                'description'   => $request->description,
+                'image'         => $fileName,
+                'promo'         => $request->is_promo,
+                'discount'      => $request->is_promo ? $request->discount : 0,
             ]);
 
             return redirect()
                 ->route('admin.hotel.index')
-                ->with('success', 'Hotel berhasil ditambahkan');
+                ->with([
+                    'title' => 'Berhasil',
+                    'text'  => 'Berhasil menambah data hotel!',
+                    'icon'  => 'success',
+                ]);
         } catch (\Exception $e) {
             return back()
                 ->with('error', 'Error: ' . $e->getMessage())
-                ->withInput();
+                ->withInput()
+                ->with([
+                    'title' => 'Gagal',
+                    'text'  => 'Gagal menambah data hotel!',
+                    'icon'  => 'error',
+                ]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id) {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id) {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id) {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id) {
         //
     }

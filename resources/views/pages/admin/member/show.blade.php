@@ -13,7 +13,7 @@
             </div>
             <hr class="mt-3">
         </section>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Informasi Pribadi</h4>
                 <div class="space-y-3">
@@ -28,6 +28,23 @@
                     <div>
                         <p class="text-sm text-gray-500">Bergabung Sejak</p>
                         <p class="font-medium">{{ $member->created_at->format('d M Y') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="font-bold text-lg mb-4">Saldo & Point</h4>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-[--secondary-container] p-4 rounded-lg">
+                        <p class="text-sm text-[--on-secondary-container] mb-1">Saldo</p>
+                        <p class="font-bold text-lg text-[--on-secondary-container]">
+                            Rp {{ number_format($member->saldo?->amount ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="bg-[--tertiary-container] p-4 rounded-lg">
+                        <p class="text-sm text-[--on-tertiary-container] mb-1">Point</p>
+                        <p class="font-bold text-lg text-[--on-tertiary-container]">
+                            {{ number_format($member->saldo?->point ?? 0, 0, ',', '.') }}
+                        </p>
                     </div>
                 </div>
             </div>

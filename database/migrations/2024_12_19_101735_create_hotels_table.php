@@ -16,7 +16,10 @@ return new class extends Migration {
             $table->integer('price');
             $table->string('image');
             $table->float('rating')->max(5);
+            $table->boolean('promo')->default(0);
+            $table->integer('discount')->default(0);
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
