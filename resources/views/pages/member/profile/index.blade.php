@@ -34,7 +34,7 @@
         </div> --}}
         <div class="pb-4 mt-1">
             <hr>
-            <a href="{{ route('transaksi.pembayaran') }}"
+            <a href="{{ route('transaksi.pembayaran.index') }}"
                 class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
                 <span class="flex items-center space-x-4">
                     <i class="material-icons">payments</i>

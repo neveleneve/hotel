@@ -18,6 +18,10 @@
                 @endforeach
             </div>
         </section>
+        <section class="px-4 py-2">
+            <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Project Anda</h2>
+            <hr>
+        </section>
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
                 <h2 class="text-lg font-bold text-[--on-primary]">Belanja Mall</h2>

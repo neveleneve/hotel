@@ -4,15 +4,15 @@
     <div class="container mx-auto px-3">
         <div class="pt-16 pb-20">
             <div class="flex space-x-1 mb-4">
-                <a href="{{ route('transaksi.pembayaran') }}"
+                <a href="{{ route('transaksi.pembayaran.index') }}"
                     class="px-2 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-extrabold text-xs">
                     Pembayaran
                 </a>
-                <a href="{{ route('transaksi.topup') }}"
+                <a href="{{ route('transaksi.topup.index') }}"
                     class="px-2 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-extrabold text-xs">
                     Top Up
                 </a>
-                <a href="{{ route('transaksi.wd') }}"
+                <a href="{{ route('transaksi.wd.index') }}"
                     class="px-2 py-2 bg-[--primary-container] text-[--on-primary-container] rounded-lg font-extrabold text-xs">
                     Penarikan
                 </a>

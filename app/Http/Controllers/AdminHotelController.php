@@ -67,7 +67,8 @@ class AdminHotelController extends Controller {
         }
     }
 
-    public function show(Hotel $hotel) {
+    public function show($id) {
+        $hotel = Hotel::withTrashed()->findOrFail($id);
         $countries = country::all();
         return view('pages.admin.hotel.show', compact('hotel', 'countries'));
     }
@@ -114,20 +115,32 @@ class AdminHotelController extends Controller {
         }
     }
 
-    public function destroy(Hotel $hotel) {
-        $delete = $hotel->delete();
-        if ($delete) {
-            return redirect(route('admin.hotel.index'))->with([
-                'title' => 'Berhasil',
-                'text' => 'Data hotel berhasil dihapus!',
-                'icon' => 'success',
-            ]);
+    public function destroy($id) {
+        $hotel = Hotel::withTrashed()->find($id);
+        if ($hotel->deleted_at) {
+            $restore = $hotel->restore();
+            if ($restore) {
+                return redirect(route('admin.hotel.show', ['hotel' => $id]))->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Data hotel berhasil dikembalikan!',
+                    'icon' => 'success',
+                ]);
+            }
         } else {
-            return back()->with([
-                'title' => 'Gagal',
-                'text' => 'Data hotel gagal dihapus!',
-                'icon' => 'error',
-            ]);
+            $delete = $hotel->delete();
+            if ($delete) {
+                return redirect(route('admin.hotel.show', ['hotel' => $id]))->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Data hotel berhasil dihapus!',
+                    'icon' => 'success',
+                ]);
+            }
         }
+
+        return back()->with([
+            'title' => 'Gagal',
+            'text' => 'Operasi gagal dilakukan!',
+            'icon' => 'error',
+        ]);
     }
 }

@@ -20,6 +20,7 @@ class AdminHotel extends Component {
                     ->orWhere('description', 'like', '%' . $this->search . '%');
             });
         })
+            ->withTrashed()
             ->paginate(10);
 
         return view('livewire.admin-hotel', [

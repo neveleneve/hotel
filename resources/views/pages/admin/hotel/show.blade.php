@@ -152,7 +152,7 @@
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                             class="px-6 py-2 font-bold bg-[--error-container] text-[--on-error-container] rounded-lg hover:bg-[--on-error-container] hover:text-[--error-container]">
-                            Hapus
+                            {{ $hotel->deleted_at ? 'Kembalikan' : 'Hapus' }}
                         </button>
                     </form>
                 @endcan
