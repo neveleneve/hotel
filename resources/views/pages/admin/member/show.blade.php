@@ -63,7 +63,7 @@
                             </div>
                             <div class="flex-1">
                                 <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
-                                <input type="number" id="amount" name="amount" value="0" min="0"
+                                <input type="number" id="amount" name="amount" value="0"
                                     class="w-full rounded-lg border border-gray-300 px-2 py-1">
                             </div>
                         </div>

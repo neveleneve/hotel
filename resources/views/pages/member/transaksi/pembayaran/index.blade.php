@@ -21,7 +21,8 @@
             @if ($order->count() > 0)
                 <div class="space-y-4">
                     @foreach ($order as $item)
-                        <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 border border-gray-100">
+                        <div
+                            class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 border border-gray-100">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="font-bold text-lg text-gray-800">{{ $item->hotel->name }}</h3>
@@ -74,8 +75,7 @@
                     <div class="text-gray-400 mb-4">
                         <i class="material-icons text-6xl">receipt_long</i>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900">Belum ada transaksi</h3>
-                    <p class="text-gray-600 mt-1">Anda belum melakukan transaksi apapun</p>
+                    <h3 class="text-lg font-medium text-gray-900">Belum ada transaksi pembayaran</h3>
                 </div>
             @endif
         </div>

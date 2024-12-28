@@ -37,7 +37,7 @@ class AdminMemberController extends Controller {
     public function update(Request $request, User $member) {
         $request->validate([
             'type' => 'required|in:saldo,point',
-            'amount' => 'required|numeric|min:0',
+            'amount' => 'required|numeric',
         ]);
 
         try {

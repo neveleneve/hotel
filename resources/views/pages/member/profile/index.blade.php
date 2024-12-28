@@ -9,8 +9,17 @@
             <h2 class="mt-4 text-xl font-bold">{{ Auth::user()->name }}</h2>
             <p class="text-sm text-[--on-primary] font-semibold">{{ Auth::user()->email }}</p>
             <div class="mt-4 border-t px-3 pt-3">
-                <p class="text-md font-semibold">Saldo Anda</p>
-                <p class="text-xl font-bold">Rp {{ number_format(Auth::user()->saldo->saldo ?? 0, 0, ',', '.') }}</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-md font-semibold">Saldo Anda</p>
+                        <p class="text-xl font-bold">Rp {{ number_format(Auth::user()->saldo->saldo ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="border-l">
+                        <p class="text-md font-semibold">Poin Anda</p>
+                        <p class="text-xl font-bold">{{ number_format(Auth::user()->points ?? 0, 0, ',', '.') }} pts</p>
+                    </div>
+                </div>
             </div>
         </div>
         {{-- <div class="grid grid-cols-2 my-2">
@@ -23,7 +32,7 @@
                 <span class="text-xs mt-2 text-center font-bold">Withdraw</span>
             </div>
         </div> --}}
-        <div class="pb-4 mt-2">
+        <div class="pb-4 mt-1">
             <hr>
             <a href="{{ route('transaksi.pembayaran') }}"
                 class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
