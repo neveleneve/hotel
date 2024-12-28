@@ -18,7 +18,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Dorsett Melbourne',
                 'country_id'  => '16',
                 'price'       => '950000',
-                'rating'      => '2',
+                'rating'      => '4.3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '1.jpg'
             ],
@@ -27,7 +27,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Oaks Melbourne on Market Hotel',
                 'country_id'  => '16',
                 'price'       => '210000',
-                'rating'      => '2',
+                'rating'      => '3.8',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '2.jpg'
             ],
@@ -36,7 +36,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Radisson On Flagstaff Gardens Melbourne',
                 'country_id'  => '16',
                 'price'       => '820000',
-                'rating'      => '5',
+                'rating'      => '4.2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '3.jpg'
             ],
@@ -45,7 +45,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Rendezvous Hotel Melbourne',
                 'country_id'  => '16',
                 'price'       => '890000',
-                'rating'      => '4',
+                'rating'      => '4.5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '4.jpg'
             ],
@@ -54,7 +54,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Travelodge Hotel Melbourne Docklands',
                 'country_id'  => '16',
                 'price'       => '650000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '5.jpg'
             ],
@@ -63,7 +63,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Vibe Hotel Melbourne Docklands',
                 'country_id'  => '16',
                 'price'       => '210000',
-                'rating'      => '3',
+                'rating'      => '4.1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '6.jpg'
             ],
@@ -72,7 +72,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Grand Prince Hotel Shin Takanawa',
                 'country_id'  => '15',
                 'price'       => '180000',
-                'rating'      => '1',
+                'rating'      => '3.7',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '7.jpg'
             ],
@@ -81,7 +81,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'HOTEL GRAPHY Shibuya',
                 'country_id'  => '15',
                 'price'       => '630000',
-                'rating'      => '4',
+                'rating'      => '4.6',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '8.jpg'
             ],
@@ -90,7 +90,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'KOKO HOTEL Ginza-1chome',
                 'country_id'  => '15',
                 'price'       => '250000',
-                'rating'      => '2',
+                'rating'      => '3.8',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '9.jpg'
             ],
@@ -99,7 +99,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'MONday Apart Premium 銀座新富町',
                 'country_id'  => '15',
                 'price'       => '840000',
-                'rating'      => '4',
+                'rating'      => '4.3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '10.jpg'
             ],
@@ -108,7 +108,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Richmond Hotel Premier Asakusa International',
                 'country_id'  => '15',
                 'price'       => '860000',
-                'rating'      => '3',
+                'rating'      => '4.0',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '11.jpg'
             ],
@@ -117,7 +117,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Sakura Cross Hotel Akihabara',
                 'country_id'  => '15',
                 'price'       => '400000',
-                'rating'      => '3',
+                'rating'      => '3.6',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '12.jpg'
             ],
@@ -126,7 +126,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Sakura Hotel Ikebukuro',
                 'country_id'  => '15',
                 'price'       => '410000',
-                'rating'      => '5',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '13.jpg'
             ],
@@ -135,7 +135,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Tmark City Hotel Tokyo Omori',
                 'country_id'  => '15',
                 'price'       => '850000',
-                'rating'      => '5',
+                'rating'      => '4.7',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '14.jpg'
             ],
@@ -144,7 +144,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Tokyo Bay Ariake Washington Hotel',
                 'country_id'  => '15',
                 'price'       => '420000',
-                'rating'      => '3',
+                'rating'      => '3.5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '15.jpg'
             ],
@@ -153,7 +153,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Tokyo Prince Hotel',
                 'country_id'  => '15',
                 'price'       => '350000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '16.jpg'
             ],
@@ -162,7 +162,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'hotel MONday Asakusa',
                 'country_id'  => '15',
                 'price'       => '730000',
-                'rating'      => '5',
+                'rating'      => '4.2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '17.jpg'
             ],
@@ -171,7 +171,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'karaksa hotel premier Tokyo Ginza',
                 'country_id'  => '15',
                 'price'       => '670000',
-                'rating'      => '2',
+                'rating'      => '3.8',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '18.jpg'
             ],
@@ -180,7 +180,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Fairfield by Marriott Seoul',
                 'country_id'  => '14',
                 'price'       => '510000',
-                'rating'      => '1',
+                'rating'      => '4.1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '19.jpg'
             ],
@@ -189,7 +189,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Four Points by Sheraton Seoul, Guro',
                 'country_id'  => '14',
                 'price'       => '840000',
-                'rating'      => '3',
+                'rating'      => '3.7',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '20.jpg'
             ],
@@ -198,7 +198,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Mutal Stay',
                 'country_id'  => '14',
                 'price'       => '950000',
-                'rating'      => '3',
+                'rating'      => '4.1',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '21.jpg'
             ],
@@ -207,7 +207,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Ramada by Wyndham Seoul Dongdaemun',
                 'country_id'  => '14',
                 'price'       => '380000',
-                'rating'      => '1',
+                'rating'      => '3.7',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '22.jpg'
             ],
@@ -216,7 +216,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Summit Hotel Seoul Dongdaemun',
                 'country_id'  => '14',
                 'price'       => '990000',
-                'rating'      => '5',
+                'rating'      => '4.5',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '23.jpg'
             ],
@@ -225,7 +225,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'TwoTwo House',
                 'country_id'  => '14',
                 'price'       => '310000',
-                'rating'      => '4',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '24.jpg'
             ],
@@ -234,7 +234,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'ibis Styles Ambassador Seoul Myeong-dong',
                 'country_id'  => '14',
                 'price'       => '280000',
-                'rating'      => '4',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '25.jpg'
             ],
@@ -243,7 +243,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Grand Service Apartment @ Times Square',
                 'country_id'  => '12',
                 'price'       => '660000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '26.jpg'
             ],
@@ -252,7 +252,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Hotel Komune Living & Wellness Kuala Lumpur',
                 'country_id'  => '12',
                 'price'       => '190000',
-                'rating'      => '1',
+                'rating'      => '3.2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '27.jpg'
             ],
@@ -261,7 +261,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'KL Season Apartment At Times Square',
                 'country_id'  => '12',
                 'price'       => '830000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '28.jpg'
             ],
@@ -270,7 +270,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Lotus Infinity Apartment At Times Square Kl',
                 'country_id'  => '12',
                 'price'       => '690000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '29.jpg'
             ],
@@ -279,7 +279,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Santa Grand Signature Kuala Lumpur',
                 'country_id'  => '12',
                 'price'       => '890000',
-                'rating'      => '2',
+                'rating'      => '4.3',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '30.jpg'
             ],
@@ -288,7 +288,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Star Residence Suite KLCC',
                 'country_id'  => '12',
                 'price'       => '410000',
-                'rating'      => '4',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '31.jpg'
             ],
@@ -297,7 +297,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'The Platinum KLCC By Loversuites',
                 'country_id'  => '12',
                 'price'       => '680000',
-                'rating'      => '4',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '32.jpg'
             ],
@@ -306,7 +306,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Wyndham Grand Bangsar Kuala Lumpur',
                 'country_id'  => '12',
                 'price'       => '630000',
-                'rating'      => '2',
+                'rating'      => '3.8',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '33.jpg'
             ],
@@ -315,7 +315,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Al Meroz Hotel Bangkok - The Leading Halal Hotel',
                 'country_id'  => '9',
                 'price'       => '1000000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '34.jpg'
             ],
@@ -324,7 +324,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Centre Point Silom',
                 'country_id'  => '9',
                 'price'       => '920000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '35.jpg'
             ],
@@ -333,7 +333,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Grand 5 Hotel & Plaza Sukhumvit Bangkok',
                 'country_id'  => '9',
                 'price'       => '970000',
-                'rating'      => '5',
+                'rating'      => '4.7',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '36.jpg'
             ],
@@ -342,7 +342,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Montien Riverside Hotel Bangkok',
                 'country_id'  => '9',
                 'price'       => '200000',
-                'rating'      => '3',
+                'rating'      => '3.2',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '37.jpg'
             ],
@@ -351,7 +351,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'SKYVIEW Hotel Bangkok - Sukhumvit',
                 'country_id'  => '9',
                 'price'       => '620000',
-                'rating'      => '4',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '38.jpg'
             ],
@@ -360,7 +360,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Solitaire Bangkok Sukhumvit 11',
                 'country_id'  => '9',
                 'price'       => '910000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '39.jpg'
             ],
@@ -369,7 +369,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'The Continent Hotel Sukhumvit - Asok BTS Bangkok',
                 'country_id'  => '9',
                 'price'       => '760000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '40.jpg'
             ],
@@ -378,7 +378,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Valia Hotel Bangkok',
                 'country_id'  => '9',
                 'price'       => '370000',
-                'rating'      => '5',
+                'rating'      => '4.7',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '41.jpg'
             ],
@@ -387,7 +387,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Divan Istanbul',
                 'country_id'  => '7',
                 'price'       => '650000',
-                'rating'      => '5',
+                'rating'      => '4.4',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '42.jpg'
             ],
@@ -396,7 +396,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Ramada Encore by Wyndham Istanbul Sisli',
                 'country_id'  => '7',
                 'price'       => '300000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '43.jpg'
             ],
@@ -405,7 +405,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Taxim Suites Residences Istanbul',
                 'country_id'  => '7',
                 'price'       => '330000',
-                'rating'      => '2',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '44.jpg'
             ],
@@ -414,7 +414,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'The Fox Hotel',
                 'country_id'  => '7',
                 'price'       => '850000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '45.jpg'
             ],
@@ -423,7 +423,7 @@ class HotelSeeder extends Seeder {
                 'name'        => 'Windsor Hotel & Convention Center Istanbul',
                 'country_id'  => '7',
                 'price'       => '210000',
-                'rating'      => '3',
+                'rating'      => '3.9',
                 'description' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod.',
                 'image'       => '46.jpg'
             ],

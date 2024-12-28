@@ -28,6 +28,8 @@
                         <th scope="col" class="px-6 py-3 text-center">Nama Hotel</th>
                         <th scope="col" class="px-6 py-3 text-center">Negara</th>
                         <th scope="col" class="px-6 py-3 text-center">Deskripsi</th>
+                        <th scope="col" class="px-6 py-3 text-center">Promo</th>
+                        <th scope="col" class="px-6 py-3 text-center">Diskon</th>
                         <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -37,13 +39,15 @@
                             <td class="px-6 py-4 text-center">{{ $hotel->name }}</td>
                             <td class="px-6 py-4 text-center">{{ $hotel->country->name }}</td>
                             <td class="px-6 py-4 text-center">{{ Str::limit($hotel->description, 50) }}</td>
+                            <td class="px-6 py-4 text-center">{{ $hotel->promo ? 'Ya' : 'Tidak' }}</td>
+                            <td class="px-6 py-4 text-center">{{ $hotel->discount }}%</td>
                             <td class="px-6 py-4 text-center">
                                 <div class="flex items-center justify-center gap-2">
                                     @can('hotel edit')
-                                        <button title="Edit"
+                                        <a href="{{ route('admin.hotel.show', ['hotel' => $hotel->id]) }}" title="Edit"
                                             class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
                                             <i class="material-icons text-base">edit</i>
-                                        </button>
+                                        </a>
                                     @endcan
                                     @can('hotel delete')
                                         <button title="Hapus"
