@@ -20,6 +20,8 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">Nama</th>
                         <th scope="col" class="px-6 py-3 text-center">Email</th>
+                        <th scope="col" class="px-6 py-3 text-center">Saldo</th>
+                        <th scope="col" class="px-6 py-3 text-center">Point</th>
                         <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -28,6 +30,10 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-center">{{ $member->name }}</td>
                             <td class="px-6 py-4 text-center">{{ $member->email }}</td>
+                            <td class="px-6 py-4 text-center">
+                                Rp {{ number_format($member->saldo->saldo, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 text-center">{{ number_format($member->saldo->point, 0, ',', '.') }}</td>
                             <td class="px-6 py-4 text-center">
                                 <div class="flex items-center justify-center gap-2">
                                     @can('member edit')

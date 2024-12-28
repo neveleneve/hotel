@@ -34,8 +34,35 @@ class AdminMemberController extends Controller {
         //
     }
 
-    public function update(Request $request, string $id) {
-        //
+    public function update(Request $request, User $member) {
+        $request->validate([
+            'type' => 'required|in:saldo,point',
+            'amount' => 'required|numeric|min:0',
+        ]);
+
+        try {
+            $saldo = $member->saldo ?? $member->saldo()->create(['saldo' => 0, 'point' => 0]);
+
+            if ($request->type === 'saldo') {
+                $saldo->saldo += $request->amount;
+            } else {
+                $saldo->point += $request->amount;
+            }
+
+            $saldo->save();
+
+            return back()->with([
+                'title' => 'Berhasil',
+                'text' => 'Berhasil menambah ' . $request->type . '!',
+                'icon' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return back()->with([
+                'title' => 'Gagal',
+                'text' => 'Gagal menambah ' . $request->type . '!',
+                'icon' => 'error',
+            ]);
+        }
     }
 
     public function destroy(string $id) {

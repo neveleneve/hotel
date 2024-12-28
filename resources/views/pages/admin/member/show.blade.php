@@ -37,7 +37,7 @@
                     <div class="bg-[--secondary-container] p-4 rounded-lg">
                         <p class="text-sm text-[--on-secondary-container] mb-1">Saldo</p>
                         <p class="font-bold text-lg text-[--on-secondary-container]">
-                            Rp {{ number_format($member->saldo?->amount ?? 0, 0, ',', '.') }}
+                            Rp {{ number_format($member->saldo?->saldo ?? 0, 0, ',', '.') }}
                         </p>
                     </div>
                     <div class="bg-[--tertiary-container] p-4 rounded-lg">
@@ -47,6 +47,32 @@
                         </p>
                     </div>
                 </div>
+                <form method="POST" action="{{ route('admin.member.update', $member) }}"
+                    class="grid grid-cols-2 gap-4 mt-4">
+                    @csrf
+                    @method('PUT')
+                    <div class="col-span-2">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1">
+                                <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
+                                <select name="type" id="type"
+                                    class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                                    <option value="saldo">Saldo</option>
+                                    <option value="point">Point</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
+                                <input type="number" id="amount" name="amount" value="0" min="0"
+                                    class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="col-span-2 px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
+                        Tambah
+                    </button>
+                </form>
             </div>
             <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Riwayat Pesanan</h4>
@@ -116,3 +142,22 @@
         </div>
     </div>
 @endsection
+
+@push('customjs')
+    @session('title')
+        <script>
+            Swal.fire({
+                title: "{{ session('title') }}",
+                text: "{{ session('text') }}",
+                icon: "{{ session('icon') }}",
+                confirmButtonText: 'Tutup',
+                customClass: {
+                    popup: 'bg-white rounded-lg shadow-lg',
+                    title: 'text-lg font-bold text-[--on-primary]',
+                    text: 'text-semibold text-[--on-primary]',
+                    confirmButton: 'bg-[--primary] text-[--on-primary] px-4 py-2 rounded-lg hover:bg-[-primary-container] focus:ring focus:ring-blue-300 font-semibold',
+                },
+            })
+        </script>
+    @endsession
+@endpush
