@@ -82,10 +82,10 @@
                     </div>
                     <div class="flex gap-2">
                         @can('hotel edit')
-                            <button title="Edit"
+                            <a title="Edit" href="{{ route('admin.hotel.show', ['hotel' => $hotel->id]) }}"
                                 class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
                                 <i class="material-icons text-base">edit</i>
-                            </button>
+                            </a>
                         @endcan
                         @can('hotel delete')
                             <button title="Hapus"
