@@ -22,6 +22,7 @@ class AdminOrder extends Component {
                     });
             });
         })
+            ->withTrashed()
             ->latest()
             ->paginate(10);
 

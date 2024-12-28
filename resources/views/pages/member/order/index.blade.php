@@ -69,21 +69,23 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="mt-auto p-0 border-t">
+                        <div class="mt-auto p-0 border-t rounded-b-lg">
                             <form method="POST" action="{{ route('order.update', ['order' => $order->id]) }}"
-                                class="flex items-center gap-2">
+                                class="flex items-center">
                                 @csrf
                                 @method('put')
-                                @if (!$order->status_bayar)
+                                @if (!$order->status_bayar && !$order->deleted_at && strtotime(date($order->check_in)) >= strtotime(date('dMY')))
                                     <button type="submit" name="bayar" value="1"
-                                        class="h-full align-end bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] rounded-b-lg px-2 py-1 w-full font-bold">
+                                        class="h-full align-start bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] px-2 py-1 w-full font-bold">
                                         Bayar Sekarang
                                     </button>
                                 @endif
-                                <button type="submit" name="batal" value="1"
-                                    class="h-full align-end bg-[--error] text-[--on-error] hover:bg-[--error-container] hover:text-[--on-error-container] rounded-b-lg px-2 py-1 w-full font-bold">
-                                    Batalkan Pesanan
-                                </button>
+                                @if (!$order->deleted_at && strtotime(date($order->check_in)) >= strtotime(date('dMY')))
+                                    <button type="submit" name="batal" value="1"
+                                        class="h-full align-end bg-[--error] text-[--on-error] hover:bg-[--error-container] hover:text-[--on-error-container] px-2 py-1 w-full font-bold">
+                                        Batalkan Pesanan
+                                    </button>
+                                @endif
                             </form>
                         </div>
                     </div>

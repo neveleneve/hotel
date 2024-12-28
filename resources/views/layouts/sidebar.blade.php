@@ -51,6 +51,49 @@
                         class="{{ request()->routeIs('admin.order.*') ? 'font-bold' : '' }}">Pesanan</span>
                 </a>
             @endcan
+
+            @canany(['deposit index', 'withdraw index', 'point index'])
+                <div x-data="{
+                    open: {{ request()->routeIs('admin.deposit.*') || request()->routeIs('admin.withdraw.*') || request()->routeIs('admin.point.*') ? 'true' : 'false' }}
+                }" class="relative">
+                    <button @click="open = !open" type="button"
+                        class="flex items-center px-4 py-2 w-full rounded-lg hover:bg-[--primary-container]"
+                        :class="{ 'justify-center': !sidebarOpen, 'bg-[--primary-container]': open }">
+                        <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">payments</i>
+                        <span x-show="sidebarOpen" class="flex-1 text-left">Transaksi</span>
+                        <i x-show="sidebarOpen" class="material-icons transition-transform"
+                            :class="{ 'rotate-180': open }">expand_more</i>
+                    </button>
+
+                    <div x-show="open" x-transition.origin.top class="pl-4 mt-2 space-y-2">
+                        @can('deposit index')
+                            <a href="{{ route('admin.deposit.index') }}" title="Deposit"
+                                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.deposit.*') ? 'bg-[--primary-container]' : '' }}">
+                                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">account_balance_wallet</i>
+                                <span x-show="sidebarOpen">Deposit</span>
+                            </a>
+                        @endcan
+
+                        @can('withdraw index')
+                            <a href="{{ route('admin.withdraw.index') }}" title="Withdraw"
+                                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.withdraw.*') ? 'bg-[--primary-container]' : '' }}">
+                                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">money</i>
+                                <span x-show="sidebarOpen">Withdraw</span>
+                            </a>
+                        @endcan
+
+                        @can('point index')
+                            <a href="{{ route('admin.point.index') }}" title="Point"
+                                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.point.*') ? 'bg-[--primary-container]' : '' }}">
+                                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">stars</i>
+                                <span x-show="sidebarOpen">Point</span>
+                            </a>
+                        @endcan
+                    </div>
+                </div>
+            @endcanany
+
+            {{-- tambah disini --}}
         </div>
 
         <form method="POST" action="{{ route('logout') }}" class="mt-auto px-4 border-t">

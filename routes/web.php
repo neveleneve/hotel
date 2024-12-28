@@ -5,6 +5,9 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminHotelController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminPointController;
+use App\Http\Controllers\AdminTopupController;
+use App\Http\Controllers\AdminWithdrawController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MemberCartController;
@@ -34,6 +37,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('hotel', AdminHotelController::class);
     Route::resource('country', AdminCountryController::class);
     Route::resource('order', AdminOrderController::class);
+    Route::resource('deposit', AdminTopupController::class);
+    Route::resource('withdraw', AdminWithdrawController::class);
+    Route::resource('point', AdminPointController::class);
 });
 
 // user route
@@ -43,14 +49,15 @@ Route::middleware(['auth', 'role:member'])->group(function () {
         Route::get('account', [ProfileController::class, 'account'])->name('account');
     });
 
-    Route::prefix('transaksi')->name('transaksi.')->group(function () {
-        Route::get('pembayaran', [TopWDController::class, 'paymentIndex'])->name('pembayaran');
-        Route::get('top-up', [TopWDController::class, 'topupIndex'])->name('topup');
-        Route::get('withdraw', [TopWDController::class, 'withdrawIndex'])->name('wd');
-    });
 
     Route::resource('cart', MemberCartController::class);
     Route::resource('order', MemberOrderController::class);
+
+    Route::prefix('transaksi')->name('transaksi.')->group(function () {
+        Route::get('pembayaran', [TopWDController::class, 'paymentIndex'])->name('pembayaran.index');
+        Route::get('top-up', [TopWDController::class, 'topupIndex'])->name('topup.index');
+        Route::get('withdraw', [TopWDController::class, 'withdrawIndex'])->name('wd.index');
+    });
 
     Route::prefix('country')->group(function () {
         Route::get('/{flag_code}', [MemberCountryController::class, 'index'])->name('member.country.index');

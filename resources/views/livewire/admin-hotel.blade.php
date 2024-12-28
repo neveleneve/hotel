@@ -49,12 +49,6 @@
                                             <i class="material-icons text-base">edit</i>
                                         </a>
                                     @endcan
-                                    @can('hotel delete')
-                                        <button title="Hapus"
-                                            class="p-2 rounded-lg hover:bg-[--error] text-[--error] hover:text-[--on-error]">
-                                            <i class="material-icons text-base">delete</i>
-                                        </button>
-                                    @endcan
                                 </div>
                             </td>
                         </tr>
@@ -86,12 +80,6 @@
                                 class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
                                 <i class="material-icons text-base">edit</i>
                             </a>
-                        @endcan
-                        @can('hotel delete')
-                            <button title="Hapus"
-                                class="p-2 rounded-lg hover:bg-[--error] text-[--error] hover:text-[--on-error]">
-                                <i class="material-icons text-base">delete</i>
-                            </button>
                         @endcan
                     </div>
                 </div>

@@ -20,7 +20,6 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">Nama Negara</th>
                         <th scope="col" class="px-6 py-3 text-center">Kode Bendera</th>
-                        <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -28,22 +27,6 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-center">{{ $country->name }}</td>
                             <td class="px-6 py-4 text-center">{{ $country->flag_code }}</td>
-                            <td class="px-6 py-4 text-center">
-                                <div class="flex items-center justify-center gap-2">
-                                    @can('country edit')
-                                        <button title="Edit"
-                                            class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
-                                            <i class="material-icons text-base">edit</i>
-                                        </button>
-                                    @endcan
-                                    @can('country delete')
-                                        <button title="Hapus"
-                                            class="p-2 rounded-lg hover:bg-[--error] text-[--error] hover:text-[--on-error]">
-                                            <i class="material-icons text-base">delete</i>
-                                        </button>
-                                    @endcan
-                                </div>
-                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -67,20 +50,7 @@
                         <p class="font-semibold">{{ $country->name }}</p>
                         <p class="text-sm text-gray-600">Kode: {{ $country->flag_code }}</p>
                     </div>
-                    <div class="flex gap-2">
-                        @can('country edit')
-                            <button title="Edit"
-                                class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
-                                <i class="material-icons text-base">edit</i>
-                            </button>
-                        @endcan
-                        @can('country delete')
-                            <button title="Hapus"
-                                class="p-2 rounded-lg hover:bg-[--error] text-[--error] hover:text-[--on-error]">
-                                <i class="material-icons text-base">delete</i>
-                            </button>
-                        @endcan
-                    </div>
+
                 </div>
             </div>
         @empty

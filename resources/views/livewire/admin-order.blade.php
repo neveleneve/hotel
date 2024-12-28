@@ -27,7 +27,6 @@
                         <th scope="col" class="px-6 py-3 text-center">Check Out</th>
                         <th scope="col" class="py-3 text-center">Status</th>
                         <th scope="col" class="py-3 text-center">Total</th>
-                        <th scope="col" class="py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -39,31 +38,29 @@
                             <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_in)) }}</td>
                             <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_out)) }}</td>
                             <td class="py-4 text-center">
-                                <span
-                                    class="font-bold px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}
-
-                                    {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}
-                                </span>
+                                @if (!$order->status_bayar && !$order->deleted_at)
+                                    <span title="Belum Bayar"
+                                        class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                        Belum Bayar
+                                    </span>
+                                @elseif ($order->status_bayar && !$order->deleted_at)
+                                    <span title="Belum Bayar"
+                                        class="text-xs px-2 py-1 rounded-full font-bold bg-[--primary] text-[--on-primary]">
+                                        Sudah Bayar
+                                    </span>
+                                @else
+                                    <span title="Belum Bayar"
+                                        onclick="return confirm('Batalkan pesanan {{ $order->order_code }}?')"
+                                        class="text-xs px-2 py-1 rounded-full font-bold bg-[--error-container] text-[--on-error-container]">
+                                        Dibatalkan
+                                    </span>
+                                @endif
                             </td>
                             <td class="py-4
-                                    text-center">Rp {{ number_format($order->total, 0, ',', '.') }}
+                                    text-center">Rp
+                                {{ number_format($order->total, 0, ',', '.') }}
                             </td>
-                            <td class="py-4 text-center">
-                                <div class="flex gap-2 items-center justify-center">
-                                    @can('order edit')
-                                        <button title="Edit"
-                                            class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
-                                            <i class="material-icons text-base">edit</i>
-                                        </button>
-                                    @endcan
-                                    @can('order delete')
-                                        <button title="Hapus"
-                                            class="p-2 rounded-lg hover:bg-[--error] text-[--error] hover:text-[--on-error]">
-                                            <i class="material-icons text-base">delete</i>
-                                        </button>
-                                    @endcan
-                                </div>
-                            </td>
+
                         </tr>
                     @empty
                         <tr>
@@ -97,20 +94,6 @@
                             {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}
                         </span>
                         <p class="text-sm font-semibold">Total: Rp {{ number_format($order->total, 0, ',', '.') }}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        @can('order edit')
-                            <button title="Edit"
-                                class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
-                                <i class="material-icons text-base">edit</i>
-                            </button>
-                        @endcan
-                        @can('order delete')
-                            <button title="Hapus"
-                                class="p-2 rounded-lg hover:bg-[--error] text-[--error] hover:text-[--on-error]">
-                                <i class="material-icons text-base">delete</i>
-                            </button>
-                        @endcan
                     </div>
                 </div>
             </div>

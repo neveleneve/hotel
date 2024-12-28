@@ -37,67 +37,80 @@ class PermissionSeeder extends Seeder {
             'order edit',
             'order delete',
 
-            'role index',
-            'role create',
-            'role view',
-            'role edit',
-            'role delete',
+            'deposit index',
+            'deposit update',
 
-            'permission index',
-            'permission create',
-            'permission view',
-            'permission edit',
-            'permission delete',
+            'withdraw index',
+            'withdraw update',
+
+            'point index',
+            'point update',
         ];
 
         $super = [
             'dashboard',
+
             'member index',
             'member view',
             'member edit',
+
             'hotel index',
             'hotel create',
             'hotel view',
             'hotel edit',
             'hotel delete',
+
             'country index',
             'country create',
             'country view',
             'country edit',
             'country delete',
+
             'order index',
             'order create',
             'order view',
             'order edit',
             'order delete',
-            'role index',
-            'role create',
-            'role view',
-            'role edit',
-            'role delete',
-            'permission index',
-            'permission create',
-            'permission view',
-            'permission edit',
-            'permission delete',
+
+            'deposit index',
+            'deposit update',
+
+            'withdraw index',
+            'withdraw update',
+
+            'point index',
+            'point update',
         ];
 
         $admin = [
             'dashboard',
+
             'member index',
             'member view',
             'member edit',
+
             'hotel index',
             'hotel view',
             'hotel edit',
+
             'country index',
             'country create',
             'country view',
             'country edit',
+
             'order index',
             'order view',
             'order edit',
             'order delete',
+
+            'deposit index',
+            'deposit update',
+
+            'withdraw index',
+            'withdraw update',
+
+            'point index',
+            'point update',
         ];
 
         foreach ($permissions as $permission) {

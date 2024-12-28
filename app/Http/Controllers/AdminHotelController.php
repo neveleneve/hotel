@@ -77,10 +77,57 @@ class AdminHotelController extends Controller {
     }
 
     public function update(Request $request, Hotel $hotel) {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'country' => 'required|exists:countries,id',
+            'price' => 'required|numeric|min:0',
+            'rating' => 'required|numeric|min:0|max:5',
+            'description' => 'required|string',
+            'is_promo' => 'required|boolean',
+            'discount' => 'required_if:is_promo,1|nullable|numeric|min:0|max:100',
+        ]);
+
+        try {
+            $hotel->update([
+                'name' => $request->name,
+                'country_id' => $request->country,
+                'price' => $request->price,
+                'rating' => $request->rating,
+                'description' => $request->description,
+                'promo' => $request->is_promo,
+                'discount' => $request->is_promo ? $request->discount : 0,
+            ]);
+
+            return redirect()
+                ->route('admin.hotel.show', $hotel)
+                ->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Data hotel berhasil diperbarui!',
+                    'icon' => 'success',
+                ]);
+        } catch (\Exception $e) {
+            return back()->with([
+                'title' => 'Gagal',
+                'text' => 'Gagal memperbarui data hotel: ' . $e->getMessage(),
+                'icon' => 'error',
+            ])->withInput();
+        }
     }
 
     public function destroy(Hotel $hotel) {
-        //
+        $delete = $hotel->delete();
+        if ($delete) {
+            return redirect(route('admin.hotel.index'))->with([
+                'title' => 'Berhasil',
+                'text' => 'Data hotel berhasil dihapus!',
+                'icon' => 'success',
+            ]);
+        } else {
+            return back()->with([
+                'title' => 'Gagal',
+                'text' => 'Data hotel gagal dihapus!',
+                'icon' => 'error',
+            ]);
+        }
     }
 }
