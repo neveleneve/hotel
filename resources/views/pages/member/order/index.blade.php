@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mt-16 mb-20">
+    <div class="my-16">
         <div class="grid grid-cols-1 gap-4 px-4">
             @forelse ($orders as $order)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2">
@@ -69,27 +69,23 @@
                                 </span>
                             </div>
                         </div>
-                        @if (!$order->deleted_at)
-                            <div class="mt-auto p-0 border-t">
-                                <form method="POST" action="{{ route('order.update', ['order' => $order->id]) }}"
-                                    class="flex flex-col gap-0">
-                                    @csrf
-                                    @method('put')
-                                    @if (!$order->status_bayar && !$order->deleted_at)
-                                        <button type="submit" name="bayar" value="1"
-                                            class="bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] px-2 py-2 w-full font-bold">
-                                            Bayar Sekarang
-                                        </button>
-                                    @endif
-                                    @if (strtotime(date($order->check_in)) >= strtotime(date('Ymd')) && !$order->deleted_at)
-                                        <button type="submit" name="batal" value="1"
-                                            class="bg-[--error] text-[--on-error] hover:bg-[--error-container] hover:text-[--on-error-container] rounded-b-lg px-2 py-2 w-full font-bold">
-                                            Batalkan Pesanan
-                                        </button>
-                                    @endif
-                                </form>
-                            </div>
-                        @endif
+                        <div class="mt-auto p-0 border-t">
+                            <form method="POST" action="{{ route('order.update', ['order' => $order->id]) }}"
+                                class="flex items-center gap-2">
+                                @csrf
+                                @method('put')
+                                @if (!$order->status_bayar)
+                                    <button type="submit" name="bayar" value="1"
+                                        class="h-full align-end bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] rounded-b-lg px-2 py-1 w-full font-bold">
+                                        Bayar Sekarang
+                                    </button>
+                                @endif
+                                <button type="submit" name="batal" value="1"
+                                    class="h-full align-end bg-[--error] text-[--on-error] hover:bg-[--error-container] hover:text-[--on-error-container] rounded-b-lg px-2 py-1 w-full font-bold">
+                                    Batalkan Pesanan
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @empty

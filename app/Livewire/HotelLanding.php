@@ -38,9 +38,9 @@ class HotelLanding extends Component {
         if ($type == 'all') {
             $this->hotel = Hotel::take(8)->get();
         } elseif ($type == 'top') {
-            $this->hotel = Hotel::where('rating', '>=', 4)->take(8)->get();
+            $this->hotel = Hotel::where('promo', 1)->where('discount', '>', 0)->take(8)->get();
         } elseif ($type == 'popular') {
-            $this->hotel = Hotel::orderBy('price', 'desc')->take(8)->get();
+            $this->hotel = Hotel::orderBy('rating', 'desc')->take(8)->get();
         }
     }
 

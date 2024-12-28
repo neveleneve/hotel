@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ModelHasRole;
+use App\Models\Saldo;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller {
     /*
@@ -63,6 +67,40 @@ class RegisterController extends Controller {
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public function register(Request $request) {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        ModelHasRole::create([
+            'role_id' => 3,
+            'model_type' => 'App\Models\User',
+            'model_id' => $user->id,
+        ]);
+
+        Saldo::create([
+            'user_id' => $user->id,
+            'saldo' => 0,
+            'point' => 0,
+        ]);
+
+        auth()->login($user);
+
+        return redirect()->route('landing')->with([
+            'title' => __('message.registered_success'),
+            'text' => __('message.welcome_message'),
+            'icon' => 'success',
         ]);
     }
 }
