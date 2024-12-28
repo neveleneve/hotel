@@ -36,4 +36,8 @@ class User extends Authenticatable {
     public function saldo() {
         return $this->hasOne(Saldo::class);
     }
+
+    public function topup() {
+        return $this->hasMany(TopUp::class);
+    }
 }

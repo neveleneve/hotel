@@ -17,51 +17,45 @@
                     Penarikan
                 </a>
             </div>
-            <h1 class="text-2xl font-bold mb-6">Riwayat Pembayaran</h1>
-            @if ($order->count() > 0)
+            <h1 class="text-2xl font-bold mb-6">Riwayat Top Up</h1>
+            @if ($topup->count() > 0)
                 <div class="space-y-4">
-                    @foreach ($order as $item)
-                        <div class="bg-white rounded-lg shadow p-4">
+                    @foreach ($topup as $item)
+                        <div
+                            class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 border border-gray-100">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="font-semibold text-lg">{{ $item->hotel->name }}</h3>
-                                    <p class="text-gray-600 text-sm">{{ $item->created_at->format('d M Y, H:i') }}</p>
+                                    <h3 class="font-bold text-lg text-gray-800">Top Up Saldo</h3>
+                                    <p class="text-gray-500 text-sm mt-1">{{ $item->created_at->format('d M Y, H:i') }}</p>
                                 </div>
                                 <span
-                                    class="px-3 py-1 rounded-full text-sm font-medium
-                                    @if ($item->status == 'pending') bg-yellow-100 text-yellow-800
+                                    class="px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide
+                                    @if ($item->status == 'pending') bg-yellow-50 text-yellow-700 border border-yellow-200
                                     @elseif($item->status == 'success')
-                                        bg-green-100 text-green-800
+                                        bg-green-50 text-green-700 border border-green-200
                                     @elseif($item->status == 'failed')
-                                        bg-red-100 text-red-800 @endif">
+                                        bg-red-50 text-red-700 border border-red-200 @endif">
                                     {{ ucfirst($item->status) }}
                                 </span>
                             </div>
 
-                            <div class="mt-4 flex justify-between items-center">
-                                <div class="text-gray-700">
-                                    <p>Total Pembayaran:</p>
-                                    <p class="font-bold text-lg">Rp {{ number_format($item->total, 0, ',', '.') }}</p>
+                            <div class="mt-5 flex justify-between items-center">
+                                <div class="text-gray-800">
+                                    <p class="text-sm">Nominal Top Up:</p>
+                                    <p class="font-bold text-xl mt-1">Rp {{ number_format($item->amount, 0, ',', '.') }}</p>
                                 </div>
-                                @if ($item->status == 'pending')
-                                    <a href="{{ route('payment.show', $item->id) }}"
-                                        class="px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg hover:bg-[--primary-container] hover:text-[--on-primary-container]">
-                                        Bayar Sekarang
-                                    </a>
-                                @endif
                             </div>
-
                             @if ($item->status == 'success')
-                                <div class="mt-4 pt-4 border-t">
-                                    <h4 class="font-medium mb-2">Detail Transaksi:</h4>
-                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div class="mt-5 pt-5 border-t border-gray-100">
+                                    <h4 class="font-semibold mb-3 text-gray-800">Detail Transaksi:</h4>
+                                    <div class="grid grid-cols-2 gap-6 text-sm">
                                         <div>
-                                            <p class="text-gray-600">Metode Pembayaran</p>
-                                            <p class="font-medium">{{ $item->payment_method }}</p>
+                                            <p class="text-gray-500 mb-1">Metode Pembayaran</p>
+                                            <p class="font-medium text-gray-800">{{ $item->payment_method }}</p>
                                         </div>
                                         <div>
-                                            <p class="text-gray-600">ID Transaksi</p>
-                                            <p class="font-medium">{{ $item->transaction_id }}</p>
+                                            <p class="text-gray-500 mb-1">ID Transaksi</p>
+                                            <p class="font-medium text-gray-800">{{ $item->transaction_id }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -72,10 +66,10 @@
             @else
                 <div class="text-center py-8">
                     <div class="text-gray-400 mb-4">
-                        <i class="material-icons text-6xl">receipt_long</i>
+                        <i class="material-icons text-6xl">account_balance_wallet</i>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900">Belum ada transaksi</h3>
-                    <p class="text-gray-600 mt-1">Anda belum melakukan transaksi apapun</p>
+                    <h3 class="text-lg font-medium text-gray-900">Belum ada riwayat top up</h3>
+                    <p class="text-gray-600 mt-1">Anda belum melakukan top up saldo</p>
                 </div>
             @endif
         </div>

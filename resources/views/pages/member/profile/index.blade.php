@@ -42,7 +42,7 @@
                 </span>
                 <i class="material-icons">chevron_right</i>
             </a>
-            <hr>
+            {{-- <hr>
             <a href="#" class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
                 <span class="flex items-center space-x-4">
                     <i class="material-icons">lock</i>
@@ -65,7 +65,7 @@
                     <span class="text-[--on-primary] text-sm font-bold">Pusat Bantuan</span>
                 </span>
                 <i class="material-icons">chevron_right</i>
-            </a>
+            </a> --}}
             <hr>
             <a onclick="document.getElementById('logout').submit();"
                 class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer text-[--error-container] ">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TopUp;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -45,6 +46,19 @@ class AdminMemberController extends Controller {
 
             if ($request->type === 'saldo') {
                 $saldo->saldo += $request->amount;
+                if ($request->amount < 0) {
+                    TopUp::create([
+                        'user_id' => $member->id,
+                        'amount' => abs($request->amount),
+                        'type' => 'withdraw',
+                    ]);
+                } else {
+                    TopUp::create([
+                        'user_id' => $member->id,
+                        'amount' => $request->amount,
+                        'type' => 'deposit',
+                    ]);
+                }
             } else {
                 $saldo->point += $request->amount;
             }
