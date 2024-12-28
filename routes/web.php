@@ -13,6 +13,7 @@ use App\Http\Controllers\MemberHotelController;
 use App\Http\Controllers\MemberOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TopWDController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,12 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::get('account', [ProfileController::class, 'account'])->name('account');
+    });
+
+    Route::prefix('transaksi')->name('transaksi.')->group(function () {
+        Route::get('pembayaran', [TopWDController::class, 'paymentIndex'])->name('pembayaran');
+        Route::get('top-up', [TopWDController::class, 'topupIndex'])->name('topup');
+        Route::get('withdraw', [TopWDController::class, 'withdrawIndex'])->name('wd');
     });
 
     Route::resource('cart', MemberCartController::class);

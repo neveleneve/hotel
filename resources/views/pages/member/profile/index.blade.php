@@ -13,18 +13,27 @@
                 <p class="text-xl font-bold">Rp {{ number_format(Auth::user()->saldo->saldo ?? 0, 0, ',', '.') }}</p>
             </div>
         </div>
-        <div class="grid grid-cols-2 my-2">
+        {{-- <div class="grid grid-cols-2 my-2">
             <div class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--primary] text-[--on-primary] m-4 p-4">
-                <i class="w-12 h-12 material-icons text-5xl">credit_card</i>
-                <span class="text-xs mt-2 text-center font-bold">Pembayaran</span>
+                <i class="w-12 h-12 material-icons text-5xl">add_card</i>
+                <span class="text-xs mt-2 text-center font-bold">Deposit</span>
             </div>
             <div class="flex flex-col items-center lg:mb-8 rounded-lg bg-[--primary] text-[--on-primary] m-4 p-4">
-                <i class="w-12 h-12 material-icons text-5xl">history</i>
-                <span class="text-xs mt-2 text-center font-bold">History</span>
+                <i class="w-12 h-12 material-icons text-5xl">account_balance_wallet</i>
+                <span class="text-xs mt-2 text-center font-bold">Withdraw</span>
             </div>
-        </div>
-        <hr>
-        <div class="pb-4">
+        </div> --}}
+        <div class="pb-4 mt-2">
+            <hr>
+            <a href="{{ route('transaksi.pembayaran') }}"
+                class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
+                <span class="flex items-center space-x-4">
+                    <i class="material-icons">payments</i>
+                    <span class="text-[--on-primary] text-sm font-bold">Transaksi</span>
+                </span>
+                <i class="material-icons">chevron_right</i>
+            </a>
+            <hr>
             <a href="#" class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
                 <span class="flex items-center space-x-4">
                     <i class="material-icons">lock</i>
@@ -36,7 +45,7 @@
             <a href="#" class="flex items-center justify-between px-6 py-4 hover:bg-gray-100 cursor-pointer">
                 <span class="flex items-center space-x-4">
                     <i class="material-icons">person</i>
-                    <span class="text-[--on-primary] text-sm font-bold">Akun dan Keamanan</span>
+                    <span class="text-[--on-primary] text-sm font-bold">Atur Profile</span>
                 </span>
                 <i class="material-icons">chevron_right</i>
             </a>

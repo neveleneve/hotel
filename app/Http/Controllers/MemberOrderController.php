@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Hotel;
 use App\Models\Order;
+use App\Models\Saldo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class MemberOrderController extends Controller {
@@ -122,7 +124,46 @@ class MemberOrderController extends Controller {
     }
 
     public function update(Request $request, Order $order) {
-        //
+        $saldo = Saldo::where('user_id', Auth::user()->id)->first();
+
+        if (!$saldo) {
+            return redirect()->back()->with([
+                'title' => 'Gagal',
+                'text' => 'Saldo tidak mencukupi!',
+                'icon' => 'error',
+            ]);
+        }
+
+        if ($saldo->saldo < $order->total) {
+            return redirect()->back()->with([
+                'title' => 'Gagal',
+                'text' => 'Saldo tidak mencukupi untuk melakukan pembayaran!',
+                'icon' => 'error',
+            ]);
+        }
+
+        try {
+            $saldo->update([
+                'saldo' => $saldo->saldo - $order->total
+            ]);
+
+            // Update status order
+            $order->update([
+                'status_bayar' => true,
+            ]);
+
+            return redirect()->route('order.index')->with([
+                'title' => 'Berhasil',
+                'text' => 'Pembayaran berhasil dilakukan!',
+                'icon' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with([
+                'title' => 'Gagal',
+                'text' => 'Terjadi kesalahan saat melakukan pembayaran!',
+                'icon' => 'error',
+            ]);
+        }
     }
 
     public function destroy(Order $order) {

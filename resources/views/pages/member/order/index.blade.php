@@ -22,7 +22,6 @@
                                         ID : {{ $order->order_code }}
                                     </h5>
                                 </div>
-
                                 <div class="space-y-2 text-sm text-[--on-primary] font-semibold mb-3">
                                     <div class="flex items-center">
                                         <i class="material-icons text-sm mr-1">event_available</i>
@@ -59,6 +58,19 @@
                                 </span>
                             </div>
                         </div>
+                        @if (!$order->status_bayar)
+                            <div class="mt-auto p-0 border-t">
+                                <form method="POST" action="{{ route('order.update', ['order' => $order->id]) }}"
+                                    class="flex items-center gap-2">
+                                    @csrf
+                                    @method('put')
+                                    <button name="bayar"
+                                        class="h-full align-end bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] rounded-b-lg px-2 py-1 w-full font-bold">
+                                        Bayar
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @empty
