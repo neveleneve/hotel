@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
-use App\Models\Country;
+use App\Models\country;
 use Illuminate\Http\Request;
 
 class AdminHotelController extends Controller {
@@ -12,7 +12,7 @@ class AdminHotelController extends Controller {
     }
 
     public function create() {
-        $countries = Country::all();
+        $countries = country::all();
         return view('pages.admin.hotel.create', compact('countries'));
     }
 
