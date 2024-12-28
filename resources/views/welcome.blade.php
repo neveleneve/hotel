@@ -3,10 +3,11 @@
 @section('content')
     <div class="my-16">
         <section class="px-4 py-2">
-            <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Event Belanja</h2>
-            <hr class="mb-2">
-            <div class="bg-gray-200 h-32 flex items-center justify-center mb-4">Slide 1</div>
-            <hr class="mb-2">
+            @auth
+                <h1 class="text-[--on-primary] font-bold text-xl md:text-2xl lg:text-3xl mb-2">Selamat datang kembali,
+                    {{ Auth::user()->name }}</h1>
+                <hr class="mb-4">
+            @endauth
             <div class="grid grid-cols-4 gap-4 lg:grid-cols-8 lg:gap-2">
                 @foreach ($country as $items)
                     <a class="flex flex-col items-center lg:mb-8"
@@ -56,24 +57,3 @@
         </div>
     </header>
 @endpush
-{{--
-@push('customjs')
-    <script>
-        function toggleIcons() {
-            const input = document.getElementById('search-input');
-            const iconTimes = document.getElementById('icon-times');
-
-            if (input.value.trim() !== "") {
-                iconTimes.classList.remove('hidden');
-            } else {
-                iconTimes.classList.add('hidden');
-            }
-        }
-
-        function clearInput() {
-            const input = document.getElementById('search-input');
-            input.value = '';
-            toggleIcons();
-        }
-    </script>
-@endpush --}}
