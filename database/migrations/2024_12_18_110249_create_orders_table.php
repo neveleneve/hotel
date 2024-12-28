@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->integer('total_room');
             $table->integer('total');
             $table->boolean('status_bayar')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

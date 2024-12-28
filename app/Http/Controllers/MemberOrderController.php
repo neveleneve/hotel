@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberOrderController extends Controller {
     public function index() {
-        $orders = Order::with('hotel')
+        $orders = Order::withTrashed()
+            ->with('hotel')
             ->where('user_id', auth()->user()->id)
             ->orderBy('id', 'desc')
             ->get();
@@ -124,46 +125,75 @@ class MemberOrderController extends Controller {
     }
 
     public function update(Request $request, Order $order) {
-        $saldo = Saldo::where('user_id', Auth::user()->id)->first();
+        if ($request->has('bayar')) {
+            $saldo = Saldo::where('user_id', Auth::user()->id)->first();
 
-        if (!$saldo) {
-            return redirect()->back()->with([
-                'title' => 'Gagal',
-                'text' => 'Saldo tidak mencukupi!',
-                'icon' => 'error',
-            ]);
+            if (!$saldo) {
+                return redirect()->back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Saldo tidak mencukupi!',
+                    'icon' => 'error',
+                ]);
+            }
+
+            if ($saldo->saldo < $order->total) {
+                return redirect()->back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Saldo tidak mencukupi untuk melakukan pembayaran!',
+                    'icon' => 'error',
+                ]);
+            }
+
+            try {
+                $saldo->update([
+                    'saldo' => $saldo->saldo - $order->total
+                ]);
+
+                $order->update([
+                    'status_bayar' => true,
+                ]);
+
+                return redirect()->route('order.index')->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Pembayaran berhasil dilakukan!',
+                    'icon' => 'success',
+                ]);
+            } catch (\Exception $e) {
+                return redirect()->back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Terjadi kesalahan saat melakukan pembayaran!',
+                    'icon' => 'error',
+                ]);
+            }
+        } elseif ($request->has('batal')) {
+            $saldo = Saldo::where('user_id', Auth::user()->id)->first();
+            try {
+                if ($order->status_bayar) {
+                    $saldo->update([
+                        'saldo' => $saldo->saldo + $order->total
+                    ]);
+                }
+                $order->delete();
+                return redirect()->route('order.index')->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Pesanan berhasil dibatalkan!',
+
+                    'icon' => 'success',
+                ]);
+            } catch (\Exception $e) {
+                return redirect()->back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Terjadi kesalahan saat membatalkan pesanan!',
+                    'icon' => 'error',
+                ]);
+            }
         }
 
-        if ($saldo->saldo < $order->total) {
-            return redirect()->back()->with([
-                'title' => 'Gagal',
-                'text' => 'Saldo tidak mencukupi untuk melakukan pembayaran!',
-                'icon' => 'error',
-            ]);
-        }
-
-        try {
-            $saldo->update([
-                'saldo' => $saldo->saldo - $order->total
-            ]);
-
-            // Update status order
-            $order->update([
-                'status_bayar' => true,
-            ]);
-
-            return redirect()->route('order.index')->with([
-                'title' => 'Berhasil',
-                'text' => 'Pembayaran berhasil dilakukan!',
-                'icon' => 'success',
-            ]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with([
-                'title' => 'Gagal',
-                'text' => 'Terjadi kesalahan saat melakukan pembayaran!',
-                'icon' => 'error',
-            ]);
-        }
+        return redirect()->back()->with([
+            'title' => 'Gagal',
+            'text' => 'Aksi tidak valid!',
+            'icon' => 'error',
+        ]);
     }
 
     public function destroy(Order $order) {

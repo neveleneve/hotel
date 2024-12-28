@@ -96,14 +96,13 @@
                                         <td class="px-6 py-4">{{ $order->check_out }}</td>
                                         <td class="px-6 py-4">
                                             <span
-                                                class="px-2 py-1 rounded-full text-xs
-                                                @if ($order->status === 'pending') bg-yellow-100 text-yellow-800
-                                                @elseif($order->status === 'completed') bg-green-100 text-green-800
-                                                @else bg-red-100 text-red-800 @endif">
-                                                {{ $order->status ? 'Sudah Bayar' : 'Belum Bayar' }}
-                                            </span>
+                                                class="px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}</span>
                                         </td>
-                                        <td class="px-6 py-4">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
+                                        <td class="px-6
+                                                py-4">Rp
+                                            {{ number_format($order->total, 0, ',', '.') }}
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -125,11 +124,8 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <span
-                                    class="px-2 py-1 rounded-full text-xs
-                                    @if ($order->status === 'pending') bg-yellow-100 text-yellow-800
-                                    @elseif($order->status === 'completed') bg-green-100 text-green-800
-                                    @else bg-red-100 text-red-800 @endif">
-                                    {{ $order->status ? 'Sudah Bayar' : 'Belum Bayar' }}
+                                    class="px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}
                                 </span>
                                 <span class="font-medium">Rp {{ number_format($order->total, 0, ',', '.') }}</span>
                             </div>

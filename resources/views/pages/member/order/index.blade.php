@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="my-16">
+    <div class="mt-16 mb-20">
         <div class="grid grid-cols-1 gap-4 px-4">
             @forelse ($orders as $order)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2">
@@ -37,15 +37,26 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span title="{{ $order->status_bayar ? 'Sudah bayar' : 'Belum bayar' }}"
-                                        class="text-xs px-2 py-1 rounded-full font-bold {{ $order->status_bayar ? 'bg-[--primary] text-[--on-primary]' : 'bg-[--error] text-[--on-error]' }}">
-                                        {{ $order->status_bayar ? 'Sudah bayar' : 'Belum bayar' }}
-                                    </span>
-                                    @if (!$order->status_bayar)
+                                    @if (!$order->status_bayar && !$order->deleted_at)
+                                        <span title="Belum Bayar"
+                                            class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                            Belum Bayar
+                                        </span>
                                         <button onclick="showPaymentInfo()"
                                             class="w-5 h-5 rounded-full bg-[--on-primary-container] text-[--on-primary] flex items-center justify-center hover:bg-[--primary]">
                                             <i class="material-icons text-sm">info</i>
                                         </button>
+                                    @elseif ($order->status_bayar && !$order->deleted_at)
+                                        <span title="Belum Bayar"
+                                            class="text-xs px-2 py-1 rounded-full font-bold bg-[--primary] text-[--on-primary]">
+                                            Sudah Bayar
+                                        </span>
+                                    @else
+                                        <span title="Belum Bayar"
+                                            onclick="return confirm('Batalkan pesanan {{ $order->order_code }}?')"
+                                            class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                            Dibatalkan
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -58,16 +69,24 @@
                                 </span>
                             </div>
                         </div>
-                        @if (!$order->status_bayar)
+                        @if (!$order->deleted_at)
                             <div class="mt-auto p-0 border-t">
                                 <form method="POST" action="{{ route('order.update', ['order' => $order->id]) }}"
-                                    class="flex items-center gap-2">
+                                    class="flex flex-col gap-0">
                                     @csrf
                                     @method('put')
-                                    <button name="bayar"
-                                        class="h-full align-end bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] rounded-b-lg px-2 py-1 w-full font-bold">
-                                        Bayar
-                                    </button>
+                                    @if (!$order->status_bayar && !$order->deleted_at)
+                                        <button type="submit" name="bayar" value="1"
+                                            class="bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] px-2 py-2 w-full font-bold">
+                                            Bayar Sekarang
+                                        </button>
+                                    @endif
+                                    @if (strtotime(date($order->check_in)) >= strtotime(date('Ymd')) && !$order->deleted_at)
+                                        <button type="submit" name="batal" value="1"
+                                            class="bg-[--error] text-[--on-error] hover:bg-[--error-container] hover:text-[--on-error-container] rounded-b-lg px-2 py-2 w-full font-bold">
+                                            Batalkan Pesanan
+                                        </button>
+                                    @endif
                                 </form>
                             </div>
                         @endif
