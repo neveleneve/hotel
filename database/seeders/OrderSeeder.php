@@ -12,8 +12,8 @@ class OrderSeeder extends Seeder {
      */
     public function run(): void {
         Order::create([
-            'order_code' =>  'MY/' . date('ymdHi') . '/0003/' . strtoupper(uniqid()),
-            'user_id' => 3,
+            'order_code' =>  'MY/' . date('ymdHi') . '/0004/' . strtoupper(uniqid()),
+            'user_id' => 4,
             'hotel_id' => 32,
             'check_in' => date('Y-m-d'),
             'check_out' => date('Y-m-d', strtotime('+2 days')),

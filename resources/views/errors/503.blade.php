@@ -17,18 +17,18 @@
             @auth
                 @if (auth()->user()->hasRole(['admin', 'super admin']))
                     <a href="{{ route('admin.dashboard') }}"
-                        class="inline-block bg-[--primary] text-[--on-primary] font-bold px-6 py-3 rounded-lg mt-8 hover:bg-[--primary-container]">
+                        class="inline-block bg-[--primary] text-[--on-primary] font-bold px-6 py-3 rounded-lg mt-8 hover:bg-[--primary-container] hover:text-[--on-primary-container]">
                         Return to Admin Panel
                     </a>
                 @else
                     <a href="{{ route('landing') }}"
-                        class="inline-block bg-[--primary] text-[--on-primary] font-bold px-6 py-3 rounded-lg mt-8 hover:bg-[--primary-container]">
+                        class="inline-block bg-[--primary] text-[--on-primary] font-bold px-6 py-3 rounded-lg mt-8 hover:bg-[--primary-container] hover:text-[--on-primary-container]">
                         Return Home
                     </a>
                 @endif
             @else
                 <a href="{{ route('landing') }}"
-                    class="inline-block bg-[--primary] text-[--on-primary] font-bold px-6 py-3 rounded-lg mt-8 hover:bg-[--primary-container]">
+                    class="inline-block bg-[--primary] text-[--on-primary] font-bold px-6 py-3 rounded-lg mt-8 hover:bg-[--primary-container] hover:text-[--on-primary-container]">
                     Return Home
                 </a>
             @endauth

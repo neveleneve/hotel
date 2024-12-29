@@ -53,4 +53,12 @@ class AdminCountryController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function __construct() {
+        $this->middleware('permission:country index')->only('index');
+        $this->middleware('permission:country create')->only(['create', 'store']);
+        $this->middleware('permission:country view')->only('show');
+        $this->middleware('permission:country edit')->only(['edit', 'update']);
+        $this->middleware('permission:country delete')->only('destroy');
+    }
 }

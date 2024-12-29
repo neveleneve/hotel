@@ -53,4 +53,12 @@ class AdminOrderController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function __construct() {
+        $this->middleware('permission:order index')->only('index');
+        $this->middleware('permission:order create')->only(['create', 'store']);
+        $this->middleware('permission:order view')->only('show');
+        $this->middleware('permission:order edit')->only(['edit', 'update']);
+        $this->middleware('permission:order delete')->only('destroy');
+    }
 }

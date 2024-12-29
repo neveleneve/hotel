@@ -53,4 +53,9 @@ class AdminPointController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function __construct() {
+        $this->middleware('permission:point index')->only('index');
+        $this->middleware('permission:point update')->only(['update']);
+    }
 }

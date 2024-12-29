@@ -7,6 +7,14 @@ use App\Models\country;
 use Illuminate\Http\Request;
 
 class AdminHotelController extends Controller {
+    public function __construct() {
+        $this->middleware('permission:hotel index')->only('index');
+        $this->middleware('permission:hotel create')->only(['create', 'store']);
+        $this->middleware('permission:hotel view')->only('show');
+        $this->middleware('permission:hotel edit')->only(['edit', 'update']);
+        $this->middleware('permission:hotel delete')->only('destroy');
+    }
+
     public function index() {
         return view('pages.admin.hotel.index');
     }

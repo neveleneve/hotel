@@ -36,6 +36,20 @@
                             {{ !$member->deleted_at ? 'Aktif' : 'Tidak Aktif' }}
                         </p>
                     </div>
+                    @can('member edit')
+                        <form method="POST" action="{{ route('admin.member.update', $member) }}" class="mt-4">
+                            @csrf
+                            @method('PUT')
+                            <div class="space-y-2">
+                                <label for="message" class="text-sm text-gray-500">Pesan untuk Member</label>
+                                <textarea name="message" id="message" rows="3" class="w-full rounded-lg border border-gray-300 px-2 py-1">{{ $member->message }}</textarea>
+                                <button type="submit"
+                                    class="px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
+                                    Simpan Pesan
+                                </button>
+                            </div>
+                        </form>
+                    @endcan
                 </div>
             </div>
 
@@ -95,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit"
+                        <button type="submit" name="saldo"
                             class="col-span-2 px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
                             Tambah
                         </button>
@@ -170,7 +184,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada pesanan
+                                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada
+                                                pesanan
                                             </td>
                                         </tr>
                                     @endforelse

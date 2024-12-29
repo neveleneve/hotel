@@ -15,18 +15,6 @@ class AdminMemberController extends Controller {
     }
 
     public function index() {
-        // $member = User::role('member')->with('ownReff', 'reffBy')->get();
-        // $data = null;
-        // foreach ($member as $key => $value) {
-        //     $data[$key] = [
-        //         'name' => $value->name,
-        //         'email' => $value->email,
-        //         'own_reff' => $value->ownReff->reff_code,
-        //         'refferal_code' => $value->reffBy->ownReff->reff_code,
-        //         'reff_by' => $value->reffBy->ownReff->user->name,
-        //     ];
-        // }
-        // dd($data);
         return view('pages.admin.member.index');
     }
 
@@ -39,6 +27,20 @@ class AdminMemberController extends Controller {
     }
 
     public function show(User $member) {
+        if (auth()->user()->hasRole('admin')) {
+            $isReferredMember = $member->reffBy()->whereHas('ownReff', function ($query) {
+                $query->where('reff_code', auth()->user()->ownReff->reff_code);
+            })->exists();
+
+            if (!$isReferredMember) {
+                return redirect()->route('admin.member.index')->with([
+                    'title' => 'Akses Ditolak',
+                    'text' => 'Anda tidak memiliki akses ke member ini!',
+                    'icon' => 'error',
+                ]);
+            }
+        }
+
         return view('pages.admin.member.show', compact('member'));
     }
 
@@ -47,46 +49,70 @@ class AdminMemberController extends Controller {
     }
 
     public function update(Request $request, User $member) {
-        $request->validate([
-            'type' => 'required|in:saldo,point',
-            'amount' => 'required|numeric',
-        ]);
+        if ($request->has('message')) {
+            $request->validate([
+                'message' => 'nullable|string|max:255',
+            ]);
 
-        try {
-            $saldo = $member->saldo ?? $member->saldo()->create(['saldo' => 0, 'point' => 0]);
+            try {
+                $member->update([
+                    'message' => $request->message
+                ]);
 
-            if ($request->type === 'saldo') {
-                $saldo->saldo += $request->amount;
-                if ($request->amount < 0) {
-                    TopUp::create([
-                        'user_id' => $member->id,
-                        'amount' => abs($request->amount),
-                        'type' => 'withdraw',
-                    ]);
-                } else {
-                    TopUp::create([
-                        'user_id' => $member->id,
-                        'amount' => $request->amount,
-                        'type' => 'deposit',
-                    ]);
-                }
-            } else {
-                $saldo->point += $request->amount;
+                return back()->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Pesan berhasil diperbarui!',
+                    'icon' => 'success',
+                ]);
+            } catch (\Exception $e) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Gagal memperbarui pesan!',
+                    'icon' => 'error',
+                ]);
             }
-
-            $saldo->save();
-
-            return back()->with([
-                'title' => 'Berhasil',
-                'text' => 'Berhasil menambah ' . $request->type . '!',
-                'icon' => 'success',
+        } elseif ($request->has('amount')) {
+            $request->validate([
+                'type' => 'required|in:saldo,point',
+                'amount' => 'required|numeric',
             ]);
-        } catch (\Exception $e) {
-            return back()->with([
-                'title' => 'Gagal',
-                'text' => 'Gagal menambah ' . $request->type . '!',
-                'icon' => 'error',
-            ]);
+
+            try {
+                $saldo = $member->saldo ?? $member->saldo()->create(['saldo' => 0, 'point' => 0]);
+
+                if ($request->type === 'saldo') {
+                    $saldo->saldo += $request->amount;
+                    if ($request->amount < 0) {
+                        TopUp::create([
+                            'user_id' => $member->id,
+                            'amount' => abs($request->amount),
+                            'type' => 'withdraw',
+                        ]);
+                    } else {
+                        TopUp::create([
+                            'user_id' => $member->id,
+                            'amount' => $request->amount,
+                            'type' => 'deposit',
+                        ]);
+                    }
+                } else {
+                    $saldo->point += $request->amount;
+                }
+
+                $saldo->save();
+
+                return back()->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Berhasil menambah ' . $request->type . '!',
+                    'icon' => 'success',
+                ]);
+            } catch (\Exception $e) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Gagal menambah ' . $request->type . '!',
+                    'icon' => 'error',
+                ]);
+            }
         }
     }
 

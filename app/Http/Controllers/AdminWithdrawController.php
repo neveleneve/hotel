@@ -53,4 +53,9 @@ class AdminWithdrawController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function __construct() {
+        $this->middleware('permission:withdraw index')->only('index');
+        $this->middleware('permission:withdraw update')->only(['update']);
+    }
 }

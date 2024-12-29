@@ -53,4 +53,9 @@ class AdminTopupController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function __construct() {
+        $this->middleware('permission:deposit index')->only('index');
+        $this->middleware('permission:deposit update')->only(['update']);
+    }
 }

@@ -38,6 +38,7 @@ class UserSeeder extends Seeder {
                 'name' => 'Member ' . $i,
                 'email' => 'member' . $i . '@gmail.com',
                 'password' => Hash::make('12345678'),
+                'message' => 'Halo Member ' . $i,
             ];
         }
         $reff = [
@@ -63,7 +64,7 @@ class UserSeeder extends Seeder {
                 $user->assignRole('member');
                 Saldo::create([
                     'user_id' => $user->id,
-                    'saldo' => $key === 2 ? 2000000 : 0,
+                    'saldo' => $key === 3 ? 2000000 : 0,
                     'point' => 0,
                 ]);
                 if ($key === 3) {

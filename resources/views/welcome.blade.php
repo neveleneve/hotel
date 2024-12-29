@@ -23,10 +23,15 @@
             </div>
         </section>
         @auth
-            <section class="px-4 py-2">
-                <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Project Anda</h2>
-                <hr>
-            </section>
+            @role('member')
+                @if (Auth::user()->message != '')
+                    <section class="px-4 py-2">
+                        <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Project Anda</h2>
+                        <hr>
+                        {{ Auth::user()->message }}
+                    </section>
+                @endif
+            @endrole
         @endauth
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
