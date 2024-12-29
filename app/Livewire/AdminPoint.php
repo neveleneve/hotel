@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Topup;
+use App\Models\TopUp;
 use Livewire\Component;
 use Livewire\WithPagination;
 
