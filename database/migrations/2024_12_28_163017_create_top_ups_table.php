@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('user_id');
             $table->integer('amount');
-            $table->enum('type', ['deposit', 'withdraw']);
+            $table->enum('type', ['deposit', 'withdraw', 'point']);
             $table->timestamps();
         });
     }

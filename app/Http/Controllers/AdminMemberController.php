@@ -97,6 +97,11 @@ class AdminMemberController extends Controller {
                     }
                 } else {
                     $saldo->point += $request->amount;
+                    TopUp::create([
+                        'user_id' => $member->id,
+                        'amount' => $request->amount,
+                        'type' => 'point',
+                    ]);
                 }
 
                 $saldo->save();
