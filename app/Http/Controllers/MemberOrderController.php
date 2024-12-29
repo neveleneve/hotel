@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberOrderController extends Controller {
     public function index() {
-        $orders = Order::withTrashed()
-            ->with('hotel')
+        $orders = Order::with('hotel')
             ->where('user_id', auth()->user()->id)
             ->orderBy('id', 'desc')
             ->get();
@@ -47,11 +46,15 @@ class MemberOrderController extends Controller {
         ]);
 
         if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate->errors())->withInput()->with([
-                'title' => 'Gagal',
-                'text' => 'Gagal menambah pesanan!',
-                'icon' => 'error',
-            ]);
+            return redirect()
+                ->back()
+                ->withErrors($validate->errors())
+                ->withInput()
+                ->with([
+                    'title' => 'Gagal',
+                    'text' => 'Gagal menambah pesanan!',
+                    'icon' => 'error',
+                ]);
         } else {
             if ($request->action == 'pesan') {
                 $hotel = Hotel::find($request->hotel_id);
@@ -71,17 +74,20 @@ class MemberOrderController extends Controller {
                     'total' => $total,
                 ]);
                 if ($order) {
-                    return redirect(route('order.index'))->with([
-                        'title' => 'Berhasil',
-                        'text' => 'Berhasil menambah pesanan!',
-                        'icon' => 'success',
-                    ]);
+                    return redirect(route('order.index'))
+                        ->with([
+                            'title' => 'Berhasil',
+                            'text' => 'Berhasil menambah pesanan!',
+                            'icon' => 'success',
+                        ]);
                 } else {
-                    return redirect()->back()->with([
-                        'title' => 'Gagal',
-                        'text' => 'Gagal menambah ke keranjang!',
-                        'icon' => 'error',
-                    ]);
+                    return redirect()
+                        ->back()
+                        ->with([
+                            'title' => 'Gagal',
+                            'text' => 'Gagal menambah ke keranjang!',
+                            'icon' => 'error',
+                        ]);
                 }
             } elseif ($request->action == 'keranjang') {
                 $hotel = Hotel::find($request->hotel_id);
@@ -100,17 +106,20 @@ class MemberOrderController extends Controller {
                     'total' => $total,
                 ]);
                 if ($cart) {
-                    return redirect(route('cart.index'))->with([
-                        'title' => 'Berhasil',
-                        'text' => 'Berhasil menambah ke keranjang!',
-                        'icon' => 'success',
-                    ]);
+                    return redirect(route('cart.index'))
+                        ->with([
+                            'title' => 'Berhasil',
+                            'text' => 'Berhasil menambah ke keranjang!',
+                            'icon' => 'success',
+                        ]);
                 } else {
-                    return redirect()->back()->with([
-                        'title' => 'Gagal',
-                        'text' => 'Gagal menambah ke keranjang!',
-                        'icon' => 'error',
-                    ]);
+                    return redirect()
+                        ->back()
+                        ->with([
+                            'title' => 'Gagal',
+                            'text' => 'Gagal menambah ke keranjang!',
+                            'icon' => 'error',
+                        ]);
                 }
             }
         }
@@ -126,62 +135,58 @@ class MemberOrderController extends Controller {
 
     public function update(Request $request, Order $order) {
         if ($request->has('bayar')) {
-            $saldo = Saldo::where('user_id', Auth::user()->id)->first();
-            if (!$saldo) {
-                return redirect()->back()->with([
-                    'title' => 'Gagal',
-                    'text' => 'Saldo tidak mencukupi!',
-                    'icon' => 'error',
-                ]);
-            }
-            if ($saldo->saldo < $order->total) {
-                return redirect()->back()->with([
-                    'title' => 'Gagal',
-                    'text' => 'Saldo tidak mencukupi untuk melakukan pembayaran!',
-                    'icon' => 'error',
-                ]);
-            }
-            try {
-                $saldo->update([
-                    'saldo' => $saldo->saldo - $order->total
-                ]);
+            if (!$order->status_bayar && $order->status_pesan === 'pending' && in_array($order->status_cancel, ['none', 'reject'])) {
 
-                $order->update([
-                    'status_bayar' => true,
-                ]);
+                $saldo = Saldo::where('user_id', Auth::user()->id)->first();
 
-                return redirect()->route('order.index')->with([
-                    'title' => 'Berhasil',
-                    'text' => 'Pembayaran berhasil dilakukan!',
-                    'icon' => 'success',
-                ]);
-            } catch (\Exception $e) {
-                return redirect()->back()->with([
-                    'title' => 'Gagal',
-                    'text' => 'Terjadi kesalahan saat melakukan pembayaran!',
-                    'icon' => 'error',
-                ]);
-            }
-        } elseif ($request->has('batal')) {
-            $saldo = Saldo::where('user_id', Auth::user()->id)->first();
-            try {
-                if ($order->status_bayar) {
-                    $saldo->update([
-                        'saldo' => $saldo->saldo + $order->total
+                if (!$saldo || $saldo->saldo < $order->total) {
+                    return redirect()->back()->with([
+                        'title' => 'Gagal',
+                        'text' => 'Saldo tidak mencukupi untuk melakukan pembayaran!',
+                        'icon' => 'error',
                     ]);
                 }
-                $order->delete();
-                return redirect()->route('order.index')->with([
-                    'title' => 'Berhasil',
-                    'text' => 'Pesanan berhasil dibatalkan!',
-                    'icon' => 'success',
-                ]);
-            } catch (\Exception $e) {
-                return redirect()->back()->with([
-                    'title' => 'Gagal',
-                    'text' => 'Terjadi kesalahan saat membatalkan pesanan!',
-                    'icon' => 'error',
-                ]);
+
+                try {
+                    $saldo->update(['saldo' => $saldo->saldo - $order->total]);
+                    $order->update(['status_bayar' => true]);
+
+                    return redirect()->route('order.index')->with([
+                        'title' => 'Berhasil',
+                        'text' => 'Pembayaran berhasil dilakukan!',
+                        'icon' => 'success',
+                    ]);
+                } catch (\Exception $e) {
+                    return redirect()->back()->with([
+                        'title' => 'Gagal',
+                        'text' => 'Terjadi kesalahan saat melakukan pembayaran!',
+                        'icon' => 'error',
+                    ]);
+                }
+            }
+        } elseif ($request->has('batal')) {
+            if (in_array($order->status_pesan, ['pending', 'done']) && in_array($order->status_cancel, ['none', 'reject'])) {
+                try {
+                    if ($order->status_bayar) {
+                        $order->update(['status_cancel' => 'pending']);
+                        $message = 'Permintaan refund berhasil diajukan!';
+                    } else {
+                        $order->update(['status_cancel' => 'pending']);
+                        $message = 'Permintaan pembatalan berhasil diajukan!';
+                    }
+
+                    return redirect()->back()->with([
+                        'title' => 'Berhasil',
+                        'text' => $message,
+                        'icon' => 'success',
+                    ]);
+                } catch (\Exception $e) {
+                    return redirect()->back()->with([
+                        'title' => 'Gagal',
+                        'text' => 'Terjadi kesalahan saat mengajukan pembatalan!',
+                        'icon' => 'error',
+                    ]);
+                }
             }
         }
 

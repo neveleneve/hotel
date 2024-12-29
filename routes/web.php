@@ -10,13 +10,11 @@ use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminPointController;
 use App\Http\Controllers\AdminTopupController;
 use App\Http\Controllers\AdminWithdrawController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MemberCartController;
 use App\Http\Controllers\MemberCountryController;
 use App\Http\Controllers\MemberHotelController;
 use App\Http\Controllers\MemberOrderController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopWDController;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +24,6 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('hotels', [LandingController::class, 'hotels'])->name('hotels');
 
 Auth::routes();
-
-// general route
 
 // admin route
 
@@ -53,7 +49,6 @@ Route::middleware(['auth', 'role:member'])->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::get('account', [ProfileController::class, 'account'])->name('account');
     });
-
 
     Route::resource('cart', MemberCartController::class);
     Route::resource('order', MemberOrderController::class);

@@ -18,8 +18,10 @@ return new class extends Migration {
             $table->date('check_out');
             $table->integer('total_room');
             $table->integer('total');
+            $table->enum('status_pesan', ['pending', 'done'])->default('pending');
             $table->boolean('status_bayar')->default(false);
-            $table->softDeletes();
+            $table->enum('status_cancel', ['none', 'pending', 'approve', 'reject'])->default('none');
+            // $table->softDeletes();
             $table->timestamps();
         });
     }

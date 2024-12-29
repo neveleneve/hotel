@@ -99,7 +99,8 @@
                             <a href="{{ route('admin.deposit.index') }}" title="Deposit"
                                 class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.deposit.*') ? 'bg-[--primary-container]' : '' }}">
                                 <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">account_balance_wallet</i>
-                                <span x-show="sidebarOpen">Deposit</span>
+                                <span x-show="sidebarOpen"
+                                    class="{{ request()->routeIs('admin.deposit.*') ? 'font-bold' : '' }}">Deposit</span>
                             </a>
                         @endcan
 
@@ -107,7 +108,8 @@
                             <a href="{{ route('admin.withdraw.index') }}" title="Withdraw"
                                 class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.withdraw.*') ? 'bg-[--primary-container]' : '' }}">
                                 <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">money</i>
-                                <span x-show="sidebarOpen">Withdraw</span>
+                                <span x-show="sidebarOpen"
+                                    class="{{ request()->routeIs('admin.withdraw.*') ? 'font-bold' : '' }}">Withdraw</span>
                             </a>
                         @endcan
 
@@ -115,7 +117,8 @@
                             <a href="{{ route('admin.point.index') }}" title="Point"
                                 class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.point.*') ? 'bg-[--primary-container]' : '' }}">
                                 <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">stars</i>
-                                <span x-show="sidebarOpen">Point</span>
+                                <span x-show="sidebarOpen"
+                                    class="{{ request()->routeIs('admin.point.*') ? 'font-bold' : '' }}">Point</span>
                             </a>
                         @endcan
 
@@ -123,7 +126,8 @@
                             <a href="{{ route('admin.cancellation.index') }}" title="Pembatalan"
                                 class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.cancellation.*') ? 'bg-[--primary-container]' : '' }}">
                                 <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">event_busy</i>
-                                <span x-show="sidebarOpen">Pembatalan</span>
+                                <span x-show="sidebarOpen"
+                                    class="{{ request()->routeIs('admin.cancellation.*') ? 'font-bold' : '' }}">Pembatalan</span>
                             </a>
                         @endcan
                     </div>

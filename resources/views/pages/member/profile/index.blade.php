@@ -17,7 +17,8 @@
                     </div>
                     <div class="border-l">
                         <p class="text-md font-semibold">Poin Anda</p>
-                        <p class="text-xl font-bold">{{ number_format(Auth::user()->points ?? 0, 0, ',', '.') }} pts</p>
+                        <p class="text-xl font-bold">{{ number_format(Auth::user()->saldo->point ?? 0, 0, ',', '.') }} pts.
+                        </p>
                     </div>
                 </div>
             </div>

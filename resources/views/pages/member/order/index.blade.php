@@ -37,26 +37,76 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    @if (!$order->status_bayar && !$order->deleted_at)
-                                        <span title="Belum Bayar"
-                                            class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
-                                            Belum Bayar
-                                        </span>
-                                        <button onclick="showPaymentInfo()"
-                                            class="w-5 h-5 rounded-full bg-[--on-primary-container] text-[--on-primary] flex items-center justify-center hover:bg-[--primary]">
-                                            <i class="material-icons text-sm">info</i>
-                                        </button>
-                                    @elseif ($order->status_bayar && !$order->deleted_at)
-                                        <span title="Belum Bayar"
-                                            class="text-xs px-2 py-1 rounded-full font-bold bg-[--primary] text-[--on-primary]">
-                                            Sudah Bayar
-                                        </span>
-                                    @else
-                                        <span title="Belum Bayar"
-                                            onclick="return confirm('Batalkan pesanan {{ $order->order_code }}?')"
-                                            class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
-                                            Dibatalkan
-                                        </span>
+                                    @if ($order->status_pesan === 'pending')
+                                        @if (!$order->status_bayar)
+                                            @if ($order->status_cancel === 'none')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                                    Belum Bayar
+                                                </span>
+                                                <button onclick="showPaymentInfo()"
+                                                    class="w-5 h-5 rounded-full bg-[--on-primary-container] text-[--on-primary] flex items-center justify-center hover:bg-[--primary]">
+                                                    <i class="material-icons text-sm">info</i>
+                                                </button>
+                                            @elseif ($order->status_cancel === 'pending')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--tertiary] text-[--on-tertiary]">
+                                                    Menunggu Konfirmasi Pembatalan
+                                                </span>
+                                            @elseif ($order->status_cancel === 'approve')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                                    Pesanan Dibatalkan
+                                                </span>
+                                            @elseif ($order->status_cancel === 'reject')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                                    Belum Bayar
+                                                </span>
+                                                <button onclick="showPaymentInfo()"
+                                                    class="w-5 h-5 rounded-full bg-[--on-primary-container] text-[--on-primary] flex items-center justify-center hover:bg-[--primary]">
+                                                    <i class="material-icons text-sm">info</i>
+                                                </button>
+                                            @endif
+                                        @else
+                                            @if ($order->status_cancel === 'none')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--primary] text-[--on-primary]">
+                                                    Sudah Bayar
+                                                </span>
+                                            @elseif ($order->status_cancel === 'pending')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--tertiary] text-[--on-tertiary]">
+                                                    Proses Pembatalan & Refund
+                                                </span>
+                                            @elseif ($order->status_cancel === 'approve')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--error] text-[--on-error]">
+                                                    Dibatalkan & Refund
+                                                </span>
+                                            @elseif ($order->status_cancel === 'reject')
+                                                <span
+                                                    class="text-xs px-2 py-1 rounded-full font-bold bg-[--primary] text-[--on-primary]">
+                                                    Sudah Bayar
+                                                </span>
+                                            @endif
+                                        @endif
+                                    @elseif ($order->status_pesan === 'done')
+                                        @if ($order->status_cancel === 'none')
+                                            <span
+                                                class="text-xs px-2 py-1 rounded-full font-bold bg-[--success] text-[--on-success]">Selesai</span>
+                                        @elseif ($order->status_cancel === 'pending')
+                                            <span
+                                                class="text-xs px-2 py-1 rounded-full font-bold bg-[--tertiary] text-[--on-tertiary]">Pengajuan
+                                                Refund</span>
+                                        @elseif ($order->status_cancel === 'approve')
+                                            <span
+                                                class="text-xs px-2 py-1 rounded-full font-bold bg-[--success] text-[--on-success]">Refund
+                                                Disetujui</span>
+                                        @elseif ($order->status_cancel === 'reject')
+                                            <span
+                                                class="text-xs px-2 py-1 rounded-full font-bold bg-[--success] text-[--on-success]">Selesai</span>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -74,14 +124,23 @@
                                 class="flex items-center">
                                 @csrf
                                 @method('put')
-                                @if (!$order->status_bayar && !$order->deleted_at && strtotime(date($order->check_in)) >= strtotime(date('dMY')))
+                                @if (
+                                    $order->status_pesan === 'pending' &&
+                                        !$order->status_bayar &&
+                                        in_array($order->status_cancel, ['none', 'reject']) &&
+                                        strtotime(date($order->check_in)) >= strtotime(date('Y-m-d')))
                                     <button type="submit" name="bayar" value="1"
                                         class="h-full align-start bg-[--primary] text-[--on-primary] hover:bg-[--primary-container] hover:text-[--on-primary-container] px-2 py-1 w-full font-bold">
                                         Bayar Sekarang
                                     </button>
                                 @endif
-                                @if (!$order->deleted_at && strtotime(date($order->check_in)) >= strtotime(date('dMY')))
+
+                                @if (
+                                    ($order->status_pesan === 'pending' || $order->status_pesan === 'done') &&
+                                        in_array($order->status_cancel, ['none', 'reject']) &&
+                                        strtotime(date($order->check_in)) >= strtotime(date('Y-m-d')))
                                     <button type="submit" name="batal" value="1"
+                                        onclick="return confirm('Batalkan pesanan {{ $order->order_code }}?')"
                                         class="h-full align-end bg-[--error] text-[--on-error] hover:bg-[--error-container] hover:text-[--on-error-container] px-2 py-1 w-full font-bold">
                                         Batalkan Pesanan
                                     </button>
