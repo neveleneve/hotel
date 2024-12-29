@@ -42,7 +42,6 @@ class AdminMember extends Component {
         $this->resetPage();
     }
 
-
     public function setPage($url) {
         $parsedUrl = parse_url($url);
         if (isset($parsedUrl['query'])) {
