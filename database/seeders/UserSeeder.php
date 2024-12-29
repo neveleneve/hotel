@@ -85,6 +85,7 @@ class UserSeeder extends Seeder {
             }
         }
     }
+
     function generateRandomString($length = 6) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);

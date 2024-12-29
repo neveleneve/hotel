@@ -127,7 +127,6 @@ class MemberOrderController extends Controller {
     public function update(Request $request, Order $order) {
         if ($request->has('bayar')) {
             $saldo = Saldo::where('user_id', Auth::user()->id)->first();
-
             if (!$saldo) {
                 return redirect()->back()->with([
                     'title' => 'Gagal',
@@ -135,7 +134,6 @@ class MemberOrderController extends Controller {
                     'icon' => 'error',
                 ]);
             }
-
             if ($saldo->saldo < $order->total) {
                 return redirect()->back()->with([
                     'title' => 'Gagal',
@@ -143,7 +141,6 @@ class MemberOrderController extends Controller {
                     'icon' => 'error',
                 ]);
             }
-
             try {
                 $saldo->update([
                     'saldo' => $saldo->saldo - $order->total
@@ -177,7 +174,6 @@ class MemberOrderController extends Controller {
                 return redirect()->route('order.index')->with([
                     'title' => 'Berhasil',
                     'text' => 'Pesanan berhasil dibatalkan!',
-
                     'icon' => 'success',
                 ]);
             } catch (\Exception $e) {

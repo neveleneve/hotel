@@ -14,7 +14,7 @@
         </div>
         @can('hotel create')
             <a href="{{ route('admin.hotel.create') }}"
-                class="ml-4 px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg hover:bg-[--primary-container] hover:text-[--on-primary-container] flex items-center gap-2 font-bold">
+            class="ml-4 px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg hover:bg-[--primary-container] hover:text-[--on-primary-container] flex items-center gap-2 font-bold">
                 <i class="material-icons text-base">add</i>
                 <span>Tambah Hotel</span>
             </a>
@@ -30,7 +30,9 @@
                         <th scope="col" class="px-6 py-3 text-center">Deskripsi</th>
                         <th scope="col" class="px-6 py-3 text-center">Promo</th>
                         <th scope="col" class="px-6 py-3 text-center">Diskon</th>
-                        <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                        @canany(['hotel edit', 'hotel delete'])
+                            <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -41,16 +43,16 @@
                             <td class="px-6 py-4 text-center">{{ Str::limit($hotel->description, 50) }}</td>
                             <td class="px-6 py-4 text-center">{{ $hotel->promo ? 'Ya' : 'Tidak' }}</td>
                             <td class="px-6 py-4 text-center">{{ $hotel->discount }}%</td>
-                            <td class="px-6 py-4 text-center">
-                                <div class="flex items-center justify-center gap-2">
-                                    @can('hotel edit')
+                            @canany(['hotel show', 'hotel delete'])
+                                <td class="px-6 py-4 text-center">
+                                    <div class="flex items-center justify-center gap-2">
                                         <a href="{{ route('admin.hotel.show', ['hotel' => $hotel->id]) }}" title="Edit"
                                             class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
                                             <i class="material-icons text-base">edit</i>
                                         </a>
-                                    @endcan
-                                </div>
-                            </td>
+                                    </div>
+                                </td>
+                            @endcanany
                         </tr>
                     @empty
                         <tr>

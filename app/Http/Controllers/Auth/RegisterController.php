@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ModelHasRole;
+use App\Models\OwnRefferal;
 use App\Models\Saldo;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -75,33 +76,77 @@ class RegisterController extends Controller {
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'reff_code' => ['required', 'string', 'min:6', 'max:6'],
+            'reff_code' => ['required', 'string', 'exists:own_refferals,reff_code'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            $referral = OwnRefferal::where('reff_code', $request->reff_code)->first();
 
-        ModelHasRole::create([
-            'role_id' => 3,
-            'model_type' => 'App\Models\User',
-            'model_id' => $user->id,
-        ]);
+            if ($referral->user->deleted_at) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Kode referral tidak dapat digunakan!',
+                    'icon' => 'error',
+                ])->withInput();
+            }
 
-        Saldo::create([
-            'user_id' => $user->id,
-            'saldo' => 0,
-            'point' => 0,
-        ]);
+            if (!$referral->user->hasRole(['admin', 'super admin'])) {
+                return back()->with([])->withInput();
+            }
 
-        auth()->login($user);
+            if (!$referral->user->hasRole(['admin', 'super admin'])) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Kode referral tidak valid!',
+                    'icon' => 'error',
+                ])->withInput();
+            }
 
-        return redirect()->route('landing')->with([
-            'title' => __('message.registered_success'),
-            'text' => __('message.welcome_message'),
-            'icon' => 'success',
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $user->assignRole('member');
+
+            $user->saldo()->create([
+                'saldo' => 0,
+                'point' => 0,
+            ]);
+
+            $user->ownReff()->create([
+                'reff_code' => $this->generateRandomString()
+            ]);
+
+            $user->reffBy()->create([
+                'own_refferal_id' => $referral->id
+            ]);
+
+            auth()->login($user);
+
+            return redirect()->route('landing')->with([
+
+                'title' => 'Berhasil',
+                'text' => 'Selamat bergabung ' . $user->name . '!',
+                'icon' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return back()->with([
+                'title' => 'Gagal',
+                'text' => 'Pendaftaran gagal, silahkan coba lagi!',
+                'icon' => 'error',
+            ])->withInput();
+        }
+    }
+
+    function generateRandomString($length = 6) {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

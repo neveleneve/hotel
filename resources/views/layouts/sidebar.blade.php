@@ -81,9 +81,9 @@
                 </a>
             @endcan
 
-            @canany(['deposit index', 'withdraw index', 'point index'])
+            @canany(['deposit index', 'withdraw index', 'point index', 'cancellation index'])
                 <div x-data="{
-                    open: {{ request()->routeIs('admin.deposit.*') || request()->routeIs('admin.withdraw.*') || request()->routeIs('admin.point.*') ? 'true' : 'false' }}
+                    open: {{ request()->routeIs('admin.deposit.*') || request()->routeIs('admin.withdraw.*') || request()->routeIs('admin.point.*') || request()->routeIs('admin.cancellation.*') ? 'true' : 'false' }}
                 }" class="relative">
                     <button @click="open = !open" type="button"
                         class="flex items-center px-4 py-2 w-full rounded-lg hover:bg-[--primary-container]"
@@ -116,6 +116,14 @@
                                 class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.point.*') ? 'bg-[--primary-container]' : '' }}">
                                 <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">stars</i>
                                 <span x-show="sidebarOpen">Point</span>
+                            </a>
+                        @endcan
+
+                        @can('cancellation index')
+                            <a href="{{ route('admin.cancellation.index') }}" title="Pembatalan"
+                                class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.cancellation.*') ? 'bg-[--primary-container]' : '' }}">
+                                <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">event_busy</i>
+                                <span x-show="sidebarOpen">Pembatalan</span>
                             </a>
                         @endcan
                     </div>

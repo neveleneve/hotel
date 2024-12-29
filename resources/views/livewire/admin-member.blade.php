@@ -20,7 +20,6 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">Nama</th>
                         <th scope="col" class="px-6 py-3 text-center">Email</th>
-                        <th scope="col" class="px-6 py-3 text-center">Kode Refferal</th>
                         <th scope="col" class="px-6 py-3 text-center">Refferal Dari</th>
                         <th scope="col" class="px-6 py-3 text-center">Saldo</th>
                         <th scope="col" class="px-6 py-3 text-center">Point</th>
@@ -32,7 +31,6 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-center">{{ $member->name }}</td>
                             <td class="px-6 py-4 text-center">{{ $member->email }}</td>
-                            <td class="px-6 py-4 text-center">{{ $member->ownReff->reff_code }}</td>
                             <td class="px-6 py-4 text-center">{{ $member->reffBy->ownReff->user->name }}</td>
                             <td class="px-6 py-4 text-center">
                                 Rp {{ number_format($member->saldo->saldo, 0, ',', '.') }}
@@ -86,14 +84,6 @@
 
                         <div class="grid grid-cols-2 gap-2 text-sm">
                             <div>
-                                <span class="text-gray-600">Kode Referral:</span>
-                                <p class="font-medium">{{ $member->ownReff->reff_code }}</p>
-                            </div>
-                            <div>
-                                <span class="text-gray-600">Referral Dari:</span>
-                                <p class="font-medium">{{ $member->reffBy->ownReff->user->name }}</p>
-                            </div>
-                            <div>
                                 <span class="text-gray-600">Saldo:</span>
                                 <p class="font-medium">Rp {{ number_format($member->saldo->saldo, 0, ',', '.') }}</p>
                             </div>
@@ -101,6 +91,12 @@
                                 <span class="text-gray-600">Point:</span>
                                 <p class="font-medium">{{ number_format($member->saldo->point, 0, ',', '.') }}</p>
                             </div>
+                            @role('super admin')
+                                <div>
+                                    <span class="text-gray-600">Referral Dari:</span>
+                                    <p class="font-medium">{{ $member->reffBy->ownReff->user->name }}</p>
+                                </div>
+                            @endrole
 
                         </div>
                     </div>

@@ -51,6 +51,9 @@ class PermissionSeeder extends Seeder {
 
             'point index',
             'point update',
+
+            'cancellation index',
+            'cancellation update',
         ];
 
         $super = [
@@ -92,6 +95,9 @@ class PermissionSeeder extends Seeder {
 
             'point index',
             'point update',
+
+            'cancellation index',
+            'cancellation update',
         ];
 
         $admin = [

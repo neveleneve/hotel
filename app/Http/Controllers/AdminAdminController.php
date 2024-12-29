@@ -22,6 +22,16 @@ class AdminAdminController extends Controller {
         return view('pages.admin.admin.create');
     }
 
+    private function generateRandomString($length = 6) {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -40,7 +50,7 @@ class AdminAdminController extends Controller {
             $admin->assignRole($request->role);
 
             $admin->ownReff()->create([
-                'reff_code' => strtoupper(substr($admin->name, 0, 3) . rand(1000, 9999))
+                'reff_code' => $this->generateRandomString()
             ]);
 
             return redirect()->route('admin.admin.index')->with([

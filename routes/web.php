@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAdminController;
+use App\Http\Controllers\AdminCancellationController;
 use App\Http\Controllers\AdminCountryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminHotelController;
@@ -39,9 +40,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('hotel', AdminHotelController::class);
     Route::resource('country', AdminCountryController::class);
     Route::resource('order', AdminOrderController::class);
+
     Route::resource('deposit', AdminTopupController::class);
     Route::resource('withdraw', AdminWithdrawController::class);
     Route::resource('point', AdminPointController::class);
+    Route::resource('cancellation', AdminCancellationController::class);
 });
 
 // user route

@@ -35,7 +35,7 @@
         @endauth
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
-                <h2 class="text-lg font-bold text-[--on-primary]">Penawaran Terbaik</h2>
+                <h2 class="text-lg font-bold text-[--on-primary]">Project Reservasi</h2>
                 <a href="{{ route('hotels') }}" class="text-[--on-primary] text-xs font-bold">Lihat Semua</a>
             </div>
             <hr class="mb-2">
