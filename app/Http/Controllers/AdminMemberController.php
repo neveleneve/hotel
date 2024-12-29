@@ -15,7 +15,18 @@ class AdminMemberController extends Controller {
     }
 
     public function index() {
-
+        // $member = User::role('member')->with('ownReff', 'reffBy')->get();
+        // $data = null;
+        // foreach ($member as $key => $value) {
+        //     $data[$key] = [
+        //         'name' => $value->name,
+        //         'email' => $value->email,
+        //         'own_reff' => $value->ownReff->reff_code,
+        //         'refferal_code' => $value->reffBy->ownReff->reff_code,
+        //         'reff_by' => $value->reffBy->ownReff->user->name,
+        //     ];
+        // }
+        // dd($data);
         return view('pages.admin.member.index');
     }
 

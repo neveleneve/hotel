@@ -20,6 +20,8 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">Nama</th>
                         <th scope="col" class="px-6 py-3 text-center">Email</th>
+                        <th scope="col" class="px-6 py-3 text-center">Kode Refferal</th>
+                        <th scope="col" class="px-6 py-3 text-center">Refferal Dari</th>
                         <th scope="col" class="px-6 py-3 text-center">Saldo</th>
                         <th scope="col" class="px-6 py-3 text-center">Point</th>
                         <th scope="col" class="px-6 py-3 text-center">Aksi</th>
@@ -30,6 +32,8 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-center">{{ $member->name }}</td>
                             <td class="px-6 py-4 text-center">{{ $member->email }}</td>
+                            <td class="px-6 py-4 text-center">{{ $member->ownReff->reff_code }}</td>
+                            <td class="px-6 py-4 text-center">{{ $member->reffBy->ownReff->user->name }}</td>
                             <td class="px-6 py-4 text-center">
                                 Rp {{ number_format($member->saldo->saldo, 0, ',', '.') }}
                             </td>
@@ -64,17 +68,41 @@
         @forelse ($members as $member)
             <div class="bg-gray-50 p-4 rounded-lg space-y-3">
                 <div class="flex justify-between items-start">
-                    <div>
-                        <p class="font-semibold">{{ $member->name }}</p>
-                        <p class="text-sm text-gray-600">{{ $member->email }}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        @can('member edit')
-                            <a title="Edit" href="{{ route('admin.member.show', $member->id) }}"
-                                class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
-                                <i class="material-icons text-base">edit</i>
-                            </a>
-                        @endcan
+                    <div class="space-y-2 w-full">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">{{ $member->name }}</p>
+                                <p class="text-sm text-gray-600">{{ $member->email }}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                @can('member edit')
+                                    <a title="Edit" href="{{ route('admin.member.show', $member->id) }}"
+                                        class="p-2 rounded-lg hover:bg-[--primary] text-[--primary] hover:text-[--on-primary]">
+                                        <i class="material-icons text-base">edit</i>
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <span class="text-gray-600">Kode Referral:</span>
+                                <p class="font-medium">{{ $member->ownReff->reff_code }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-600">Referral Dari:</span>
+                                <p class="font-medium">{{ $member->reffBy->ownReff->user->name }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-600">Saldo:</span>
+                                <p class="font-medium">Rp {{ number_format($member->saldo->saldo, 0, ',', '.') }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-600">Point:</span>
+                                <p class="font-medium">{{ number_format($member->saldo->point, 0, ',', '.') }}</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

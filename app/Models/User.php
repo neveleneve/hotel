@@ -17,7 +17,6 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
-        'reff_code',
     ];
 
     protected $hidden = [
@@ -40,5 +39,13 @@ class User extends Authenticatable {
 
     public function topup() {
         return $this->hasMany(TopUp::class);
+    }
+
+    public function ownReff() {
+        return $this->hasOne(OwnRefferal::class);
+    }
+
+    public function reffBy() {
+        return $this->hasOne(RefferedBy::class);
     }
 }

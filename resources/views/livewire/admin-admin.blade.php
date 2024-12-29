@@ -38,12 +38,13 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-center">{{ $admin->name }}</td>
                             <td class="px-6 py-4 text-center">{{ $admin->email }}</td>
-                            <td class="px-6 py-4 text-center">{{ $admin->reff_code }}</td>
+                            <td class="px-6 py-4 text-center">{{ $admin->ownReff->reff_code }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if ($admin->deleted_at)
                                     <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full">Nonaktif</span>
                                 @else
-                                    <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Aktif</span>
+                                    <span
+                                        class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Aktif</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-center">
@@ -108,4 +109,3 @@
         @endif
     </div>
 </div>
-

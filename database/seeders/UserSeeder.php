@@ -25,29 +25,39 @@ class UserSeeder extends Seeder {
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('12345678'),
-                'reff_code' => 'J9I4KD',
             ],
             [
                 'name' => 'Admin1',
                 'email' => 'admin1@gmail.com',
                 'password' => Hash::make('12345678'),
-                'reff_code' => $this->generateRandomString(),
             ],
         ];
 
-        for ($i = 1; $i <= 1; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $users[] = [
                 'name' => 'Member ' . $i,
                 'email' => 'member' . $i . '@gmail.com',
                 'password' => Hash::make('12345678'),
-                'reff_code' => 'J9I4KD',
             ];
         }
+        $reff = [
+            'J9I4KD',
+            'W9I8KI',
+        ];
         foreach ($users as $key => $userData) {
             $user = User::create($userData);
             if ($key === 0) {
                 $user->assignRole('super admin');
             } elseif ($key === 1 || $key === 2) {
+                if ($key === 1) {
+                    $user->ownReff()->create([
+                        'reff_code' => $reff[0],
+                    ]);
+                } else {
+                    $user->ownReff()->create([
+                        'reff_code' => $reff[1],
+                    ]);
+                }
                 $user->assignRole('admin');
             } else {
                 $user->assignRole('member');
@@ -56,6 +66,21 @@ class UserSeeder extends Seeder {
                     'saldo' => $key === 2 ? 2000000 : 0,
                     'point' => 0,
                 ]);
+                if ($key === 3) {
+                    $user->ownReff()->create([
+                        'reff_code' => $this->generateRandomString()
+                    ]);
+                    $user->reffBy()->create([
+                        'own_refferal_id' => 1
+                    ]);
+                } else {
+                    $user->ownReff()->create([
+                        'reff_code' => $this->generateRandomString()
+                    ]);
+                    $user->reffBy()->create([
+                        'own_refferal_id' => 2
+                    ]);
+                }
             }
         }
     }

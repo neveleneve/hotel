@@ -23,12 +23,15 @@ class AdminMember extends Component {
                 });
             });
 
-        // Jika user adalah admin (bukan super admin), tampilkan hanya member dengan reff_code yang sama
         if (Auth::user()->hasRole('admin')) {
-            $query->where('reff_code', Auth::user()->reff_code);
+            $query->whereHas('reffBy.ownReff', function ($q) {
+                $q->where('reff_code', Auth::user()->ownReff->reff_code);
+            });
         }
 
-        $members = $query->withTrashed()->paginate(10);
+        $members = $query->withTrashed()
+            ->with(['ownReff', 'reffBy.ownReff']) // eager load semua relasi yang dibutuhkan
+            ->paginate(10);
 
         return view('livewire.admin-member', [
             'members' => $members
