@@ -72,6 +72,22 @@
                                 </button>
                             </div>
                         </div>
+                        <div>
+                            <label for="reff_code" class="block mb-2 text-sm font-bold text-[--on-primary]">
+                                Kode Refferal
+                            </label>
+                            <div class="relative">
+                                <input type="text" name="reff_code" id="reff_code" placeholder="Kode Refferal"
+                                    class="bg-[--on-primary-container] border border-[--on-primary] focus:ring-[--on-primary-container] text-[--on-primary] rounded-xl block w-full p-2 pr-10 @error('reff_code') border-red-500 @enderror"
+                                    required>
+                                <button type="button" id="togglePassword"
+                                    class="absolute inset-y-0 right-2 flex items-center">
+                                </button>
+                            </div>
+                            @error('reff_code')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
                         <button type="submit"
                             class="w-full text-[--on-primary] bg-primary-600 border-2 border-[--on-primary] hover:bg-[--on-primary] hover:text-[--primary] font-medium rounded-lg text-sm px-5 py-2 text-center font-bold">
                             Daftar

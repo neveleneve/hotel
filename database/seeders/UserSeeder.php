@@ -25,6 +25,13 @@ class UserSeeder extends Seeder {
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('12345678'),
+                'reff_code' => 'J9I4KD',
+            ],
+            [
+                'name' => 'Admin1',
+                'email' => 'admin1@gmail.com',
+                'password' => Hash::make('12345678'),
+                'reff_code' => $this->generateRandomString(),
             ],
         ];
 
@@ -33,13 +40,14 @@ class UserSeeder extends Seeder {
                 'name' => 'Member ' . $i,
                 'email' => 'member' . $i . '@gmail.com',
                 'password' => Hash::make('12345678'),
+                'reff_code' => 'J9I4KD',
             ];
         }
         foreach ($users as $key => $userData) {
             $user = User::create($userData);
             if ($key === 0) {
                 $user->assignRole('super admin');
-            } elseif ($key === 1) {
+            } elseif ($key === 1 || $key === 2) {
                 $user->assignRole('admin');
             } else {
                 $user->assignRole('member');
@@ -50,5 +58,14 @@ class UserSeeder extends Seeder {
                 ]);
             }
         }
+    }
+    function generateRandomString($length = 6) {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

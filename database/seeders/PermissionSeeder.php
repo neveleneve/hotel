@@ -14,6 +14,12 @@ class PermissionSeeder extends Seeder {
         $permissions = [
             'dashboard',
 
+            'admin index',
+            'admin create',
+            'admin view',
+            'admin edit',
+            'admin delete',
+
             'member index',
             'member view',
             'member edit',
@@ -49,6 +55,12 @@ class PermissionSeeder extends Seeder {
 
         $super = [
             'dashboard',
+
+            'admin index',
+            'admin create',
+            'admin view',
+            'admin edit',
+            'admin delete',
 
             'member index',
             'member view',
@@ -91,7 +103,6 @@ class PermissionSeeder extends Seeder {
 
             'hotel index',
             'hotel view',
-            'hotel edit',
 
             'country index',
             'country create',

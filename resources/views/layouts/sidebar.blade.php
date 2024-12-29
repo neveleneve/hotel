@@ -2,6 +2,24 @@
     <div class="px-6 py-2 border-b" :class="{ 'justify-center': !sidebarOpen, 'py-4': !sidebarOpen }">
         <h1 class="text-2xl text-center font-bold text-nowrap" x-show="sidebarOpen">Admin Panel</h1>
         <h1 class="text-center font-semibold" x-show='sidebarOpen'>{{ Auth::user()->name }}</h1>
+        <div x-data="{ copied: false }" class="flex items-center justify-center gap-2" x-show='sidebarOpen'>
+            <h1 class="text-center font-semibold text-xs">Refferal Code : {{ Auth::user()->reff_code }}</h1>
+            <button
+                @click="
+                $refs.code.select();
+                document.execCommand('copy');
+                copied = true;
+                setTimeout(() => copied = false, 2000)
+            "
+                class="p-1 rounded-lg hover:bg-[--primary-container] focus:outline-none text-xs relative">
+                <input type="text" class="sr-only" x-ref="code" value="{{ Auth::user()->reff_code }}">
+                <i class="material-icons text-sm">content_copy</i>
+                <div x-show="copied" x-transition
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-green-500 text-white text-xs rounded whitespace-nowrap">
+                    Tersalin!
+                </div>
+            </button>
+        </div>
         <h1 class="text-sm font-bold text-center bg-[--primary] rounded-lg p-2" x-show="!sidebarOpen">AP</h1>
     </div>
     <nav class="flex-1 flex flex-col">
@@ -13,6 +31,15 @@
                     <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">dashboard</i>
                     <span x-show="sidebarOpen"
                         class="{{ request()->routeIs('admin.dashboard') ? 'font-bold' : '' }}">Dashboard</span>
+                </a>
+            @endcan
+            @can('admin index')
+                <a href="{{ route('admin.admin.index') }}" title="Admin"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.admin.*') ? 'bg-[--primary-container]' : '' }}"
+                    :class="{ 'justify-center': !sidebarOpen }">
+                    <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">manage_accounts</i>
+                    <span x-show="sidebarOpen"
+                        class="{{ request()->routeIs('admin.member.*') ? 'font-bold' : '' }}">Administrator</span>
                 </a>
             @endcan
             @can('member index')

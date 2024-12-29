@@ -7,6 +7,9 @@
                 <h1 class="text-[--on-primary] font-bold text-xl md:text-2xl lg:text-3xl mb-2">Selamat datang kembali,
                     {{ Auth::user()->name }}</h1>
                 <hr class="mb-4">
+            @else
+                <h1 class="text-[--on-primary] font-bold text-xl md:text-2xl lg:text-3xl mb-2">Selamat datang!</h1>
+                <hr class="mb-4">
             @endauth
             <div class="grid grid-cols-4 gap-4 lg:grid-cols-8 lg:gap-2">
                 @foreach ($country as $items)
@@ -19,10 +22,12 @@
                 @endforeach
             </div>
         </section>
-        <section class="px-4 py-2">
-            <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Project Anda</h2>
-            <hr>
-        </section>
+        @auth
+            <section class="px-4 py-2">
+                <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Project Anda</h2>
+                <hr>
+            </section>
+        @endauth
         <section class="p-4">
             <div class="flex justify-between items-center mb-1">
                 <h2 class="text-lg font-bold text-[--on-primary]">Belanja Mall</h2>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAdminController;
 use App\Http\Controllers\AdminCountryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminHotelController;
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::middleware(['permission:dashboard'])->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     });
+    Route::resource('admin', AdminAdminController::class);
     Route::resource('member', AdminMemberController::class);
     Route::resource('hotel', AdminHotelController::class);
     Route::resource('country', AdminCountryController::class);
