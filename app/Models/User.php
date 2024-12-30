@@ -17,7 +17,7 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
-        'message',  // Add this line
+        // Remove message from fillable
     ];
 
     protected $hidden = [
@@ -48,5 +48,9 @@ class User extends Authenticatable {
 
     public function reffBy() {
         return $this->hasOne(RefferedBy::class);
+    }
+
+    public function memberMessages() {
+        return $this->hasMany(MemberMessage::class);
     }
 }

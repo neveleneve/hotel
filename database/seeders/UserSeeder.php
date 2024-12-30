@@ -38,7 +38,6 @@ class UserSeeder extends Seeder {
                 'name' => 'Member ' . $i,
                 'email' => 'member' . $i . '@gmail.com',
                 'password' => Hash::make('12345678'),
-                'message' => 'Halo Member ' . $i,
             ];
         }
         $reff = [

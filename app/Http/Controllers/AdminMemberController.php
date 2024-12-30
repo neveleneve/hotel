@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TopUp;
 use App\Models\User;
+use App\Models\Hotel;
+use App\Models\MemberMessage;
 use Illuminate\Http\Request;
 
 class AdminMemberController extends Controller {
@@ -41,7 +43,8 @@ class AdminMemberController extends Controller {
             }
         }
 
-        return view('pages.admin.member.show', compact('member'));
+        $hotels = Hotel::all();
+        return view('pages.admin.member.show', compact('member', 'hotels'));
     }
 
     public function edit(string $id) {
@@ -49,25 +52,52 @@ class AdminMemberController extends Controller {
     }
 
     public function update(Request $request, User $member) {
-        if ($request->has('message')) {
+        if ($request->has('action') && $request->action === 'toggle_project') {
             $request->validate([
-                'message' => 'nullable|string|max:255',
+                'project_id' => 'required|exists:member_messages,id'
             ]);
 
             try {
-                $member->update([
-                    'message' => $request->message
-                ]);
+                $project = MemberMessage::findOrFail($request->project_id);
+                $project->active = !$project->active;
+                $project->save();
 
                 return back()->with([
                     'title' => 'Berhasil',
-                    'text' => 'Pesan berhasil diperbarui!',
+                    'text' => 'Status project berhasil diubah!',
                     'icon' => 'success',
                 ]);
             } catch (\Exception $e) {
                 return back()->with([
                     'title' => 'Gagal',
-                    'text' => 'Gagal memperbarui pesan!',
+                    'text' => 'Gagal mengubah status project!',
+                    'icon' => 'error',
+                ]);
+            }
+        }
+
+        if ($request->has('assign_hotel')) {
+            $request->validate([
+                'hotel_id' => 'required|exists:hotels,id',
+                'price' => 'required|numeric|min:0',
+            ]);
+
+            try {
+                MemberMessage::create([
+                    'user_id' => $member->id,
+                    'hotel_id' => $request->hotel_id,
+                    'price' => $request->price,
+                ]);
+
+                return back()->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Project berhasil ditambahkan!',
+                    'icon' => 'success',
+                ]);
+            } catch (\Exception $e) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Gagal menambahkan project!',
                     'icon' => 'error',
                 ]);
             }

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->integer('user_id');
             $table->integer('hotel_id');
             $table->integer('price');
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

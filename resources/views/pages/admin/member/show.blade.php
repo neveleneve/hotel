@@ -13,7 +13,7 @@
             </div>
             <hr class="mt-3">
         </section>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Informasi Pribadi</h4>
                 <div class="space-y-3">
@@ -36,26 +36,6 @@
                             {{ !$member->deleted_at ? 'Aktif' : 'Tidak Aktif' }}
                         </p>
                     </div>
-                    @can('member edit')
-                        <form method="POST" action="{{ route('admin.member.update', $member) }}" class="mt-4">
-                            @csrf
-                            @method('PUT')
-                            <div class="space-y-2">
-                                <label for="message" class="text-sm text-gray-500">Pesan untuk Member</label>
-                                <textarea name="message" id="message" rows="3" class="w-full rounded-lg border border-gray-300 px-2 py-1">{{ $member->message }}</textarea>
-                                <button type="submit"
-                                    class="px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
-                                    Simpan Pesan
-                                </button>
-                            </div>
-                        </form>
-                    @endcan
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h4 class="font-bold text-lg mb-4">Informasi Referral</h4>
-                <div class="space-y-3">
                     <div>
                         <p class="text-sm text-gray-500">Kode Referral Sendiri</p>
                         <p class="font-medium">{{ $member->ownReff->reff_code }}</p>
@@ -69,6 +49,29 @@
                         <p class="text-sm text-gray-500">Total Mereferral</p>
                         <p class="font-medium">{{ $member->ownReff->reffBy->count() }} member</p>
                     </div>
+                    {{-- @can('member edit')
+                        <form method="POST" action="{{ route('admin.member.update', $member) }}" class="mt-4">
+                            @csrf
+                            @method('PUT')
+                            <div class="space-y-2">
+                                <label for="hotel_id" class="text-sm text-gray-500">Pilih Hotel Project</label>
+                                <select name="hotel_id" id="hotel_id"
+                                    class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                                    <option value="">Pilih Hotel</option>
+                                    @foreach ($hotels as $hotel)
+                                        <option value="{{ $hotel->id }}">{{ $hotel->name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="price" class="text-sm text-gray-500">Harga Project</label>
+                                <input type="number" name="price" id="price"
+                                    class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                                <button type="submit" name="assign_hotel"
+                                    class="px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
+                                    Assign Project
+                                </button>
+                            </div>
+                        </form>
+                    @endcan --}}
                 </div>
             </div>
 
@@ -89,7 +92,7 @@
                     </div>
                 </div>
                 @can('member edit')
-                    <form method="POST" action="{{ route('admin.member.update', $member) }}" class="grid gap-4">
+                    <form method="POST" action="{{ route('admin.member.update', $member) }}" class="grid gap-4 border-t-2">
                         @csrf
                         @method('PUT')
                         <div class="col-span-2">
@@ -115,103 +118,242 @@
                         </button>
                     </form>
                 @endcan
+                @can('member edit')
+                    <form method="POST" action="{{ route('admin.member.update', $member) }}" class="mt-4 border-t-2">
+                        @csrf
+                        @method('PUT')
+                        <div class="space-y-2">
+                            <label for="hotel_id" class="text-sm text-gray-500">Pilih Hotel Project</label>
+                            <select name="hotel_id" id="hotel_id" class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                                <option value="">Pilih Hotel</option>
+                                @foreach ($hotels as $hotel)
+                                    <option value="{{ $hotel->id }}">{{ $hotel->name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="price" class="text-sm text-gray-500">Harga Project</label>
+                            <input type="number" name="price" id="price"
+                                class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                            <button type="submit" name="assign_hotel"
+                                class="px-4 py-2 w-full bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
+                                Tambah Project Member
+                            </button>
+                        </div>
+                    </form>
+                @endcan
             </div>
 
-            <div class="lg:col-span-3 space-y-4">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h4 class="font-bold text-lg mb-4">Riwayat Top Up</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-[--primary] text-[--on-primary]">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tanggal</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tipe</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase">Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                @forelse($member->topup as $topUp)
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="px-6 py-4">{{ $topUp->created_at->format('d M Y H:i') }}</td>
-                                        <td class="px-6 py-4">
-                                            <span
-                                                class="px-2 py-1 rounded-full text-xs {{ $topUp->type === 'deposit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                                {{ $topUp->type === 'deposit' ? 'Deposit' : 'Withdraw' }}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4">Rp {{ number_format($topUp->amount, 0, ',', '.') }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-gray-500">Belum ada riwayat top
-                                            up</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h4 class="font-bold text-lg mb-4">Riwayat Pesanan</h4>
-                    <div class="hidden md:block">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200 text-nowrap">
-                                <thead class="bg-[--primary] text-[--on-primary]">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase">Hotel</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase">Check In</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase">Check Out</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase">Status</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    @forelse($member->orders as $order)
-                                        <tr class="hover:bg-gray-50">
-                                            <td class="px-6 py-4">{{ $order->hotel->name }}</td>
-                                            <td class="px-6 py-4">{{ $order->check_in }}</td>
-                                            <td class="px-6 py-4">{{ $order->check_out }}</td>
-                                            <td class="px-6 py-4">
-                                                <span
-                                                    class="px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                                    {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}</span>
-                                            </td>
-                                            <td class="px-6
-                                                    py-4">Rp
-                                                {{ number_format($order->total, 0, ',', '.') }}
-                                            </td>
-                                        </tr>
-                                    @empty
+            <div class="lg:col-span-3">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-lg mb-4">Riwayat Top Up</h4>
+                        <div class="hidden md:block">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-[--primary] text-[--on-primary]">
                                         <tr>
-                                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada
-                                                pesanan
-                                            </td>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tanggal</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tipe</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Jumlah</th>
                                         </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        @forelse($member->topup as $topUp)
+                                            <tr class="hover:bg-gray-50">
+                                                <td class="px-6 py-4">{{ $topUp->created_at->format('d M Y H:i') }}</td>
+                                                <td class="px-6 py-4">
+                                                    <span
+                                                        class="px-2 py-1 rounded-full text-xs {{ $topUp->type === 'deposit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                        {{ $topUp->type === 'deposit' ? 'Deposit' : 'Withdraw' }}
+                                                    </span>
+                                                </td>
+                                                <td class="px-6 py-4">Rp {{ number_format($topUp->amount, 0, ',', '.') }}
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                                    Belum ada riwayat top up
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="md:hidden space-y-4">
+                            @forelse($member->topup as $topUp)
+                                <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+                                    <div class="text-sm text-gray-600">
+                                        <div>Tanggal: {{ $topUp->created_at->format('d M Y H:i') }}</div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span
+                                            class="px-2 py-1 rounded-full text-xs {{ $topUp->type === 'deposit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {{ $topUp->type === 'deposit' ? 'Deposit' : 'Withdraw' }}
+                                        </span>
+                                        <span class="font-medium">Rp
+                                            {{ number_format($topUp->amount, 0, ',', '.') }}</span>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="text-center py-4 text-gray-500">Belum ada riwayat top up</div>
+                            @endforelse
                         </div>
                     </div>
-                    <div class="md:hidden space-y-4">
-                        @forelse($member->orders as $order)
-                            <div class="bg-gray-50 p-4 rounded-lg space-y-2">
-                                <div class="font-medium">{{ $order->hotel->name }}</div>
-                                <div class="text-sm text-gray-600">
-                                    <div>Check In: {{ $order->check_in }}</div>
-                                    <div>Check Out: {{ $order->check_out }}</div>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span
-                                        class="px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                        {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}
-                                    </span>
-                                    <span class="font-medium">Rp {{ number_format($order->total, 0, ',', '.') }}</span>
-                                </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-lg mb-4">Riwayat Pesanan</h4>
+                        <div class="hidden md:block">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200 text-nowrap">
+                                    <thead class="bg-[--primary] text-[--on-primary]">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Hotel</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Check In</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Check Out</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Status</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        @forelse($member->orders as $order)
+                                            <tr class="hover:bg-gray-50">
+                                                <td class="px-6 py-4">{{ $order->hotel->name }}</td>
+                                                <td class="px-6 py-4">{{ date('d M Y', strtotime($order->check_in)) }}
+                                                </td>
+                                                <td class="px-6 py-4">{{ date('d M Y', strtotime($order->check_out)) }}
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <span
+                                                        class="px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                        {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}</span>
+                                                </td>
+                                                <td
+                                                    class="px-6
+                                                        py-4">
+                                                    Rp
+                                                    {{ number_format($order->total, 0, ',', '.') }}
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada
+                                                    pesanan
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
-                        @empty
-                            <div class="text-center py-4 text-gray-500">Belum ada pesanan</div>
-                        @endforelse
+                        </div>
+                        <div class="md:hidden space-y-4">
+                            @forelse($member->orders as $order)
+                                <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+                                    <div class="font-medium">{{ $order->hotel->name }}</div>
+                                    <div class="text-sm text-gray-600">
+                                        <div>Check In: {{ date('d F Y', strtotime($order->check_in)) }}</div>
+                                        <div>Check Out: {{ date('d F Y', strtotime($order->check_out)) }}</div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span
+                                            class="px-2 py-1 rounded-full text-xs {{ $order->status_bayar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {{ $order->status_bayar ? 'Sudah Bayar' : 'Belum Bayar' }}
+                                        </span>
+                                        <span class="font-medium">Rp
+                                            {{ number_format($order->total, 0, ',', '.') }}</span>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="text-center py-4 text-gray-500">Belum ada pesanan</div>
+                            @endforelse
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-lg mb-4">Daftar Project Member</h4>
+                        <div class="hidden md:block">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200 text-nowrap">
+                                    <thead class="bg-[--primary] text-[--on-primary]">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Hotel</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Harga Project
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tanggal Mulai
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Status</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        @forelse($member->memberMessages as $project)
+                                            <tr class="hover:bg-gray-50">
+                                                <td class="px-6 py-4">{{ $project->hotel->name }}</td>
+                                                <td class="px-6 py-4">Rp {{ number_format($project->price, 0, ',', '.') }}
+                                                </td>
+                                                <td class="px-6 py-4">{{ $project->created_at->format('d M Y') }}</td>
+                                                <td class="px-6 py-4">
+                                                    <span
+                                                        class="px-2 py-1 rounded-full text-xs {{ $project->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                        {{ $project->active ? 'Aktif' : 'Nonaktif' }}
+                                                    </span>
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.member.update', $member) }}"
+                                                        class="inline">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="project_id"
+                                                            value="{{ $project->id }}">
+                                                        <input type="hidden" name="action" value="toggle_project">
+                                                        <button type="submit"
+                                                            class="text-sm text-blue-600 hover:text-blue-800">
+                                                            {{ $project->active ? 'Nonaktifkan' : 'Aktifkan' }}
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                                    Belum ada project yang ditugaskan
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="md:hidden space-y-4">
+                            @forelse($member->memberMessages as $project)
+                                <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+                                    <div class="font-medium">{{ $project->hotel->name }}</div>
+                                    <div class="text-sm text-gray-600">
+                                        <div>Harga: Rp {{ number_format($project->price, 0, ',', '.') }}</div>
+                                        <div>Tanggal Mulai: {{ $project->created_at->format('d M Y') }}</div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span
+                                            class="px-2 py-1 rounded-full text-xs {{ $project->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {{ $project->active ? 'Aktif' : 'Nonaktif' }}
+                                        </span>
+                                        <form method="POST" action="{{ route('admin.member.update', $member) }}"
+                                            class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="project_id" value="{{ $project->id }}">
+                                            <input type="hidden" name="action" value="toggle_project">
+                                            <button type="submit" class="text-sm text-blue-600 hover:text-blue-800">
+                                                {{ $project->active ? 'Nonaktifkan' : 'Aktifkan' }}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="text-center py-4 text-gray-500">Belum ada project yang ditugaskan</div>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>
