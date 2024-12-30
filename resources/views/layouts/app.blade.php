@@ -17,6 +17,7 @@
     @stack('nav')
     @yield('content')
     @stack('footer')
+    @stack('tab')
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {},
@@ -32,7 +33,6 @@
         })();
     </script>
     <!--End of Tawk.to Script-->
-    @stack('tab')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('customjs')
     @livewireScripts
