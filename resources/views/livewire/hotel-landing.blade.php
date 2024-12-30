@@ -14,7 +14,7 @@
         </button>
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-4" wire:loading.class="opacity-40">
-        @foreach ($hotel as $item)
+        @forelse ($hotel as $item)
             <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
                 href="{{ route('member.hotel.index', ['flag_code' => $item->country->flag_code, 'id' => $item->id]) }}">
                 <div class="relative w-full">
@@ -67,7 +67,19 @@
                     </div>
                 </div>
             </a>
-        @endforeach
+        @empty
+            <div class="col-span-full text-center py-8">
+                <div class="text-gray-500 text-lg font-medium">
+                    <i class="material-icons text-4xl mb-2">hotel</i>
+                    <p>Tidak ada hotel yang tersedia</p>
+                    @if ($select !== 'all')
+                        <button wire:click="changeData('all')" class="mt-3 text-sm text-[--primary] hover:underline">
+                            Lihat semua hotel
+                        </button>
+                    @endif
+                </div>
+            </div>
+        @endforelse
     </div>
     @if ($hasMorePages)
         <div wire:loading.remove class="flex justify-center mt-4">
