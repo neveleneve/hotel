@@ -11,7 +11,7 @@
         <div class="flex flex-col items-center justify-center w-full lg:w-96 mx-4">
             <a href="{{ route('landing') }}"
                 class="fixed top-12 flex items-center mb-6 text-2xl font-bold text-[--on-primary-container]">
-                <img class="w-8 h-8 mr-2 rounded-full" src="https://placehold.co/200?text=Belanja.com" alt="logo">
+                <img class="w-8 h-8 mr-2" src="{{ asset('assets/img/logo.png') }}" alt="logo">
                 {{ env('APP_NAME') }}
             </a>
             <div class="w-full bg-[--primary] rounded-lg shadow">

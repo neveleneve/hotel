@@ -19,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopWDController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('hotels', [LandingController::class, 'hotels'])->name('hotels');
@@ -41,6 +42,18 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('withdraw', AdminWithdrawController::class);
     Route::resource('point', AdminPointController::class);
     Route::resource('cancellation', AdminCancellationController::class);
+});
+
+Route::prefix('maintenance')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/down', function () {
+        Artisan::call('down');
+        return redirect()->back();
+    });
+
+    Route::get('/up', function () {
+        Artisan::call('up');
+        return redirect(route('landing'));
+    });
 });
 
 // user route
