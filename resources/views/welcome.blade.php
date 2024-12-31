@@ -26,7 +26,7 @@
             @role('member')
                 @if ($activeProjects && $activeProjects->count() > 0)
                     <section class="px-4 py-2">
-                        <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Project Anda</h2>
+                        <h2 class="text-lg font-bold mb-1 text-[--on-primary]">Hot Sale</h2>
                         <hr class="mb-4">
                         <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-4">
                             @foreach ($activeProjects as $project)
