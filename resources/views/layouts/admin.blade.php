@@ -22,12 +22,12 @@
         }
     }
 }" x-init="checkScreen();
-window.addEventListener('resize', () => checkScreen());l
+window.addEventListener('resize', () => checkScreen());
+l
 $watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value))">
     <div class="min-h-screen flex overflow-hidden">
         <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
             class="fixed inset-0 z-20 bg-black bg-opacity-50 transition-opacity lg:hidden"></div>
-
         <div x-cloak
             :class="{
                 'translate-x-0': sidebarOpen,
@@ -39,7 +39,6 @@ $watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value))">
             @include('layouts.sidebar')
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col" :class="{ 'md:ml-64': sidebarOpen, 'md:ml-20': !sidebarOpen }">
             <nav class="sticky top-0 bg-white shadow-sm py-4 z-20">
                 <div class="px-4">
@@ -51,7 +50,6 @@ $watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value))">
                     </div>
                 </div>
             </nav>
-            <!-- Page Content -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto p-4">
                 @yield('content')
             </main>

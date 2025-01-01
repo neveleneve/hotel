@@ -10,9 +10,10 @@ class MemberMessage extends Model {
 
     protected $fillable = [
         'user_id',
-
         'hotel_id',
         'price',
+        'discount',
+        'discount_status',
         'active'
     ];
 

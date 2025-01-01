@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->integer('user_id');
             $table->integer('hotel_id');
             $table->integer('price');
+            $table->integer('discount')->max;
+            $table->boolean('discount_status')->default(false);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

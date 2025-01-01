@@ -6,7 +6,11 @@ use App\Models\TopUp;
 use App\Models\User;
 use App\Models\Hotel;
 use App\Models\MemberMessage;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+
+use function Laravel\Prompts\error;
 
 class AdminMemberController extends Controller {
     public function __construct() {
@@ -29,7 +33,7 @@ class AdminMemberController extends Controller {
     }
 
     public function show(User $member) {
-        if (auth()->user()->hasRole('admin')) {
+        if (auth()->user()->roles->contains('name', 'admin')) {
             $isReferredMember = $member->reffBy()->whereHas('ownReff', function ($query) {
                 $query->where('reff_code', auth()->user()->ownReff->reff_code);
             })->exists();
@@ -67,7 +71,7 @@ class AdminMemberController extends Controller {
                     'text' => 'Status project berhasil diubah!',
                     'icon' => 'success',
                 ]);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return back()->with([
                     'title' => 'Gagal',
                     'text' => 'Gagal mengubah status project!',
@@ -80,13 +84,23 @@ class AdminMemberController extends Controller {
             $request->validate([
                 'hotel_id' => 'required|exists:hotels,id',
                 'price' => 'required|numeric|min:0',
+                'is_discount' => 'sometimes',
+                'discount' => 'required_if:is_discount,on|nullable|numeric|min:0|max:100',
             ]);
 
             try {
+                $discountAmount = 0;
+                if ($request->has('is_discount') && $request->discount) {
+                    $discountAmount = $request->discount;
+                }
+
                 MemberMessage::create([
                     'user_id' => $member->id,
                     'hotel_id' => $request->hotel_id,
                     'price' => $request->price,
+                    'discount' => $discountAmount,
+                    'discount_status' => $request->has('is_discount'),
+                    'active' => true
                 ]);
 
                 return back()->with([
@@ -94,37 +108,41 @@ class AdminMemberController extends Controller {
                     'text' => 'Project berhasil ditambahkan!',
                     'icon' => 'success',
                 ]);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return back()->with([
                     'title' => 'Gagal',
-                    'text' => 'Gagal menambahkan project!',
+                    'text' => 'Gagal menambahkan project: ' . $e->getMessage(),
                     'icon' => 'error',
                 ]);
             }
         } elseif ($request->has('amount')) {
-            $request->validate([
-                'type' => 'required|in:saldo,point',
-                'amount' => 'required|numeric',
-            ]);
-
             try {
+                $request->validate([
+                    'type' => 'required|in:saldo,point',
+                    'amount' => 'required|numeric|not_in:0',
+                ], [
+                    'amount.not_in' => 'Jumlah tidak boleh 0!',
+                    'amount.required' => 'Jumlah harus diisi!',
+                    'amount.numeric' => 'Jumlah harus berupa angka!',
+                ]);
+
+                if ($request->amount == 0) {
+                    return back()->with([
+                        'title' => 'Gagal',
+                        'text' => 'Jumlah tidak boleh 0!',
+                        'icon' => 'error',
+                    ]);
+                }
+
                 $saldo = $member->saldo ?? $member->saldo()->create(['saldo' => 0, 'point' => 0]);
 
                 if ($request->type === 'saldo') {
                     $saldo->saldo += $request->amount;
-                    if ($request->amount < 0) {
-                        TopUp::create([
-                            'user_id' => $member->id,
-                            'amount' => abs($request->amount),
-                            'type' => 'withdraw',
-                        ]);
-                    } else {
-                        TopUp::create([
-                            'user_id' => $member->id,
-                            'amount' => $request->amount,
-                            'type' => 'deposit',
-                        ]);
-                    }
+                    TopUp::create([
+                        'user_id' => $member->id,
+                        'amount' => abs($request->amount),
+                        'type' => $request->amount < 0 ? 'withdraw' : 'deposit',
+                    ]);
                 } else {
                     $saldo->point += $request->amount;
                     TopUp::create([
@@ -141,11 +159,18 @@ class AdminMemberController extends Controller {
                     'text' => 'Berhasil menambah ' . $request->type . '!',
                     'icon' => 'success',
                 ]);
-            } catch (\Exception $e) {
+            } catch (ValidationException $e) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => collect($e->errors())->first()[0],
+                    'icon' => 'error',
+                ]);
+            } catch (Exception $e) {
                 return back()->with([
                     'title' => 'Gagal',
                     'text' => 'Gagal menambah ' . $request->type . '!',
                     'icon' => 'error',
+
                 ]);
             }
         }
