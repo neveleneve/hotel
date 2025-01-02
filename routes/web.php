@@ -14,6 +14,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MemberCartController;
 use App\Http\Controllers\MemberCountryController;
 use App\Http\Controllers\MemberHotelController;
+use App\Http\Controllers\MemberHotSaleController;
 use App\Http\Controllers\MemberOrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopWDController;
@@ -65,6 +66,10 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
     Route::resource('cart', MemberCartController::class);
     Route::resource('order', MemberOrderController::class);
+
+    Route::prefix('hot-sale')->name('hot-sale.')->group(function () {
+        Route::get('/{user_id}/{id}', [MemberHotSaleController::class, 'show'])->name('show');
+    });
 
     Route::prefix('transaksi')->name('transaksi.')->group(function () {
         Route::get('pembayaran', [TopWDController::class, 'paymentIndex'])->name('pembayaran.index');

@@ -31,8 +31,17 @@
                         <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-4">
                             @foreach ($activeProjects as $project)
                                 <a class="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:mb-3"
-                                    href="{{ route('hotels') }}">
+                                    href="{{ route('hot-sale.show', ['user_id' => Auth::user()->id, 'id' => $project->id]) }}">
                                     <div class="relative w-full">
+                                        @if ($project->discount_status)
+                                            <div class="absolute top-2 right-2 animate-pulse">
+                                                <span
+                                                    class="bg-[--error] text-[--on-error] text-xs font-bold px-2 py-1 rounded-full">
+                                                    <i class="material-icons text-sm align-middle">local_offer</i>
+                                                    Hot Sale
+                                                </span>
+                                            </div>
+                                        @endif
                                         <img class="w-full aspect-square object-cover rounded-t-lg"
                                             src="{{ asset('assets/img/hotel/' . $project->hotel->image) }}"
                                             alt="Gambar Hotel {{ $project->hotel->name }}">
@@ -50,15 +59,31 @@
                                                 </span>
                                             </div>
                                             <div class="flex items-center mt-1">
-                                                <i class="material-icons text-[--primary] text-sm">work</i>
-                                                <span class="ml-1 text-sm font-semibold text-gray-700">Active Project</span>
+                                                <i class="material-icons text-yellow-500 text-sm">star_half</i>
+                                                <span
+                                                    class="ml-1 text-sm font-semibold text-gray-700">{{ $project->hotel->rating }}</span>
                                             </div>
                                         </div>
                                         <hr class="border-t my-2">
                                         <div class="text-sm">
-                                            <div class="font-bold text-[--on-primary]">
-                                                {{ 'Rp ' . number_format($project->price, 0, ',', '.') }}
-                                            </div>
+                                            @if ($project->discount_status)
+                                                <div class="flex items-center gap-2">
+                                                    <div class="text-[--on-error] text-xs line-through font-bold">
+                                                        {{ 'Rp ' . number_format($project->price, 0, ',', '.') }}
+                                                    </div>
+                                                    <span
+                                                        class="bg-[--error] text-[--on-error] text-xs px-2 py-0.5 rounded-full font-bold">
+                                                        -{{ $project->discount }}%
+                                                    </span>
+                                                </div>
+                                                <div class="font-extrabold text-[--on-primary] text-sm">
+                                                    {{ 'Rp ' . number_format($project->price - ($project->price * $project->discount) / 100, 0, ',', '.') }}
+                                                </div>
+                                            @else
+                                                <div class="font-bold text-[--on-primary] text-sm">
+                                                    {{ 'Rp ' . number_format($project->price, 0, ',', '.') }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </a>

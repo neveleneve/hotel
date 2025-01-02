@@ -14,8 +14,6 @@ return new class extends Migration {
             if (!Schema::hasColumn('member_messages', 'discount_status')) {
                 $table->boolean('discount_status')->default(false);
             }
-
-            // Ubah default value kolom active
             DB::statement('ALTER TABLE member_messages ALTER COLUMN active SET DEFAULT true');
         });
     }
