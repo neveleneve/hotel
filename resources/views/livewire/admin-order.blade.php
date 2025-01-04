@@ -21,7 +21,7 @@
                 <thead class="text-xs uppercase bg-[--primary] text-[--on-primary]">
                     <tr>
                         <th scope="col" class="py-3 text-center">Kode Pesanan</th>
-                        <th scope="col" class="px-6 py-3 text-center">Nama Pemesan</th>
+                        <th scope="col" class="px-6 py-3 text-center">Email Pemesan</th>
                         <th scope="col" class="py-3 text-center">Hotel</th>
                         <th scope="col" class="px-6 py-3 text-center">Check In</th>
                         <th scope="col" class="px-6 py-3 text-center">Check Out</th>
@@ -33,8 +33,16 @@
                     @forelse ($orders as $order)
                         <tr class="hover:bg-gray-50">
                             <td class="py-4 text-center">{{ $order->order_code }}</td>
-                            <td class="px-6 py-4 text-center">{{ $order->user->name }}</td>
-                            <td class="py-4 text-center">{{ $order->hotel->name }}</td>
+                            <td class="px-6 py-4 text-center">{{ $order->user->email }}</td>
+                            <td class="py-4 text-center">
+                                {{ $order->hotel->name }}
+                                @if ($order->is_hot_sale)
+                                    <span
+                                        class="inline-block bg-[--error] text-[--on-error] px-2 py-0.5 text-xs font-bold rounded-full ml-1">
+                                        Hot Sale
+                                    </span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_in)) }}</td>
                             <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_out)) }}</td>
                             <td class="py-4 text-center">
@@ -77,14 +85,20 @@
         @endif
     </div>
 
-    <!-- Mobile Cards -->
     <div class="xl:hidden space-y-4">
         @forelse ($orders as $order)
             <div class="bg-gray-50 p-4 rounded-lg space-y-3">
                 <div class="flex justify-between items-start">
                     <div class="space-y-1">
-                        <p class="font-bold text-gray-600">{{ $order->hotel->name }}</p>
-                        <p class="font-semibold">{{ $order->user->name }}</p>
+                        <div class="flex items-center gap-2">
+                            <p class="font-bold text-gray-600">{{ $order->hotel->name }}</p>
+                            @if ($order->is_hot_sale)
+                                <span class="bg-[--error] text-[--on-error] px-2 py-0.5 text-xs font-bold rounded-full">
+                                    Hot Sale
+                                </span>
+                            @endif
+                        </div>
+                        <p class="font-semibold">{{ $order->user->email }}</p>
                         <p class="text-sm text-gray-600">{{ $order->order_code }}</p>
                         <p class="text-sm">Check In: {{ $order->check_in }}</p>
                         <p class="text-sm">Check Out: {{ $order->check_out }}</p>

@@ -69,6 +69,7 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
     Route::prefix('hot-sale')->name('hot-sale.')->group(function () {
         Route::get('/{user_id}/{id}', [MemberHotSaleController::class, 'show'])->name('show');
+        Route::post('/{user_id}/{id}/order', [MemberHotSaleController::class, 'order'])->name('order');
     });
 
     Route::prefix('transaksi')->name('transaksi.')->group(function () {

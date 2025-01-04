@@ -18,7 +18,8 @@ class AdminOrder extends Component {
             $query->where(function ($q) {
                 $q->where('order_code', 'like', '%' . $this->search . '%')
                     ->orWhereHas('user', function ($query) {
-                        $query->where('name', 'like', '%' . $this->search . '%');
+                        $query->where('name', 'like', '%' . $this->search . '%')
+                            ->orWhere('email', 'like', '%' . $this->search . '%');
                     });
             });
         })

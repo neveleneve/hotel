@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\country;
 use App\Models\Hotel;
 use App\Models\Order;
+use App\Models\TopUp;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class AdminDashboardController extends Controller {
             $hotels = Hotel::count();
             $countries = country::count();
             $members = User::role('member')->count();
-            $payments = Order::where('status_bayar', true)->sum('total');
+            $payments = TopUp::where('type', 'deposit')->sum('amount') - TopUp::where('type', 'withdraw')->sum('amount');
         } else {
             $referralCode = auth()->user()->ownReff->reff_code;
             $memberIds = User::role('member')
@@ -31,7 +32,12 @@ class AdminDashboardController extends Controller {
             $hotels = Hotel::count();
             $countries = country::count();
             $members = count($memberIds);
-            $payments = Order::whereIn('user_id', $memberIds)->where('status_bayar', true)->sum('total');
+            $payments = TopUp::whereIn('user_id', $memberIds)
+                        ->where('type', 'deposit')
+                        ->sum('amount') - 
+                      TopUp::whereIn('user_id', $memberIds)
+                        ->where('type', 'withdraw')
+                        ->sum('amount');
         }
 
         return view('pages.admin.dashboard.index', compact(

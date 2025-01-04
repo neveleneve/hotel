@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberOrderController extends Controller {
     public function index() {
-        $orders = Order::with('hotel')
+        $orders = Order::with(['hotel'])
             ->where('user_id', auth()->user()->id)
             ->orderBy('id', 'desc')
             ->get();

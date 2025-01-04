@@ -7,7 +7,13 @@
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2">
                     <div class="flex flex-col h-full">
                         <div class="flex">
-                            <div class="w-1/4">
+                            <div class="w-1/4 relative">
+                                @if ($order->is_hot_sale)
+                                    <div
+                                        class="absolute top-0 left-0 bg-[--error] text-[--on-error] px-2 py-1 text-xs font-bold">
+                                        Hot Sale
+                                    </div>
+                                @endif
                                 <img src="{{ asset('assets/img/hotel/' . $order->hotel->id . '.jpg') }}"
                                     alt="{{ $order->hotel->name }}" class="w-full h-full object-cover aspect-square">
                             </div>

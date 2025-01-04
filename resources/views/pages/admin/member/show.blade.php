@@ -13,7 +13,7 @@
             </div>
             <hr class="mt-3">
         </section>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-3">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Informasi Pribadi</h4>
                 <div class="space-y-3">

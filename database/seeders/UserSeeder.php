@@ -63,7 +63,8 @@ class UserSeeder extends Seeder {
                 $user->assignRole('member');
                 Saldo::create([
                     'user_id' => $user->id,
-                    'saldo' => $key === 3 ? 2000000 : 0,
+                    // 'saldo' => $key === 3 ? 2000000 : 0,
+                    'saldo' => 0,
                     'point' => 0,
                 ]);
                 if ($key === 3) {
