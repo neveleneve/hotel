@@ -59,13 +59,13 @@
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h4 class="font-bold text-lg mb-4">Saldo & Point</h4>
                 <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div class="bg-[--secondary-container] p-4 rounded-lg">
-                        <p class="text-sm text-[--on-secondary-container] mb-1">Saldo</p>
-                        <p class="font-bold text-lg text-[--on-secondary-container]">
+                    <div class="bg-[--primary-container] p-4 rounded-lg col-span-2 lg:col-span-1">
+                        <p class="text-sm text-[--on-primary-container] mb-1">Saldo</p>
+                        <p class="font-bold text-lg text-[--on-primary-container]">
                             Rp {{ number_format($member->saldo?->saldo ?? 0, 0, ',', '.') }}
                         </p>
                     </div>
-                    <div class="bg-[--tertiary-container] p-4 rounded-lg">
+                    <div class="bg-[--tertiary-container] p-4 rounded-lg col-span-2 lg:col-span-1">
                         <p class="text-sm text-[--on-tertiary-container] mb-1">Point</p>
                         <p class="font-bold text-lg text-[--on-tertiary-container]">
                             {{ number_format($member->saldo?->point ?? 0, 0, ',', '.') }}
@@ -73,24 +73,25 @@
                     </div>
                 </div>
                 @can('member edit')
-                    <form method="POST" action="{{ route('admin.member.update', $member) }}" class="grid gap-4 border-t-2">
+                    <form method="POST" action="{{ route('admin.member.update', $member) }}"
+                        class="grid grid-cols-2 gap-4 border-t-2">
                         @csrf
                         @method('PUT')
-                        <div class="col-span-2">
-                            <div class="flex items-center space-x-4">
-                                <div class="flex-1">
-                                    <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
-                                    <select name="type" id="type"
-                                        class="w-full rounded-lg border border-gray-300 px-2 py-1">
-                                        <option value="saldo">Saldo</option>
-                                        <option value="point">Point</option>
-                                    </select>
-                                </div>
-                                <div class="flex-1">
-                                    <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
-                                    <input type="number" id="amount" name="amount" value="0"
-                                        class="w-full rounded-lg border border-gray-300 px-2 py-1">
-                                </div>
+                        <div class="col-span-2 lg:col-span-1">
+                            <div class="flex-1">
+                                <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
+                                <select name="type" id="type"
+                                    class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                                    <option value="saldo">Saldo</option>
+                                    <option value="point">Point</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-span-2 lg:col-span-1">
+                            <div class="flex-1">
+                                <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
+                                <input type="number" id="amount" name="amount" value="0"
+                                    class="w-full rounded-lg border border-gray-300 px-2 py-1">
                             </div>
                         </div>
                         <button type="submit" name="saldo"
@@ -154,21 +155,23 @@
                                         <td class="px-6 py-4">{{ $project->hotel->name }}</td>
                                         <td class="px-6 py-4">Rp {{ number_format($project->price, 0, ',', '.') }}</td>
                                         <td class="px-6 py-4">
-                                            @if($project->discount_status)
+                                            @if ($project->discount_status)
                                                 <span class="text-green-600">{{ $project->discount }}%</span>
                                             @else
                                                 <span class="text-gray-400">-</span>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            @if($project->discount_status)
-                                                Rp {{ number_format($project->price - ($project->price * $project->discount/100), 0, ',', '.') }}
+                                            @if ($project->discount_status)
+                                                Rp
+                                                {{ number_format($project->price - ($project->price * $project->discount) / 100, 0, ',', '.') }}
                                             @else
                                                 Rp {{ number_format($project->price, 0, ',', '.') }}
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            <span class="px-2 py-1 rounded-full text-xs {{ $project->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            <span
+                                                class="px-2 py-1 rounded-full text-xs {{ $project->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                                 {{ $project->active ? 'Aktif' : 'Nonaktif' }}
                                             </span>
                                         </td>
@@ -202,9 +205,11 @@
                             <div class="font-medium">{{ $project->hotel->name }}</div>
                             <div class="text-sm text-gray-600">
                                 <div>Harga Normal: Rp {{ number_format($project->price, 0, ',', '.') }}</div>
-                                @if($project->discount_status)
+                                @if ($project->discount_status)
                                     <div>Diskon: <span class="text-green-600">{{ $project->discount }}%</span></div>
-                                    <div>Harga Akhir: Rp {{ number_format($project->price - ($project->price * $project->discount/100), 0, ',', '.') }}</div>
+                                    <div>Harga Akhir: Rp
+                                        {{ number_format($project->price - ($project->price * $project->discount) / 100, 0, ',', '.') }}
+                                    </div>
                                 @endif
                             </div>
                             <div class="flex justify-between items-center">
@@ -241,6 +246,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tanggal</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium uppercase">Tipe</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium uppercase">Jumlah</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -255,10 +261,22 @@
                                         </td>
                                         <td class="px-6 py-4">Rp {{ number_format($topUp->amount, 0, ',', '.') }}
                                         </td>
+                                        <td class="px-6 py-4">
+                                            <form action="{{ route('admin.deposit.destroy', $topUp->id) }}"
+                                                method="POST" class="inline"
+                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-800">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                        <td colspan="{{ auth()->user()->can('deposit delete') ? '4' : '3' }}"
+                                            class="px-6 py-4 text-center text-gray-500">
                                             Belum ada riwayat top up
                                         </td>
                                     </tr>
@@ -281,6 +299,19 @@
                                 <span class="font-medium">Rp
                                     {{ number_format($topUp->amount, 0, ',', '.') }}</span>
                             </div>
+                            @can('deposit delete')
+                                <div class="mt-2 border-t pt-2">
+                                    <form action="{{ route('admin.top-up.destroy', $topUp->id) }}" method="POST"
+                                        class="inline"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-800">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            @endcan
                         </div>
                     @empty
                         <div class="text-center py-4 text-gray-500">Belum ada riwayat top up</div>
@@ -361,7 +392,7 @@
 @endsection
 
 @push('customjs')
-    @if(session('title') || $errors->any())
+    @if (session('title') || $errors->any())
         <script>
             Swal.fire({
                 title: "{{ session('title') ?? 'Gagal' }}",
