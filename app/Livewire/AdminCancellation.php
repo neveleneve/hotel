@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Order;
+use App\Models\Saldo;
 use Illuminate\Pagination\Paginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -58,6 +59,10 @@ class AdminCancellation extends Component {
         if ($order) {
             try {
                 $order->update(['status_cancel' => $status]);
+
+                if ($status === 'approve' && $order->status_bayar) {
+                    Saldo::where('user_id', $order->user_id)->increment('saldo', $order->total);
+                }
 
                 $title = $status === 'approve' ? 'Disetujui' : 'Ditolak';
                 $this->dispatch('showAlert', [
