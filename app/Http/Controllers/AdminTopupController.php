@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TopUp;
 use App\Models\Saldo;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,7 +68,7 @@ class AdminTopupController extends Controller {
             switch ($topup->type) {
                 case 'deposit':
                     if ($saldo->saldo < $topup->amount) {
-                        throw new \Exception('Saldo tidak mencukupi untuk melakukan pembatalan');
+                        throw new Exception('Saldo tidak mencukupi untuk melakukan pembatalan');
                     }
                     $saldo->saldo -= $topup->amount;
                     break;
@@ -76,7 +77,7 @@ class AdminTopupController extends Controller {
                     break;
                 case 'point':
                     if ($saldo->point < $topup->amount) {
-                        throw new \Exception('Point tidak mencukupi untuk melakukan pembatalan');
+                        throw new Exception('Point tidak mencukupi untuk melakukan pembatalan');
                     }
                     $saldo->point -= $topup->amount;
                     break;
@@ -92,7 +93,7 @@ class AdminTopupController extends Controller {
                 'text' => 'Data top up berhasil dihapus',
                 'icon' => 'success'
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->with([
                 'title' => 'Gagal',
@@ -103,6 +104,7 @@ class AdminTopupController extends Controller {
     }
 
     public function __construct() {
+        $this->middleware(['auth', 'role:admin|super admin']);
         $this->middleware('permission:deposit index')->only('index');
         $this->middleware('permission:deposit update')->only(['update']);
     }
