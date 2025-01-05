@@ -66,12 +66,18 @@ class AdminTopupController extends Controller {
 
             switch ($topup->type) {
                 case 'deposit':
+                    if ($saldo->saldo < $topup->amount) {
+                        throw new \Exception('Saldo tidak mencukupi untuk melakukan pembatalan');
+                    }
                     $saldo->saldo -= $topup->amount;
                     break;
                 case 'withdraw':
                     $saldo->saldo += $topup->amount;
                     break;
                 case 'point':
+                    if ($saldo->point < $topup->amount) {
+                        throw new \Exception('Point tidak mencukupi untuk melakukan pembatalan');
+                    }
                     $saldo->point -= $topup->amount;
                     break;
             }
@@ -83,7 +89,6 @@ class AdminTopupController extends Controller {
 
             return redirect()->back()->with([
                 'title' => 'Berhasil',
-
                 'text' => 'Data top up berhasil dihapus',
                 'icon' => 'success'
             ]);
