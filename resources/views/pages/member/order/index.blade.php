@@ -166,7 +166,7 @@
 @endsection
 
 @push('nav')
-    <header class="fixed top-0 left-0 w-full bg-[#003060] text-white p-4 flex justify-center items-center">
+    <header class="fixed top-0 left-0 w-full bg-[#003060] text-white p-4 flex justify-center items-center z-20">
         <div class="flex items-center">
             <h1 class="font-bold">Pesanan Saya</h1>
         </div>
