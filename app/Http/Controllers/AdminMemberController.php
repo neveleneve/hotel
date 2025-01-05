@@ -137,12 +137,20 @@ class AdminMemberController extends Controller {
                 $saldo = $member->saldo ?? $member->saldo()->create(['saldo' => 0, 'point' => 0]);
 
                 if ($request->type === 'saldo') {
-                    $saldo->saldo += $request->amount;
-                    TopUp::create([
-                        'user_id' => $member->id,
-                        'amount' => abs($request->amount),
-                        'type' => $request->amount < 0 ? 'withdraw' : 'deposit',
-                    ]);
+                    if ($saldo->saldo + $request->amount >= 0) {
+                        $saldo->saldo += $request->amount;
+                        TopUp::create([
+                            'user_id' => $member->id,
+                            'amount' => abs($request->amount),
+                            'type' => $request->amount < 0 ? 'withdraw' : 'deposit',
+                        ]);
+                    } else {
+                        return back()->with([
+                            'title' => 'Gagal',
+                            'text' => 'Saldo tidak mencukupi!',
+                            'icon' => 'error',
+                        ]);
+                    }
                 } else {
                     $saldo->point += $request->amount;
                     TopUp::create([
