@@ -32,12 +32,7 @@ class MemberCartController extends Controller {
     }
 
     public function update(Request $request, Cart $cart) {
-        $total_day = (strtotime($cart->check_out) - strtotime($cart->check_in)) / (60 * 60 * 24);
-        if ($cart->hotel->promo) {
-            $total = ($cart->hotel->price * $cart->total_room * $total_day) - ($cart->hotel->price * $cart->total_room * $total_day * $cart->hotel->discount / 100);
-        } else {
-            $total = $cart->hotel->price * $cart->total_room * $total_day;
-        }
+        // $total_day = (strtotime($cart->check_out) - strtotime($cart->check_in)) / (60 * 60 * 24);
         $order = Order::create([
             'order_code' => strtoupper($cart->hotel->country->flag_code) . '/' . date('ymdHi') . '/' . str_pad($cart->user_id, 4, "0", STR_PAD_LEFT) . '/' . strtoupper(uniqid()),
             'user_id' => $cart->user_id,
@@ -45,7 +40,9 @@ class MemberCartController extends Controller {
             'check_in' => $cart->check_in,
             'check_out' => $cart->check_out,
             'total_room' => $cart->total_room,
-            'total' => $total,
+            'total' => $cart->total,
+            'is_hot_sale' => $cart->is_hot_sale,
+            'member_message_id' => $cart->member_message_id,
         ]);
         if ($order) {
             $cart->delete();
