@@ -40,7 +40,15 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($cancellations as $order)
                         <tr class="hover:bg-gray-50">
-                            <td class="py-4 text-center">{{ $order->order_code }}</td>
+                            <td class="py-4 text-center">
+                                {{ $order->order_code }}
+                                @if ($order->is_hot_sale)
+                                    <span
+                                        class="text-xs px-2 py-1 rounded-full font-bold bg-orange-500 text-white ml-1">
+                                        Hot Sale
+                                    </span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 text-center">{{ $order->user->name }}</td>
                             <td class="py-4 text-center">{{ $order->hotel->name }}</td>
                             <td class="px-6 py-4 text-center">{{ date('d M Y', strtotime($order->check_in)) }}</td>
@@ -96,7 +104,9 @@
                     <div class="space-y-1">
                         <p class="font-bold text-gray-600">{{ $order->hotel->name }}</p>
                         <p class="font-semibold">{{ $order->user->name }}</p>
-                        <p class="text-sm text-gray-600">{{ $order->order_code }}</p>
+                        <p class="text-sm text-gray-600">
+                            {{ $order->order_code }}
+                        </p>
                         <p class="text-sm">Check In: {{ date('d M Y', strtotime($order->check_in)) }}</p>
                         <p class="text-sm">Check Out: {{ date('d M Y', strtotime($order->check_out)) }}</p>
                         <div class="flex flex-wrap gap-2">
@@ -114,6 +124,11 @@
                                         : 'bg-[--error] text-[--on-error]') }}">
                                 {{ ucfirst($order->status_cancel) }}
                             </span>
+                            @if ($order->is_hot_sale)
+                                <span class="text-xs px-2 py-1 rounded-lg font-bold bg-[--error-container] text-white">
+                                    Hot Sale
+                                </span>
+                            @endif
                         </div>
                         <p class="text-sm font-semibold mt-2">Total: Rp {{ number_format($order->total, 0, ',', '.') }}
                         </p>

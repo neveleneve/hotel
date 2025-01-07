@@ -20,6 +20,7 @@ class Order extends Model {
         'status_pesan',
         'status_cancel',
         'is_hot_sale',
+        'member_message_id'
     ];
 
     public function hotel() {
@@ -28,5 +29,13 @@ class Order extends Model {
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function memberMessage() {
+        return $this->belongsTo(MemberMessage::class, 'member_message_id')
+            ->withTrashed()
+            ->when($this->is_hot_sale, function ($query) {
+                return $query->where('active', true);
+            });
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Hotel;
+use App\Models\MemberMessage;
 use App\Models\Order;
 use App\Models\Saldo;
 use Illuminate\Pagination\Paginator;
@@ -62,15 +63,23 @@ class AdminCancellation extends Component {
                 $order->update(['status_cancel' => $status]);
 
                 if ($status === 'approve' && $order->status_bayar) {
-                    if ($order->hotel->promo) {
-                        $hotel = Hotel::find($order->hotel_id);
+                    if ($order->is_hot_sale) {
+                        $hotel = MemberMessage::find($order->member_message_id);
                         $total_day = (strtotime($order->check_out) - strtotime($order->check_in)) / (60 * 60 * 24);
                         $increment = $hotel->price * $order->total_room * $total_day;
                         Saldo::where('user_id', $order->user_id)
                             ->increment('saldo', $increment);
                     } else {
-                        Saldo::where('user_id', $order->user_id)
-                            ->increment('saldo', $order->total);
+                        if ($order->hotel->promo) {
+                            $hotel = Hotel::find($order->hotel_id);
+                            $total_day = (strtotime($order->check_out) - strtotime($order->check_in)) / (60 * 60 * 24);
+                            $increment = $hotel->price * $order->total_room * $total_day;
+                            Saldo::where('user_id', $order->user_id)
+                                ->increment('saldo', $increment);
+                        } else {
+                            Saldo::where('user_id', $order->user_id)
+                                ->increment('saldo', $order->total);
+                        }
                     }
                 }
 

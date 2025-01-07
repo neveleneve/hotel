@@ -21,7 +21,6 @@ class MemberHotSaleController extends Controller {
     }
 
     public function order(Request $request, $user_id, $id) {
-        // dd($request->all(), $user_id, $id);
         $hotSale = MemberMessage::with('hotel')
             ->where('user_id', $user_id)
             ->where('id', $id)
@@ -41,6 +40,7 @@ class MemberHotSaleController extends Controller {
             'total_room' => $request->room_hidden,
             'total' => $finalPrice * $request->room_hidden,
             'is_hot_sale' => 1,
+            'member_message_id' => $hotSale->id,
         ]);
 
         if ($order) {
