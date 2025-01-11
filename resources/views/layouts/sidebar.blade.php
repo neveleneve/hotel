@@ -41,7 +41,7 @@
                     :class="{ 'justify-center': !sidebarOpen }">
                     <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">manage_accounts</i>
                     <span x-show="sidebarOpen"
-                        class="{{ request()->routeIs('admin.member.*') ? 'font-bold' : '' }}">Administrator</span>
+                        class="{{ request()->routeIs('admin.admin.*') ? 'font-bold' : '' }}">Administrator</span>
                 </a>
             @endcan
             @can('member index')
