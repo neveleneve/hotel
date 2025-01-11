@@ -45,7 +45,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('cancellation', AdminCancellationController::class);
 });
 
-Route::prefix('maintenance')->middleware(['auth', 'role:super admin|admin'])->group(function () {
+Route::prefix('maintenance')->group(function () {
     Route::get('/down', function () {
         Artisan::call('down');
         return redirect()->back();
