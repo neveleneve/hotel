@@ -22,13 +22,14 @@
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
-        Tawk_API.visitor = {
-            name: 'Test Test',
-            email: 'test@test.com'
-        };
-        var Tawk_LoadStart = new Date();
         var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
         var visitorHash = '{{ md5(Auth::check() ? Auth::user()->email : 'guest@guest.com') }}';
+        Tawk_API.visitor = {
+            'name': visitorName,
+            'email': visitorEmail,
+            'hash': visitorHash
+        };
+        var Tawk_LoadStart = new Date();
 
 
         (function() {
