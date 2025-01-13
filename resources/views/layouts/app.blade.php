@@ -21,27 +21,16 @@
     @stack('tab')
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}
+        var Tawk_API = Tawk_API || {};
+        Tawk_API.visitor = {
+            name: 'Test Test',
+            email: 'test@test.com'
+        };
         var Tawk_LoadStart = new Date();
         var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
         var visitorHash = '{{ md5(Auth::check() ? Auth::user()->email : 'guest@guest.com') }}';
 
-        // window.Tawk_API = window.Tawk_API || {};
-        // window.Tawk_API.visitor = {
-        //     name: 'Name',
-        //     email: 'email@email.com'
-        // };
-        Tawk_API.onLoad = function() {
-            Tawk_API.setAttributes({
-                name: '{{ Auth::check() ? Auth::user()->name : 'Guest' }}',
-                email: visitorEmail,
-                hash: visitorHash
-            }, function(error) {
-                if (error) {
-                    console.log('Error setting Tawk attributes:', error);
-                }
-            });
-        };
+
         (function() {
             var s1 = document.createElement("script"),
                 s0 = document.getElementsByTagName("script")[0];
