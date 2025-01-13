@@ -22,6 +22,7 @@
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
+        var Tawk_LoadStart = new Date();
         var visitorName = '{{ Auth::check() ? Auth::user()->name : 'Guest' }}';
         var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
         var visitorHash =
@@ -31,7 +32,6 @@
             'email': visitorEmail,
             'hash': visitorHash
         };
-        var Tawk_LoadStart = new Date();
 
 
         (function() {
