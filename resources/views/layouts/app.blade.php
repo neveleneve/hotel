@@ -25,7 +25,7 @@
         var visitorName = '{{ Auth::check() ? Auth::user()->name : 'Guest' }}';
         var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
         var visitorHash =
-            '{{ hash_hmac('sha256', Auth::check() ? Auth::user()->email : 'guest@guest.com' . '5f76aa59f0e7167d001585c1') }}';
+            '{{ hash_hmac('sha256', Auth::check() ? Auth::user()->email : 'guest@guest.com' , '5f76aa59f0e7167d001585c1') }}';
         Tawk_API.visitor = {
             'name': visitorName,
             'email': visitorEmail,
