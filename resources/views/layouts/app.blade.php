@@ -22,6 +22,7 @@
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
+        var visitorName = '{{ Auth::check() ? Auth::user()->name : "Guest" }}';
         var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
         var visitorHash = '{{ md5(Auth::check() ? Auth::user()->email : 'guest@guest.com') }}';
         Tawk_API.visitor = {
