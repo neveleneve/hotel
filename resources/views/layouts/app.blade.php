@@ -22,9 +22,10 @@
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
-        var visitorName = '{{ Auth::check() ? Auth::user()->name : "Guest" }}';
+        var visitorName = '{{ Auth::check() ? Auth::user()->name : 'Guest' }}';
         var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
-        var visitorHash = '{{ md5(Auth::check() ? Auth::user()->email : 'guest@guest.com') }}';
+        var visitorHash =
+            '{{ hash_hmac('sha256', Auth::check() ? Auth::user()->email : 'guest@guest.com' . '5f76aa59f0e7167d001585c1') }}';
         Tawk_API.visitor = {
             'name': visitorName,
             'email': visitorEmail,
