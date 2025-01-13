@@ -23,11 +23,22 @@
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {},
             Tawk_LoadStart = new Date();
+        var visitorEmail = '{{ Auth::check() ? Auth::user()->email : 'guest@guest.com' }}';
+        var visitorHash = '{{ md5(Auth::check() ? Auth::user()->email : 'guest@guest.com') }}';
+
+        Tawk_API.onLoad = function() {
+            Tawk_API.setAttributes({
+                name: '{{ Auth::check() ? Auth::user()->name : 'Guest' }}',
+                email: visitorEmail,
+                hash: visitorHash
+            }, function(error) {});
+        };
         (function() {
             var s1 = document.createElement("script"),
                 s0 = document.getElementsByTagName("script")[0];
             s1.async = true;
-            s1.src = 'https://embed.tawk.to/6772787baf5bfec1dbe48728/1igbid98q';
+            s1.src = 'https://embed.tawk.to/5f76aa59f0e7167d001585c1/default';
+            // s1.src = 'https://embed.tawk.to/6772787baf5bfec1dbe48728/1igbid98q';
             s1.charset = 'UTF-8';
             s1.setAttribute('crossorigin', '*');
             s0.parentNode.insertBefore(s1, s0);
