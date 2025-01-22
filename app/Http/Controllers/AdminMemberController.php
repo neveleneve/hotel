@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\MemberMessage;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 use function Laravel\Prompts\error;
@@ -179,6 +180,33 @@ class AdminMemberController extends Controller {
                     'text' => 'Gagal menambah ' . $request->type . '!',
                     'icon' => 'error',
 
+                ]);
+            }
+        } elseif ($request->has('change_password')) {
+            try {
+                $request->validate([
+                    'password' => 'required|min:6|confirmed',
+                ]);
+
+                $member->password = Hash::make($request->password);
+                $member->save();
+
+                return back()->with([
+                    'title' => 'Berhasil',
+                    'text' => 'Password berhasil diubah!',
+                    'icon' => 'success',
+                ]);
+            } catch (ValidationException $e) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => collect($e->errors())->first()[0],
+                    'icon' => 'error',
+                ]);
+            } catch (Exception $e) {
+                return back()->with([
+                    'title' => 'Gagal',
+                    'text' => 'Gagal mengubah password!',
+                    'icon' => 'error',
                 ]);
             }
         }

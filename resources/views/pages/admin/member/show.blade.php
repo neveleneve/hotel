@@ -53,6 +53,35 @@
                         <p class="text-sm text-gray-500 font-medium">Total Mereferral</p>
                         <p class="font-semibold">{{ $member->ownReff->reffBy->count() }} member</p>
                     </div>
+                    <div>
+                        @can('member edit')
+                            <form method="POST" action="{{ route('admin.member.update', $member) }}"
+                                class="mt-4 border-t-2 pt-4">
+                                @csrf
+                                @method('PUT')
+                                <div class="space-y-3">
+                                    <label for="password" class="text-sm text-gray-500 font-bold">Password Baru</label>
+                                    <div class="relative">
+                                        <input type="password" name="password" id="password" placeholder="Masukkan password baru"
+                                            class="w-full rounded-lg border border-gray-300 px-2 py-1">
+                                        <span class="absolute right-2 top-2 cursor-pointer" id="togglePassword">
+                                            <i class="material-icons text-gray-500">visibility</i>
+                                        </span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Konfirmasi password baru" class="w-full rounded-lg border border-gray-300 px-2 py-1 mb-2">
+                                        <span class="absolute right-2 top-2 cursor-pointer" id="toggleConfirmPassword">
+                                            <i class="material-icons text-gray-500">visibility</i>
+                                        </span>
+                                    </div>
+                                    <button type="submit" name="change_password"
+                                        class="px-4 py-2 bg-[--primary] text-[--on-primary] rounded-lg font-bold hover:bg-[--primary-container] hover:text-[--on-primary-container]">
+                                        Ubah Password
+                                    </button>
+                                </div>
+                            </form>
+                        @endcan
+                    </div>
                 </div>
             </div>
 
@@ -408,4 +437,23 @@
             })
         </script>
     @endif
+@endpush
+@push('customjs')
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = this.querySelector('.material-icons');
+            icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password_confirmation');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = this.querySelector('.material-icons');
+            icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+    </script>
 @endpush
