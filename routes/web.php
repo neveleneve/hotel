@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminHotelController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminPointController;
+use App\Http\Controllers\AdminReviewController;
 use App\Http\Controllers\AdminTopupController;
 use App\Http\Controllers\AdminWithdrawController;
 use App\Http\Controllers\LandingController;
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     });
     Route::resource('admin', AdminAdminController::class);
+    Route::resource('review', AdminReviewController::class);
     Route::resource('member', AdminMemberController::class);
     Route::resource('hotel', AdminHotelController::class);
     Route::resource('country', AdminCountryController::class);

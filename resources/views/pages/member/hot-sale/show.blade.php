@@ -103,6 +103,39 @@
                 </div>
             </div>
         </div>
+        <div class="grid grid-cols-1 px-3 text-[--on-primary]">
+            <div class="w-full h-full flex flex-col bg-white border rounded-lg shadow-lg lg:mb-3 p-3 mt-6">
+                <h3 class="font-bold text-xl">Review</h3>
+                <hr class="my-2">
+                <div class="grid grid-cols-1 gap-4">
+                    @forelse ($hotSale->hotel->reviews as $review)
+                        <div class="border rounded-lg p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <img src="{{ asset('assets/img/user-default.jpg') }}" alt="Avatar"
+                                        class="w-10 h-10 rounded-full object-cover">
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <div class="font-semibold text-lg">{{ $review->name }}</div>
+                                        <div class="flex items-center">
+                                            <i class="material-icons text-sm text-yellow-500">star</i>
+                                            <span class="ml-1 text-sm">{{ $review->star }}</span>
+                                        </div>
+                                    </div>
+                                    <p class="mt-2 text-gray-600">{{ $review->comment }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="text-center p-4 text-gray-500">
+                            <i class="material-icons text-4xl">rate_review</i>
+                            <p class="mt-2">Belum ada review</p>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

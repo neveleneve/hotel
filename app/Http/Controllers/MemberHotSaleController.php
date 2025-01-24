@@ -14,7 +14,7 @@ class MemberHotSaleController extends Controller {
         $hotSale = MemberMessage::where('user_id', $user_id)
             ->where('id', $id)
             ->where('active', 1)
-            ->with(['hotel', 'user'])
+            ->with(['hotel', 'user', 'hotel.reviews'])
             ->firstOrFail();
 
         return view('pages.member.hot-sale.show', [

@@ -23,7 +23,6 @@
     }
 }" x-init="checkScreen();
 window.addEventListener('resize', () => checkScreen());
-l
 $watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value))">
     <div class="min-h-screen flex overflow-hidden">
         <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
