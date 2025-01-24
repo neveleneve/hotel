@@ -108,15 +108,33 @@
                 <hr class="my-2">
                 <div class="grid grid-cols-1 gap-4">
                     @forelse ($hotel->reviews as $review)
-                        <div class="border rounded-lg p-4">
-                            <div class="flex justify-between items-start">
-                                <div class="font-semibold text-lg">{{ $review->name }}</div>
-                                <div class="flex items-center">
-                                    <i class="material-icons text-sm text-yellow-500">star</i>
-                                    <span class="ml-1 text-sm">{{ $review->star }}</span>
+                        <div class="border rounded-lg px-4 pt-4 pb-3">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <img src="{{ asset('assets/img/user-default.jpg') }}" alt="Avatar"
+                                        class="w-10 h-10 rounded-full object-cover">
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <div class="font-semibold text-lg">
+                                            {{ $review->name }}
+                                            <p class="mt-2 text-gray-600 font-normal">{{ $review->comment }}</p>
+                                            <div class="flex items-center">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= floor($review->star))
+                                                        <i class="material-icons text-lg text-yellow-500 align-middle">star</i>
+                                                    @elseif ($i - 0.5 <= $review->star)
+                                                        <i class="material-icons text-lg text-yellow-500 align-middle">star_half</i>
+                                                    @else
+                                                        <i class="material-icons text-lg text-yellow-500 align-middle">star_border</i>
+                                                    @endif
+                                                @endfor
+                                                <span class="ml-1 text-lg align-middle">{{ $review->star }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <p class="mt-2 text-gray-600">{{ $review->comment }}</p>
                         </div>
                     @empty
                         <div class="text-center p-4 text-gray-500">
