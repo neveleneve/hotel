@@ -41,8 +41,17 @@
                             </span>
                         </div>
                         <div class="flex items-center mt-1">
-                            <i class="material-icons text-yellow-500 text-sm">star_half</i>
-                            <span class="ml-1 text-sm font-semibold text-gray-700">{{ $item->rating ?? '-' }}</span>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= floor($item->rating))
+                                    <i class="material-icons text-yellow-500 text-sm align-middle">star</i>
+                                @elseif ($i - 0.99 <= $item->rating)
+                                    <i class="material-icons text-yellow-500 text-sm align-middle">star_half</i>
+                                @else
+                                    <i class="material-icons text-yellow-500 text-sm align-middle">star_border</i>
+                                @endif
+                            @endfor
+                            <span
+                                class="ml-1 text-sm font-semibold text-gray-700">{{ number_format($item->rating, 1, '.', ',') }}</span>
                         </div>
                     </div>
                     <hr class="border-t my-2">

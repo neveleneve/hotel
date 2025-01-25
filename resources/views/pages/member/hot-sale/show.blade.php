@@ -39,8 +39,16 @@
                             </span>
                         </div>
                         <div class="flex items-center mt-1">
-                            <i class="material-icons text-sm text-yellow-500">star_half</i>
-                            <span class="ml-1 text-sm font-semibold">{{ $hotSale->hotel->rating }}</span>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= floor($hotSale->hotel->rating))
+                                    <i class="material-icons text-sm text-yellow-500 align-middle">star</i>
+                                @elseif ($i - 0.5 <= $hotSale->hotel->rating)
+                                    <i class="material-icons text-sm text-yellow-500 align-middle">star_half</i>
+                                @else
+                                    <i class="material-icons text-sm text-yellow-500 align-middle">star_border</i>
+                                @endif
+                            @endfor
+                            <span class="ml-1 text-sm align-middle font-semibold">{{ $hotSale->hotel->rating }}</span>
                         </div>
                     </div>
                     <hr class="border-t border-gray-200 my-3">
@@ -124,16 +132,16 @@
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <= floor($review->star))
                                                         <i
-                                                            class="material-icons text-lg text-yellow-500 align-middle">star</i>
+                                                            class="material-icons text-sm text-yellow-500 align-middle">star</i>
                                                     @elseif ($i - 0.5 <= $review->star)
                                                         <i
-                                                            class="material-icons text-lg text-yellow-500 align-middle">star_half</i>
+                                                            class="material-icons text-sm text-yellow-500 align-middle">star_half</i>
                                                     @else
                                                         <i
-                                                            class="material-icons text-lg text-yellow-500 align-middle">star_border</i>
+                                                            class="material-icons text-sm text-yellow-500 align-middle">star_border</i>
                                                     @endif
                                                 @endfor
-                                                <span class="ml-1 text-lg align-middle">{{ $review->star }}</span>
+                                                <span class="ml-1 text-sm align-middle">{{ $review->star }}</span>
                                             </div>
                                         </div>
                                     </div>
