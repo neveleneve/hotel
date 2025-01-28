@@ -33,13 +33,13 @@ class UserSeeder extends Seeder {
             ],
         ];
 
-        for ($i = 1; $i <= 2; $i++) {
-            $users[] = [
-                'name' => 'Member ' . $i,
-                'email' => 'member' . $i . '@gmail.com',
-                'password' => Hash::make('12345678'),
-            ];
-        }
+        // for ($i = 1; $i <= 2; $i++) {
+        //     $users[] = [
+        //         'name' => 'Member ' . $i,
+        //         'email' => 'member' . $i . '@gmail.com',
+        //         'password' => Hash::make('12345678'),
+        //     ];
+        // }
         $reff = [
             'J9I4KD',
             'W9I8KI',
