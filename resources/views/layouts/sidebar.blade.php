@@ -28,7 +28,7 @@
         <div class="px-4 pt-3 space-y-2">
             @can('dashboard')
                 <a href="{{ route('admin.dashboard') }}" title="Dashboard"
-                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--primary-container] {{ request()->routeIs('admin.dashboard') ? 'bg-[--primary-container]' : '' }}"
+                    class="flex items-center px-4 py-2 rounded-lg hover:bg-[--pwrimary-container] {{ request()->routeIs('admin.dashboard') ? 'bg-[--primary-container]' : '' }}"
                     :class="{ 'justify-center': !sidebarOpen }">
                     <i class="material-icons" :class="{ 'mr-3': sidebarOpen }">dashboard</i>
                     <span x-show="sidebarOpen"

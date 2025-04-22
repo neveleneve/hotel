@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminAdminController extends Controller {
     public function __construct() {
@@ -67,7 +69,8 @@ class AdminAdminController extends Controller {
         }
     }
 
-    public function show(User $admin) {
+    public function show($admin) {
+        $admin = User::withTrashed()->findOrFail($admin);
         return view('pages.admin.admin.show', compact('admin'));
     }
 
@@ -75,8 +78,55 @@ class AdminAdminController extends Controller {
         //
     }
 
-    public function update(Request $request, string $id) {
-        //
+    public function update(Request $request, $admin) {
+        $admin = User::withTrashed()->findOrFail($admin);
+
+        $validationRules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $admin->id,
+            'role' => 'required|in:admin,super admin',
+            'status' => 'required|in:active,inactive',
+        ];
+
+        if ($request->filled('password')) {
+            $validationRules['password'] = 'required|string|min:8|confirmed';
+        }
+
+        $validated = $request->validate($validationRules);
+
+        try {
+            DB::beginTransaction();
+
+            $updateData = [
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+            ];
+
+            if (isset($validated['password'])) {
+                $updateData['password'] = bcrypt($validated['password']);
+            }
+
+            $admin->update($updateData);
+
+            $admin->roles()->detach();
+            $admin->assignRole($validated['role']);
+
+            if ($validated['status'] === 'inactive' && !$admin->deleted_at) {
+                $admin->delete();
+            } elseif ($validated['status'] === 'active' && $admin->deleted_at) {
+                $admin->restore();
+            }
+
+            DB::commit();
+            return redirect()
+                ->route('admin.admin.show', $admin)
+                ->with('success', 'Data admin berhasil diperbarui');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()
+                ->withInput()
+                ->with('error', 'Gagal memperbarui data admin: ' . $e->getMessage());
+        }
     }
 
     public function destroy(string $id) {
